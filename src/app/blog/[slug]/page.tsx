@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 const categoryStyle: Record<string, { bg: string; color: string }> = {
@@ -575,7 +574,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
           </div>
         </section>
 
-        <CTASection />
       </main>
       <Footer />
     </div>

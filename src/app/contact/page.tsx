@@ -1,9 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn from "@/components/ui/FadeIn";
 
 const helpCards = [
@@ -17,6 +17,7 @@ const helpCards = [
     title: "Book a Demo",
     desc: "See Zonov's AI agents in action with a live walkthrough tailored to your hospital.",
     cta: "Schedule Demo",
+    href: "/book-demo",
   },
   {
     icon: (
@@ -28,6 +29,7 @@ const helpCards = [
     title: "Sales Inquiry",
     desc: "Talk to our team about pricing, implementation timelines, and ROI projections.",
     cta: "Contact Sales",
+    href: "mailto:hello@zonov.ai",
   },
   {
     icon: (
@@ -39,18 +41,27 @@ const helpCards = [
     title: "Partnership",
     desc: "Explore integration, reseller, or co-development opportunities with us.",
     cta: "Explore Partnership",
+    href: "mailto:partnerships@zonov.ai",
   },
 ];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", email: "", organization: "", message: "" });
+  const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState("");
 
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
+      setError("Please fill in your name, email, and message.");
+      return;
+    }
+    setError("");
+    setSubmitted(true);
   }
 
   return (
@@ -76,55 +87,41 @@ export default function ContactPage() {
 
                 <div className="lg:col-span-2">
                   <div className="bg-white rounded-[var(--radius-lg)] p-8 shadow-sm">
-                    <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                      <div>
-                        <label className="type-caption text-[var(--text-muted)] block mb-1.5">Name</label>
-                        <input
-                          name="name"
-                          value={form.name}
-                          onChange={handleChange}
-                          placeholder="Your full name"
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors"
-                        />
+                    {submitted ? (
+                      <div className="flex flex-col items-center justify-center text-center py-12 gap-4">
+                        <div className="w-14 h-14 rounded-full flex items-center justify-center" style={{ background: "var(--primary-subtle)" }}>
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="none">
+                            <path d="M5 13l4 4L19 7" stroke="var(--primary)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                        </div>
+                        <h3 className="type-h3 text-[var(--text)]">Message sent!</h3>
+                        <p className="type-body text-[var(--text-muted)] max-w-sm">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
+                        <button type="button" onClick={() => { setSubmitted(false); setForm({ name: "", email: "", organization: "", message: "" }); }} className="btn btn-ghost mt-2">Send another message</button>
                       </div>
-                      <div>
-                        <label className="type-caption text-[var(--text-muted)] block mb-1.5">Email</label>
-                        <input
-                          name="email"
-                          type="email"
-                          value={form.email}
-                          onChange={handleChange}
-                          placeholder="you@hospital.com"
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors"
-                        />
-                      </div>
-                      <div>
-                        <label className="type-caption text-[var(--text-muted)] block mb-1.5">Organization</label>
-                        <input
-                          name="organization"
-                          value={form.organization}
-                          onChange={handleChange}
-                          placeholder="Hospital or clinic name"
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors"
-                        />
-                      </div>
-                      <div>
-                        <label className="type-caption text-[var(--text-muted)] block mb-1.5">Message</label>
-                        <textarea
-                          name="message"
-                          value={form.message}
-                          onChange={handleChange}
-                          rows={5}
-                          placeholder="Tell us what you're looking for..."
-                          className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors resize-none"
-                        />
-                      </div>
-                      <div>
-                        <button type="submit" className="btn btn-primary-lg">
-                          Send Message
-                        </button>
-                      </div>
-                    </form>
+                    ) : (
+                      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                        <div>
+                          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Name</label>
+                          <input name="name" value={form.name} onChange={handleChange} placeholder="Your full name" className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors" />
+                        </div>
+                        <div>
+                          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Email</label>
+                          <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@hospital.com" className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors" />
+                        </div>
+                        <div>
+                          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Organization</label>
+                          <input name="organization" value={form.organization} onChange={handleChange} placeholder="Hospital or clinic name" className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors" />
+                        </div>
+                        <div>
+                          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Message</label>
+                          <textarea name="message" value={form.message} onChange={handleChange} rows={5} placeholder="Tell us what you're looking for..." className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors resize-none" />
+                        </div>
+                        {error && <p className="type-caption text-red-500">{error}</p>}
+                        <div>
+                          <button type="submit" className="btn btn-primary-lg">Send Message</button>
+                        </div>
+                      </form>
+                    )}
                   </div>
                 </div>
 
@@ -188,9 +185,9 @@ export default function ContactPage() {
                     <h3 className="type-body font-semibold text-[var(--text)]">{card.title}</h3>
                     <p className="type-body text-[var(--text-muted)] flex-grow">{card.desc}</p>
                     <div>
-                      <a href="#" className="btn btn-ghost">
+                      <Link href={card.href} className="btn btn-ghost">
                         {card.cta}
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 ))}
@@ -199,7 +196,6 @@ export default function ContactPage() {
           </div>
         </section>
 
-        <CTASection />
 
       </main>
       <Footer />

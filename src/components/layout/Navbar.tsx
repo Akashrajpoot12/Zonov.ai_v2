@@ -35,13 +35,15 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 will-change-transform transition-all duration-300 ${
-        scrolled ? "bg-white/95 backdrop-blur-sm shadow-sm border-b border-[var(--border)]" : "bg-white"
-      }`}
-      style={{ WebkitBackdropFilter: scrolled ? "blur(8px)" : "none" }}
-    >
-      <nav className="container-wide flex items-center justify-between h-[72px]">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 pointer-events-none">
+      <nav
+        className={`pointer-events-auto flex items-center justify-between h-[56px] px-4 w-full max-w-[900px] transition-all duration-300 rounded-full ${
+          scrolled
+            ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/8 border border-[var(--border)]"
+            : "bg-white/80 backdrop-blur-sm border border-[var(--border-strong)]/60 shadow-md shadow-black/5"
+        }`}
+        style={{ WebkitBackdropFilter: "blur(12px)" }}
+      >
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0" aria-label="Zonov.ai home">
           <Image
@@ -114,7 +116,7 @@ export default function Navbar() {
 
         {/* Right side */}
         <div className="flex items-center gap-3">
-          <Link href="/book-demo" className="btn btn-primary hidden lg:inline-flex">
+          <Link href="/book-demo" className="hidden lg:inline-flex items-center justify-center bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white text-[13px] font-medium transition-colors rounded-full px-5 h-[36px]">
             Book a Demo
           </Link>
           {/* Mobile menu button */}
@@ -136,7 +138,6 @@ export default function Navbar() {
             </svg>
           </button>
         </div>
-      </nav>
 
       {/* Mobile Menu */}
       <AnimatePresence>
@@ -187,6 +188,7 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
+      </nav>
     </header>
   );
 }

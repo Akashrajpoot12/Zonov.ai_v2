@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
@@ -18,12 +18,9 @@ const values = [
 ];
 
 const team = [
-  { name: "Aryan Mehta", title: "CEO", initials: "AM" },
-  { name: "Priya Nair", title: "CTO", initials: "PN" },
-  { name: "Dr. Kavya Rao", title: "CMO", initials: "KR" },
-  { name: "Rohan Gupta", title: "Head of AI", initials: "RG" },
-  { name: "Sneha Iyer", title: "Head of Sales", initials: "SI" },
-  { name: "Vikram Das", title: "Head of Design", initials: "VD" },
+  { name: "Arvind Chawla", title: "CEO & Founder", sub: "Ex- EMS, IPCURE", photo: "/team-arvind-chawla.png" },
+  { name: "Dr. Sanjeev Kalra", title: "CBO & Co-Founder", sub: "MD, MDBA, AHCLM, MHA", photo: "/team-sanjeev-kalra.png" },
+  { name: "Dr. Parul Panwar", title: "Chief Medical Officer", sub: "Ex- Manipal Hospital", photo: "/team-parul-panwar.png" },
 ];
 
 const roadmap = [
@@ -194,19 +191,23 @@ export default function AboutPage() {
             <FadeIn>
               <h2 className="type-h2 text-[var(--text)] mb-10">Meet the team</h2>
             </FadeIn>
-            <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <FadeInStagger className="grid grid-cols-1 sm:grid-cols-3 gap-6">
               {team.map((member) => (
                 <FadeInItem key={member.name}>
-                  <div className="card flex flex-col items-center text-center gap-3">
-                    <div
-                      className="w-16 h-16 rounded-full flex items-center justify-center"
-                      style={{ background: "rgba(27,79,216,0.1)" }}
-                    >
-                      <span className="type-mono text-[var(--primary)] font-semibold">{member.initials}</span>
+                  <div className="card flex flex-col items-center text-center gap-4 pb-6">
+                    <div className="w-full overflow-hidden rounded-xl" style={{ aspectRatio: "3/3.2" }}>
+                      <Image
+                        src={member.photo}
+                        alt={member.name}
+                        width={400}
+                        height={427}
+                        className="w-full h-full object-cover object-top"
+                      />
                     </div>
                     <div>
                       <p className="type-body font-semibold text-[var(--text)]">{member.name}</p>
-                      <p className="type-caption text-[var(--text-muted)] mt-0.5">{member.title}</p>
+                      <p className="type-caption font-medium mt-0.5" style={{ color: "var(--secondary)" }}>{member.title}</p>
+                      <p className="type-caption text-[var(--text-muted)] mt-0.5">{member.sub}</p>
                     </div>
                   </div>
                 </FadeInItem>
@@ -258,7 +259,6 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <CTASection />
 
       </main>
       <Footer />

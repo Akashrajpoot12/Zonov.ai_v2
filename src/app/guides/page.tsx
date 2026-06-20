@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn from "@/components/ui/FadeIn";
 import NewsletterForm from "@/components/ui/NewsletterForm";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
@@ -253,7 +252,6 @@ export default function GuidesPage() {
           </div>
         </section>
 
-        <CTASection />
       </main>
       <Footer />
     </div>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Playfair_Display, Inter } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "@/components/ui/SmoothScroll";
+import ChatBot from "@/components/ui/ChatBot";
 
 const playfair = Playfair_Display({
   variable: "--font-playfair",
@@ -54,8 +54,8 @@ export default function RootLayout({
       className={`${playfair.variable} ${inter.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text antialiased">
-        <SmoothScroll />
         {children}
+        <ChatBot />
       </body>
     </html>
   );

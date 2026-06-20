@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
@@ -206,7 +205,7 @@ export default function BlogPage() {
                   <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
                     <div>
                       <p className="type-caption text-white/40">Zonov.ai Team</p>
-                      <p className="type-caption text-white/40">June 2025 · 7 min read</p>
+                      <p className="type-caption text-white/40">2026 · 7 min read</p>
                     </div>
                     <span className="btn btn-glass self-start sm:self-auto">Read Article →</span>
                   </div>
@@ -270,7 +269,7 @@ export default function BlogPage() {
                         {post.excerpt}
                       </p>
                       <div className="flex justify-between items-center mt-4 pt-4 border-t border-[var(--border)]">
-                        <p className="type-caption text-[var(--text-muted)]">Zonov.ai Team · June 2025</p>
+                        <p className="type-caption text-[var(--text-muted)]">Zonov.ai Team · 2026</p>
                         <p className="type-caption text-[var(--text-muted)]">{post.read} read</p>
                       </div>
                     </Link>
@@ -310,7 +309,6 @@ export default function BlogPage() {
           </div>
         </section>
 
-        <CTASection />
       </main>
       <Footer />
     </div>

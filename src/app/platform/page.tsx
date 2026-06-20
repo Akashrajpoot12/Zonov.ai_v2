@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import PlatformHero from "@/components/sections/PlatformHero";
 import PlatformSteps from "@/components/sections/PlatformSteps";
 import PlatformIntegrations from "@/components/sections/PlatformIntegrations";
@@ -19,7 +18,6 @@ export default function PlatformPage() {
         <PlatformHero />
         <PlatformSteps />
         <PlatformIntegrations />
-        <CTASection />
       </main>
       <Footer />
     </div>

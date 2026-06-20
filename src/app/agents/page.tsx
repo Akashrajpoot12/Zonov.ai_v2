@@ -2,12 +2,11 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
-  title: "AI Agents — Zonov.ai | 7 Specialized Healthcare AI Agents",
-  description: "Meet the 7 AI agents powering India's smartest hospitals — from patient registration to billing, diagnostics to operations.",
+  title: "AI Agents — Zonov.ai | 8 Specialized Healthcare AI Agents",
+  description: "Meet the 8 AI agents powering India's smartest hospitals — from patient registration to finance, diagnostics to OT management.",
 };
 
 const AGENTS = [
@@ -15,22 +14,22 @@ const AGENTS = [
     slug: "patient-registration",
     icon: "🪪",
     num: "01",
-    name: "Patient Registration AI",
-    tagline: "Zero-friction intake from first contact to first care.",
+    name: "Registration Agent",
+    tagline: "Voice-based registration. 60% faster OPD.",
     problem: "Manual registration takes 10–15 minutes, causes OPD queues, and loses data. Front desk staff spend 60% of their time on paperwork.",
-    solves: ["Auto-fills forms from ABHA/insurance", "Real-time eligibility verification", "Queue assignment in under 90 seconds"],
-    metric: "90s avg. registration time",
+    solves: ["Voice-based patient registration", "Auto-fills from ABHA/insurance", "Queue assignment in under 90 seconds"],
+    metric: "60% faster OPD",
     color: "#1B4FD8",
     bgColor: "#EBF0FF",
   },
   {
-    slug: "doctor-ai",
+    slug: "doctor-prescription",
     icon: "🩺",
     num: "02",
-    name: "Doctor AI Agent",
-    tagline: "Every word captured. Every prescription precise.",
+    name: "Doctor Prescription Agent",
+    tagline: "Voice-powered prescription. Zero typing.",
     problem: "Doctors spend 2–3 hours daily on notes and prescriptions instead of patients. Handwritten prescriptions cause errors and delays.",
-    solves: ["Ambient voice-to-SOAP notes", "AI prescription drafts", "Auto-coded diagnoses (ICD-10)"],
+    solves: ["Voice-powered prescription drafts", "Ambient voice-to-SOAP notes", "Auto-coded diagnoses (ICD-10)"],
     metric: "2 hrs saved per doctor daily",
     color: "#00B4AE",
     bgColor: "#E6FAFA",
@@ -40,58 +39,70 @@ const AGENTS = [
     icon: "🔬",
     num: "03",
     name: "Investigation Agent",
-    tagline: "From order to result — automated end to end.",
+    tagline: "AI-assisted faster diagnostic reporting.",
     problem: "Lab and radiology orders get lost, delayed, or duplicated. Critical results don't reach the right doctor in time.",
-    solves: ["Auto-routes orders to LIS/RIS", "Flags critical values instantly", "Tracks TAT and sends alerts"],
+    solves: ["Auto-routes orders to LIS/RIS", "AI-assisted diagnostic reporting", "Flags critical values instantly"],
     metric: "40% faster result delivery",
     color: "#7C3AED",
     bgColor: "#F3EEFF",
   },
   {
-    slug: "follow-up",
-    icon: "📲",
+    slug: "pharmacy",
+    icon: "💊",
     num: "04",
-    name: "Follow-up Agent",
-    tagline: "No patient falls through the cracks.",
-    problem: "80% of patients never return for follow-up care. Missed follow-ups mean worse outcomes and lost revenue for hospitals.",
-    solves: ["Automated WhatsApp/SMS reminders", "Post-discharge care instructions", "Re-booking with one tap"],
-    metric: "3× improvement in follow-up rates",
+    name: "Pharmacy Agent",
+    tagline: "Near-expiry alerts. Zero wastage.",
+    problem: "Pharmacy teams manually track stock and expiry dates — leading to wastage, stockouts, and dispensing errors.",
+    solves: ["Notifies near-expiry medicines", "Auto-reorder on low stock", "Reduces dispensing errors"],
+    metric: "Zero expiry wastage",
     color: "#059669",
     bgColor: "#E6F7F1",
   },
   {
-    slug: "billing",
-    icon: "💳",
+    slug: "ipd",
+    icon: "🛏️",
     num: "05",
-    name: "Billing & Revenue AI",
-    tagline: "Every rupee earned. Every claim filed.",
-    problem: "Indian hospitals lose 15–20% of revenue to missed charges, claim denials, and manual billing errors every month.",
-    solves: ["Auto-captures unbilled procedures", "Reduces claim rejections by 70%", "Real-time revenue leakage alerts"],
-    metric: "₹18L avg. monthly recovery",
+    name: "IPD Agent",
+    tagline: "Nursing handovers. Mistreatment alerts.",
+    problem: "Nursing handovers are verbal and error-prone. Mistreatment risks go undetected until it's too late.",
+    solves: ["Structured nursing handover-takeover", "Real-time mistreatment alerts", "Automated care plan tracking"],
+    metric: "Zero missed handovers",
     color: "#D97706",
     bgColor: "#FEF3C7",
   },
   {
-    slug: "operations",
-    icon: "⚙️",
+    slug: "ot",
+    icon: "🏥",
     num: "06",
-    name: "Hospital Operations AI",
-    tagline: "Every bed, every room, every resource — optimized.",
-    problem: "Bed allocation, staff scheduling, and supply management are still done on Excel and WhatsApp — causing waste and delays.",
-    solves: ["Real-time bed & OT management", "Predictive staff scheduling", "Supply chain auto-reordering"],
-    metric: "30% reduction in resource waste",
+    name: "OT Agent",
+    tagline: "OT scheduling, monitoring and emergency management.",
+    problem: "OT scheduling is done manually on whiteboards and calls — causing delays, cancellations, and emergency conflicts.",
+    solves: ["AI-powered OT scheduling", "Real-time OT monitoring", "Emergency case management"],
+    metric: "30% fewer OT delays",
     color: "#0D1F3C",
     bgColor: "#EEF2F8",
   },
   {
-    slug: "analytics",
-    icon: "📊",
+    slug: "claim",
+    icon: "📋",
     num: "07",
-    name: "Analytics AI",
-    tagline: "Intelligence that drives every decision.",
-    problem: "Hospital leaders make million-rupee decisions based on weekly Excel reports. By the time data arrives, the opportunity is gone.",
-    solves: ["Live dashboards for every department", "Natural language data queries", "Predictive revenue and capacity models"],
-    metric: "Real-time, not week-old data",
+    name: "Claim Agent",
+    tagline: "Reduce 20% claim rejection. Recover every rupee.",
+    problem: "Indian hospitals lose 15–20% of revenue to missed charges, claim denials, and manual billing errors every month.",
+    solves: ["Reduces claim rejections by 20%", "Auto-captures unbilled procedures", "Real-time revenue leakage alerts"],
+    metric: "20% fewer claim rejections",
+    color: "#7C3AED",
+    bgColor: "#F3EEFF",
+  },
+  {
+    slug: "finance",
+    icon: "💰",
+    num: "08",
+    name: "Finance Agent",
+    tagline: "20% revenue leakage reduced. Per-patient P&L.",
+    problem: "Hospital finance teams operate on week-old Excel data — missing revenue leakage and unable to track per-patient profitability.",
+    solves: ["Reduces revenue leakage by 20%", "Per-patient P&L tracking", "Real-time financial dashboards"],
+    metric: "20% revenue leakage reduced",
     color: "#1B4FD8",
     bgColor: "#EBF0FF",
   },
@@ -112,7 +123,7 @@ export default function AgentsPage() {
                 AI Agents
               </p>
               <h1 className="type-display text-white max-w-3xl [text-wrap:balance] mb-5">
-                7 agents. Every hospital{" "}
+                8 agents. Every hospital{" "}
                 <span className="italic gradient-text-light">workflow covered.</span>
               </h1>
               <p className="type-subtitle text-white/55 max-w-xl">
@@ -189,20 +200,7 @@ export default function AgentsPage() {
           </div>
         </section>
 
-        {/* Bottom strip */}
-        <section className="py-12 bg-[var(--surface)] border-t border-[var(--border)]">
-          <div className="container-wide flex flex-col md:flex-row items-center justify-between gap-6">
-            <div>
-              <p className="text-[15px] font-semibold text-[var(--text)] mb-1">All 7 agents. One unified platform.</p>
-              <p className="text-[13px] text-[var(--text-muted)]">Deploy one agent or all seven — they share a single data layer and work together.</p>
-            </div>
-            <Link href="/book-demo" className="btn btn-primary-lg flex-shrink-0">
-              Book a Demo
-            </Link>
-          </div>
-        </section>
 
-        <CTASection />
       </main>
       <Footer />
     </div>

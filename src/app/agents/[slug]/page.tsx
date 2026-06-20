@@ -1,6 +1,5 @@
 import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
-import CTASection from "@/components/sections/CTASection";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import { notFound } from "next/navigation";
 
@@ -63,8 +62,8 @@ const AGENTS: Record<string, AgentData> = {
     ],
   },
 
-  "doctor-ai": {
-    name: "Doctor AI",
+  "doctor-prescription": {
+    name: "Doctor Prescription Agent",
     tagline: "Every word captured. Every prescription precise.",
     description:
       "An ambient AI scribe that listens to physician-patient conversations, generates structured SOAP notes in real time, and drafts prescriptions — so doctors spend their time healing, not typing.",
@@ -298,6 +297,146 @@ const AGENTS: Record<string, AgentData> = {
     ],
   },
 
+  pharmacy: {
+    name: "Pharmacy Agent",
+    tagline: "Near-expiry alerts. Zero wastage.",
+    description: "Keep your pharmacy running at zero waste — with AI that tracks stock, alerts on near-expiry medicines, and auto-reorders before shortages hit.",
+    color: "#059669",
+    icon: "💊",
+    features: [
+      { title: "Near-expiry Medicine Alerts", desc: "Automatically flags medicines approaching expiry with enough lead time to redistribute or return stock." },
+      { title: "Smart Inventory Management", desc: "Real-time stock visibility across all pharmacy locations with automated reorder triggers." },
+      { title: "Dispensing Error Prevention", desc: "Cross-checks prescriptions against available stock and patient allergies before dispensing." },
+      { title: "Controlled Substance Tracking", desc: "Audit trail for every controlled substance movement — from receipt to dispensing." },
+      { title: "Supplier Integration", desc: "Auto-raises purchase orders with preferred suppliers when stock falls below threshold." },
+      { title: "Cost Optimization", desc: "Identifies generic substitution opportunities and highlights high-cost prescribing patterns." },
+    ],
+    metrics: [
+      { num: "0%", label: "Expiry wastage after deployment" },
+      { num: "30%", label: "Reduction in pharmacy costs" },
+      { num: "99%", label: "Dispensing accuracy rate" },
+      { num: "2×", label: "Faster stock replenishment" },
+    ],
+    useCases: [
+      "Hospital pharmacies losing revenue to preventable medicine wastage",
+      "Multi-location hospital chains needing centralized pharmacy oversight",
+      "Facilities managing high volumes of controlled substances",
+      "Pharmacies wanting to reduce manual stock reconciliation effort",
+    ],
+  },
+
+  ipd: {
+    name: "IPD Agent",
+    tagline: "Nursing handovers. Mistreatment alerts.",
+    description: "Digitize every nursing handover and monitor in-patient care quality in real time — so no critical information is lost between shifts and no patient goes unnoticed.",
+    color: "#D97706",
+    icon: "🛏️",
+    features: [
+      { title: "Structured Nursing Handover", desc: "Replaces verbal shift handovers with a structured digital protocol — capturing vitals, pending tasks, and care notes for every patient." },
+      { title: "Mistreatment & Neglect Alerts", desc: "AI monitors care delivery patterns and flags anomalies that indicate potential patient neglect or mistreatment in real time." },
+      { title: "Automated Care Plan Tracking", desc: "Tracks adherence to prescribed care plans and alerts nursing staff to missed interventions or overdue assessments." },
+      { title: "Patient Fall Risk Monitoring", desc: "Continuously scores fall risk based on medications, mobility, and vitals — triggering preventive protocols for high-risk patients." },
+      { title: "Ward Round Support", desc: "Prepares structured patient summaries for ward rounds, reducing preparation time and ensuring no case is overlooked." },
+      { title: "Nursing Staff Workload Balancing", desc: "Distributes patient assignments based on acuity and nurse capacity to prevent overload and ensure consistent care quality." },
+    ],
+    metrics: [
+      { num: "100%", label: "Handover completion rate" },
+      { num: "60%", label: "Reduction in care plan deviations" },
+      { num: "40%", label: "Fewer patient falls" },
+      { num: "15 min", label: "Saved per nurse per shift on handovers" },
+    ],
+    useCases: [
+      "IPD wards with high patient-to-nurse ratios and frequent handover errors",
+      "Hospitals with accreditation requirements around nursing documentation",
+      "Facilities looking to reduce patient safety incidents and adverse events",
+      "Multi-ward hospitals needing real-time visibility into in-patient care quality",
+    ],
+  },
+
+  ot: {
+    name: "OT Agent",
+    tagline: "OT scheduling, monitoring and emergency management.",
+    description: "Eliminate OT delays and conflicts with AI-powered scheduling, real-time monitoring, and intelligent emergency case insertion — so your operation theatres run at maximum utilization.",
+    color: "#0D1F3C",
+    icon: "🏥",
+    features: [
+      { title: "AI-powered OT Scheduling", desc: "Optimizes surgery schedules across all OTs based on surgeon availability, equipment, and case complexity — filling gaps automatically." },
+      { title: "Real-time OT Monitoring", desc: "Live dashboard showing every OT's current status, case progress, and expected completion time — visible to surgeons, anaesthetists, and coordinators." },
+      { title: "Emergency Case Management", desc: "Intelligently inserts emergency cases into the schedule with minimal disruption to elective cases." },
+      { title: "Pre-op Checklist Automation", desc: "Ensures all pre-operative requirements are completed before the patient enters OT, reducing last-minute cancellations." },
+      { title: "Anaesthesia Coordination", desc: "Syncs OT schedule with anaesthesia team availability and pre-assessment completion status." },
+      { title: "OT Utilization Analytics", desc: "Tracks block utilization, case cancellations, turnover times, and surgeon performance to drive continuous improvement." },
+    ],
+    metrics: [
+      { num: "30%", label: "Fewer OT delays" },
+      { num: "25%", label: "Increase in OT utilization" },
+      { num: "50%", label: "Reduction in emergency case conflicts" },
+      { num: "20 min", label: "Average turnover time reduction" },
+    ],
+    useCases: [
+      "Surgical hospitals with multiple OTs running concurrent speciality cases",
+      "Facilities with high emergency surgery volumes needing dynamic scheduling",
+      "Hospital administrators targeting OT utilization above 85%",
+      "Multi-speciality chains standardizing OT protocols across all facilities",
+    ],
+  },
+
+  claim: {
+    name: "Claim Agent",
+    tagline: "Reduce 20% claim rejection. Recover every rupee.",
+    description: "Cut claim rejections by 20% with AI that validates, scrubs, and submits insurance claims with zero manual errors — and automatically manages appeals for denied claims.",
+    color: "#7C3AED",
+    icon: "📋",
+    features: [
+      { title: "Pre-submission Claim Scrubbing", desc: "Validates every claim against payer-specific rules before submission, eliminating the most common rejection reasons." },
+      { title: "Auto-coding from Clinical Notes", desc: "Extracts ICD-10 and procedure codes directly from clinical documentation, reducing manual coding errors." },
+      { title: "Rejection Analysis & Prevention", desc: "Learns from your rejection history to flag high-risk claims for review before they are submitted." },
+      { title: "Automated Appeal Generation", desc: "Drafts appeal letters with supporting clinical evidence for denied claims — reducing appeals turnaround from weeks to hours." },
+      { title: "Payer-specific Rule Engine", desc: "Maintains an up-to-date library of payer rules across all major insurers and TPAs to ensure compliant submissions." },
+      { title: "Real-time Claims Dashboard", desc: "Live visibility into submission status, rejection rates, pending appeals, and collections by payer." },
+    ],
+    metrics: [
+      { num: "20%", label: "Reduction in claim rejections" },
+      { num: "70%", label: "Faster appeal resolution" },
+      { num: "99%", label: "First-pass claim accuracy" },
+      { num: "3×", label: "Faster claims processing" },
+    ],
+    useCases: [
+      "Hospitals with high TPA rejection rates eating into collections",
+      "Cashless empanelled hospitals needing faster claim turnaround",
+      "Billing teams overwhelmed by manual coding and rejection management",
+      "CFOs needing real-time visibility into claims performance by payer",
+    ],
+  },
+
+  finance: {
+    name: "Finance Agent",
+    tagline: "20% revenue leakage reduced. Per-patient P&L.",
+    description: "Stop revenue leakage and start managing every patient as a profit centre — with real-time financial dashboards, per-patient P&L tracking, and AI-driven cost optimization.",
+    color: "#1B4FD8",
+    icon: "💰",
+    features: [
+      { title: "Revenue Leakage Detection", desc: "Identifies unbilled procedures, missed charges, and billing gaps in real time — recovering revenue before it is lost." },
+      { title: "Per-patient P&L Tracking", desc: "Calculates the full cost and revenue for every patient encounter, enabling true per-patient profitability analysis." },
+      { title: "Real-time Financial Dashboards", desc: "Live visibility into revenue, costs, EBITDA, and cash flow — broken down by department, doctor, and payer." },
+      { title: "Budget vs Actuals Monitoring", desc: "Tracks departmental spending against budget in real time and alerts finance teams to variances early." },
+      { title: "Predictive Revenue Forecasting", desc: "Models next 30/60/90-day revenue based on current census, payer mix, and seasonal trends." },
+      { title: "Cost Reduction Intelligence", desc: "Identifies high-cost outliers in supplies, staffing, and procedures and benchmarks them against best-in-class peers." },
+    ],
+    metrics: [
+      { num: "20%", label: "Revenue leakage recovered" },
+      { num: "100%", label: "Per-patient P&L visibility" },
+      { num: "40%", label: "Faster month-end close" },
+      { num: "15%", label: "Average cost reduction" },
+    ],
+    useCases: [
+      "Hospital CFOs needing real-time financial performance visibility",
+      "Multi-speciality chains wanting per-department and per-doctor P&L analysis",
+      "Hospitals struggling with unexplained revenue shortfalls",
+      "Finance teams spending weeks on manual month-end reporting",
+    ],
+  },
+
   analytics: {
     name: "Analytics AI",
     tagline: "Intelligence that drives every decision.",
@@ -527,7 +666,6 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <CTASection />
       </main>
       <Footer />
     </div>

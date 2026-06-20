@@ -4,21 +4,21 @@ import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 const AGENTS = [
   {
     num: "01",
-    name: "Patient Registration Agent",
+    name: "Registration Agent",
     href: "/agents/patient-registration",
     color: "var(--primary)",
-    icon: "👤",
-    features: ["Aadhaar scan", "Face recognition", "Voice-based registration", "Auto form filling", "Returning patient ID"],
-    metric: "Seconds not minutes",
+    icon: "🪪",
+    features: ["Voice-based registration", "ABHA/insurance auto-fill", "Queue assignment in 90s"],
+    metric: "60% faster OPD",
   },
   {
     num: "02",
-    name: "Doctor AI Agent",
-    href: "/agents/doctor-ai",
+    name: "Doctor Prescription Agent",
+    href: "/agents/doctor-prescription",
     color: "var(--secondary)",
     icon: "🩺",
-    features: ["Voice-to-prescription", "Voice-to-EMR", "Clinical documentation", "Investigation recommendations", "Digital patient records"],
-    metric: "Zero manual entry",
+    features: ["Voice-to-prescription", "Voice-to-EMR notes", "ICD-10 auto-coding"],
+    metric: "2 hrs saved/doctor/day",
   },
   {
     num: "03",
@@ -26,44 +26,53 @@ const AGENTS = [
     href: "/agents/investigation",
     color: "var(--purple)",
     icon: "🔬",
-    features: ["Lab report interpretation", "Radiology report generation", "AI-assisted findings", "Risk prediction", "Automated alerts"],
-    metric: "AI-powered insights",
+    features: ["AI diagnostic reporting", "Critical value alerts", "LIS/RIS auto-routing"],
+    metric: "40% faster results",
   },
   {
     num: "04",
-    name: "Patient Follow-up Agent",
-    href: "/agents/follow-up",
-    color: "#F59E0B",
-    icon: "📱",
-    features: ["WhatsApp reminders", "Medication reminders", "Follow-up scheduling", "Personalized instructions", "Missed appointment alerts"],
-    metric: "3× better adherence",
+    name: "Pharmacy Agent",
+    href: "/agents/pharmacy",
+    color: "#059669",
+    icon: "💊",
+    features: ["Near-expiry alerts", "Auto stock reorder", "Dispensing error prevention"],
+    metric: "Zero expiry wastage",
   },
   {
     num: "05",
-    name: "Billing & Revenue Agent",
-    href: "/agents/billing",
-    color: "var(--success)",
-    icon: "💳",
-    features: ["Billing automation", "Revenue leakage detection", "Coding assistance", "Claims support", "Audit trail"],
-    metric: "15–20% more revenue",
+    name: "IPD Agent",
+    href: "/agents/ipd",
+    color: "#D97706",
+    icon: "🛏️",
+    features: ["Structured nursing handover", "Mistreatment alerts", "Care plan tracking"],
+    metric: "100% handover completion",
   },
   {
     num: "06",
-    name: "Hospital Operations Agent",
-    href: "/agents/operations",
-    color: "#EF4444",
+    name: "OT Agent",
+    href: "/agents/ot",
+    color: "#0D1F3C",
     icon: "🏥",
-    features: ["Bed management", "Queue management", "Staff monitoring", "Operational dashboards", "Performance analytics"],
-    metric: "30% efficiency gain",
+    features: ["AI OT scheduling", "Real-time OT monitoring", "Emergency case management"],
+    metric: "30% fewer OT delays",
   },
   {
     num: "07",
-    name: "AI Analytics Agent",
-    href: "/agents/analytics",
-    color: "var(--dark-navy)",
-    icon: "📊",
-    features: ["Real-time hospital insights", "Revenue analytics", "Patient flow analysis", "Operational intelligence", "Predictive dashboards"],
-    metric: "Real-time intelligence",
+    name: "Claim Agent",
+    href: "/agents/claim",
+    color: "var(--purple)",
+    icon: "📋",
+    features: ["Pre-submission scrubbing", "Auto appeal generation", "Payer rule engine"],
+    metric: "20% fewer rejections",
+  },
+  {
+    num: "08",
+    name: "Finance Agent",
+    href: "/agents/finance",
+    color: "var(--primary)",
+    icon: "💰",
+    features: ["Revenue leakage detection", "Per-patient P&L", "Real-time dashboards", "Budget vs actuals", "Cost optimization"],
+    metric: "20% leakage recovered",
   },
 ];
 
@@ -126,34 +135,36 @@ export default function AgentsOverview() {
           ))}
         </FadeInStagger>
 
-        {/* 7th agent — full width */}
-        <FadeIn delay={0.1}>
-          <Link href={AGENTS[6].href} className="group block mt-5 card hover:no-underline">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-[12px] flex items-center justify-center text-2xl flex-shrink-0 bg-[var(--dark-navy)]/10">
-                  {AGENTS[6].icon}
+        {/* Last 2 agents — full width */}
+        <div className="flex flex-col gap-4 mt-5">
+          {AGENTS.slice(6).map((agent) => (
+            <FadeIn key={agent.num} delay={0.1}>
+              <Link href={agent.href} className="group block card hover:no-underline">
+                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 rounded-[12px] flex items-center justify-center text-2xl flex-shrink-0" style={{ background: `${agent.color}18` }}>
+                      {agent.icon}
+                    </div>
+                    <div>
+                      <p className="type-mono text-[var(--text-dim)] mb-1">{agent.num}</p>
+                      <h3 className="text-[17px] font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors">
+                        {agent.name}
+                      </h3>
+                    </div>
+                  </div>
+                  <div className="flex flex-wrap gap-2">
+                    {agent.features.map((f) => (
+                      <span key={f} className="text-[11px] text-[var(--text-muted)] bg-[var(--bg)] px-3 py-1.5 rounded-full border border-[var(--border)]">
+                        {f}
+                      </span>
+                    ))}
+                  </div>
+                  <span className="flex-shrink-0 btn btn-ghost btn-sm">Learn more →</span>
                 </div>
-                <div>
-                  <p className="type-mono text-[var(--text-dim)] mb-1">{AGENTS[6].num}</p>
-                  <h3 className="text-[17px] font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors">
-                    {AGENTS[6].name}
-                  </h3>
-                </div>
-              </div>
-              <div className="flex flex-wrap gap-2">
-                {AGENTS[6].features.map((f) => (
-                  <span key={f} className="text-[11px] text-[var(--text-muted)] bg-[var(--bg)] px-3 py-1.5 rounded-full border border-[var(--border)]">
-                    {f}
-                  </span>
-                ))}
-              </div>
-              <span className="flex-shrink-0 btn btn-ghost btn-sm">
-                Learn more →
-              </span>
-            </div>
-          </Link>
-        </FadeIn>
+              </Link>
+            </FadeIn>
+          ))}
+        </div>
       </div>
     </section>
   );
