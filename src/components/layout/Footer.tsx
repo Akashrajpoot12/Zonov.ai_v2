@@ -100,16 +100,9 @@ function FooterGroupBlock({ group }: { group: FooterGroup }) {
 
 export default function Footer() {
   return (
-    <footer className="noise relative overflow-hidden bg-[var(--dark-navy)] text-white">
-      {/* Background graphics */}
-      <div className="absolute inset-0 pointer-events-none z-0" aria-hidden="true">
-        <div className="absolute -bottom-32 -left-24 w-[480px] h-[480px] rounded-full blur-[120px] opacity-[0.13] bg-[var(--primary)]" />
-        <div className="absolute -bottom-40 right-10 w-[420px] h-[420px] rounded-full blur-[130px] opacity-[0.1] bg-[var(--purple)]" />
-        <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[600px] h-[300px] rounded-full blur-[140px] opacity-[0.06] bg-[var(--secondary)]" />
-      </div>
-
+    <footer className="relative overflow-hidden bg-[var(--dark-navy)] text-white">
       {/* Top CTA band */}
-      <div className="border-b border-white/10 relative overflow-hidden z-10">
+      <div className="border-b border-white/10 relative overflow-hidden z-10 py-8 md:py-10">
         {/* Floating 3D panels — decorative background */}
         <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
           {/* Panel 1 — large, far right */}
@@ -162,7 +155,7 @@ export default function Footer() {
           }} />
         </div>
 
-        <div className="container-wide py-28 md:py-32 flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
+        <div className="container-wide flex flex-col lg:flex-row items-center justify-between gap-8 relative z-10">
           <div>
             <h2 className="text-[29px] font-semibold" style={{ fontFamily: "var(--font-playfair)" }}>
               Give your hospital an <span className="italic gradient-text-light">AI workforce.</span>
@@ -179,8 +172,11 @@ export default function Footer() {
         </div>
       </div>
 
-{/* Links grid + brand column — amigo style */}
-      <div className="container-wide pt-28 md:pt-32 pb-20 relative z-10">
+{/* Spacer — gap after the CTA band line */}
+      <div className="h-10 md:h-14 relative z-10" aria-hidden="true" />
+
+      {/* Links grid + brand column — amigo style */}
+      <div className="container-wide pb-20 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 lg:gap-0">
 
           {/* Brand column */}

@@ -80,7 +80,8 @@
    ═══════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; overflow-x: clip; }
+/* No CSS smooth-scroll — Lenis handles smooth scrolling (avoids scroll conflict/jank) */
+html { overflow-x: clip; }
 body { overflow-x: clip; }
 
 body {
