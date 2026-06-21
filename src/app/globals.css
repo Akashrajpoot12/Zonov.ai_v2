@@ -425,3 +425,40 @@ body {
     transition-duration: 0.01ms !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════
+   MOBILE FIXES
+   ═══════════════════════════════════════════════════ */
+
+/* Prevent any element from causing horizontal scroll */
+img, video, iframe, table {
+  max-width: 100%;
+}
+
+/* Case study metrics bar — scroll horizontally on small screens */
+@media (max-width: 640px) {
+  .metrics-bar-scroll {
+    overflow-x: auto;
+  }
+
+  /* Reduce section padding on mobile */
+  .section-py {
+    padding-top:    clamp(3rem, 8vw, 5rem);
+    padding-bottom: clamp(3rem, 8vw, 5rem);
+  }
+
+  /* Tighter card padding on mobile */
+  .card { padding: 20px; }
+  .card-dark { padding: 20px; }
+
+  /* Floating hero badges — hide on very small screens to prevent overflow */
+  .hero-badge { display: none; }
+}
+
+@media (max-width: 768px) {
+  /* Ensure grid items don't overflow */
+  .container-wide { padding-left: 1rem; padding-right: 1rem; }
+
+  /* Buttons full-width on mobile forms */
+  .btn-mobile-full { width: 100%; justify-content: center; }
+}

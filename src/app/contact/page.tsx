@@ -54,14 +54,29 @@ export default function ContactPage() {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
+  const [loading, setLoading] = useState(false);
+
+  async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
       setError("Please fill in your name, email, and message.");
       return;
     }
     setError("");
-    setSubmitted(true);
+    setLoading(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...form, type: "contact" }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSubmitted(true);
+    } catch {
+      setError("Something went wrong. Please email us directly at hello@zonov.ai");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -118,7 +133,9 @@ export default function ContactPage() {
                         </div>
                         {error && <p className="type-caption text-red-500">{error}</p>}
                         <div>
-                          <button type="submit" className="btn btn-primary-lg">Send Message</button>
+                          <button type="submit" disabled={loading} className="btn btn-primary-lg">
+                            {loading ? "Sending..." : "Send Message"}
+                          </button>
                         </div>
                       </form>
                     )}

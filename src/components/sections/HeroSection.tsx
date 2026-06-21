@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
 
 const STATS = [
-  { value: 7, suffix: "+", label: "AI Agents", animate: true },
+  { value: 8, suffix: "", label: "AI Agents", animate: true },
   { value: null, display: "6–8", suffix: " wks", label: "Weeks to Deploy", animate: false },
   { value: 40, suffix: "%", label: "Less Paperwork", animate: true },
   { value: 100, suffix: "%", label: "HIPAA Compliant", animate: true },

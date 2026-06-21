@@ -60,8 +60,29 @@ export default function BookDemoPage() {
     }));
   }
 
-  function handleSubmit() {
-    setSubmitted(true);
+  const [loading, setLoading] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
+  async function handleSubmit() {
+    if (!formData.name || !formData.email || !formData.phone || !formData.hospitalName) {
+      setSubmitError("Please fill in your name, email, phone, and hospital name.");
+      return;
+    }
+    setLoading(true);
+    setSubmitError("");
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, type: "book-demo" }),
+      });
+      if (!res.ok) throw new Error("Failed");
+      setSubmitted(true);
+    } catch {
+      setSubmitError("Something went wrong. Please email us at hello@zonov.ai");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -301,13 +322,18 @@ export default function BookDemoPage() {
                         Next
                       </button>
                     ) : (
-                      <button
-                        type="button"
-                        className="btn btn-primary-lg"
-                        onClick={handleSubmit}
-                      >
-                        Submit Request
-                      </button>
+                      <>
+                        {submitError && <p className="type-caption text-red-500 mr-4">{submitError}</p>}
+                        <button
+                          type="button"
+                          className="btn btn-primary-lg"
+                          onClick={handleSubmit}
+                          disabled={loading}
+                          style={{ opacity: loading ? 0.7 : 1 }}
+                        >
+                          {loading ? "Submitting..." : "Submit Request"}
+                        </button>
+                      </>
                     )}
                   </div>
                 </div>

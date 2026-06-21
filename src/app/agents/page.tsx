@@ -87,7 +87,7 @@ const AGENTS = [
     icon: "📋",
     num: "07",
     name: "Claim Agent",
-    tagline: "Reduce 20% claim rejection. Recover every rupee.",
+    tagline: "Reduce 20% claim rejection. Recover more revenue.",
     problem: "Indian hospitals lose 15–20% of revenue to missed charges, claim denials, and manual billing errors every month.",
     solves: ["Reduces claim rejections by 20%", "Auto-captures unbilled procedures", "Real-time revenue leakage alerts"],
     metric: "20% fewer claim rejections",

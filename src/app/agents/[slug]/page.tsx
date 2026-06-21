@@ -383,7 +383,7 @@ const AGENTS: Record<string, AgentData> = {
 
   claim: {
     name: "Claim Agent",
-    tagline: "Reduce 20% claim rejection. Recover every rupee.",
+    tagline: "Reduce 20% claim rejection. Recover more revenue.",
     description: "Cut claim rejections by 20% with AI that validates, scrubs, and submits insurance claims with zero manual errors — and automatically manages appeals for denied claims.",
     color: "#7C3AED",
     icon: "📋",
