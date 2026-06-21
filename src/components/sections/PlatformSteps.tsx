@@ -33,7 +33,7 @@ const STEPS = [
   {
     num: "03",
     name: "Deploy",
-    tagline: "Go live in 6–8 weeks",
+    tagline: "Go live in 1–2 weeks",
     desc: "Deployment is seamless. Agents integrate with your existing systems through APIs, work across web, mobile, and kiosk interfaces, and start reducing workload from day one.",
     tabs: [
       { label: "API Integration", content: "Connect through our REST API to any existing HIS, EMR, LIS, or billing software. Zero rip-and-replace." },

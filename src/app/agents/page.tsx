@@ -127,7 +127,7 @@ export default function AgentsPage() {
                 <span className="italic gradient-text-light">workflow covered.</span>
               </h1>
               <p className="type-subtitle text-white/55 max-w-xl">
-                Each agent is purpose-built for one domain — trained on clinical data, integrated with your existing systems, and live in 6–8 weeks.
+                Each agent is purpose-built for one domain — trained on clinical data, integrated with your existing systems, and live in 1–2 weeks.
               </p>
             </FadeIn>
           </div>

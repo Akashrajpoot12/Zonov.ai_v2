@@ -21,7 +21,7 @@ export default function PlatformHero() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="type-subtitle text-white/60 max-w-xl mb-10">
-            One unified AI infrastructure behind every care decision — from patient arrival to final billing. Deploy in 6–8 weeks, not 18 months.
+            One unified AI infrastructure behind every care decision — from patient arrival to final billing. Deploy in 1–2 weeks, not 18 months.
           </p>
         </FadeIn>
         <FadeIn delay={0.15}>
@@ -37,7 +37,7 @@ export default function PlatformHero() {
         <FadeIn delay={0.2}>
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { n: "6–8 wks", l: "Time to deploy" },
+              { n: "1–2 wks", l: "Time to deploy" },
               { n: "7", l: "Specialized AI agents" },
               { n: "100%", l: "HIPAA compliant" },
               { n: "24/7", l: "Autonomous operation" },

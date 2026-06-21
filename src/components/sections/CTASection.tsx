@@ -20,7 +20,7 @@ export default function CTASection() {
                 <span className="italic gradient-text-light">AI workforce.</span>
               </h2>
               <p className="type-body-lg text-white/60 max-w-xl mx-auto mb-10">
-                Deploy AI agents across registration, documentation, diagnostics, billing, and operations. Go live in 6–8 weeks.
+                Deploy AI agents across registration, documentation, diagnostics, billing, and operations. Go live in 1–2 weeks.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                 <Link href="/book-demo" className="btn btn-primary-lg">
@@ -31,7 +31,7 @@ export default function CTASection() {
                 </Link>
               </div>
               <p className="mt-8 text-[12px] text-white/30">
-                No long IT projects. No disruption. Live in 6–8 weeks.
+                No long IT projects. No disruption. Live in 1–2 weeks.
               </p>
             </div>
           </div>

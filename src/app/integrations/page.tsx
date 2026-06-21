@@ -112,7 +112,7 @@ export default function IntegrationsPage() {
                 <span className="gradient-text-light italic">your hospital already uses.</span>
               </h1>
               <p className="type-body-lg text-white/60 mt-5 max-w-2xl">
-                Zonov.ai integrates with India&apos;s leading HIS platforms, diagnostic labs, insurance networks, and government health schemes. No rip-and-replace. Live in 6–8 weeks.
+                Zonov.ai integrates with India&apos;s leading HIS platforms, diagnostic labs, insurance networks, and government health schemes. No rip-and-replace. Live in 1–2 weeks.
               </p>
               <div className="flex gap-3 mt-8 flex-wrap">
                 <Link href="/book-demo" className="btn btn-primary-lg">Book a Demo</Link>
@@ -128,7 +128,7 @@ export default function IntegrationsPage() {
                 { n: "20+", l: "HIS Systems" },
                 { n: "100%", l: "ABDM Compliant" },
                 { n: "HL7 FHIR", l: "Native Support" },
-                { n: "6–8 wks", l: "Go Live Time" },
+                { n: "1–2 wks", l: "Go Live Time" },
               ].map((s) => (
                 <div key={s.l} className="bg-white/5 border border-white/10 rounded-2xl p-5 text-center">
                   <p className="font-bold text-white leading-none" style={{ fontFamily: "var(--font-playfair)", fontSize: "clamp(22px, 2.5vw, 32px)" }}>{s.n}</p>

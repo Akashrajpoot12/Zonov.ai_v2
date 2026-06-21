@@ -293,7 +293,7 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                     style={{ backgroundColor: "var(--primary-subtle)", border: "1px solid rgba(27,79,216,0.15)" }}
                   >
                     <p className="type-mono text-xs mb-2" style={{ color: "var(--primary)" }}>IMPLEMENTATION</p>
-                    <p className="type-body font-semibold" style={{ color: "var(--text)" }}>Live in 6–8 weeks</p>
+                    <p className="type-body font-semibold" style={{ color: "var(--text)" }}>Live in 1–2 weeks</p>
                     <p className="type-caption mt-1" style={{ color: "var(--text-muted)" }}>
                       Zero downtime to clinical operations. Integrated with existing HIS.
                     </p>

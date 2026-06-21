@@ -18,7 +18,7 @@ const WHY_DIFFERENT = [
   },
   {
     icon: "⚡",
-    title: "Deploy in 6–8 Weeks",
+    title: "Deploy in 1–2 Weeks",
     desc: "No 18-month IT projects. Our agents integrate with your existing systems and go live fast.",
   },
   {

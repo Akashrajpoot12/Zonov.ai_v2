@@ -660,7 +660,7 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                 ?
               </h2>
               <p className="type-body-lg text-white/50 max-w-lg mx-auto">
-                Go live in 6–8 weeks with zero disruption to existing workflows. Our implementation team handles everything.
+                Go live in 1–2 weeks with zero disruption to existing workflows. Our implementation team handles everything.
               </p>
             </FadeIn>
           </div>

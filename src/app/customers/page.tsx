@@ -14,7 +14,7 @@ const stats = [
   { number: "20+", label: "Hospitals" },
   { number: "4", label: "Cities" },
   { number: "20%+", label: "Revenue Leakage Recovered" },
-  { number: "6–8 wks", label: "Avg. Implementation Time" },
+  { number: "1–2 wks", label: "Avg. Implementation Time" },
 ];
 
 const customers = [

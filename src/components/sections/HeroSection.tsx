@@ -6,7 +6,7 @@ import CountUp from "@/components/ui/CountUp";
 
 const STATS = [
   { value: 8, suffix: "", label: "AI Agents", animate: true },
-  { value: null, display: "6–8", suffix: " wks", label: "Weeks to Deploy", animate: false },
+  { value: null, display: "1–2", suffix: " wks", label: "Weeks to Deploy", animate: false },
   { value: 40, suffix: "%", label: "Less Paperwork", animate: true },
   { value: 100, suffix: "%", label: "HIPAA Compliant", animate: true },
 ];
