@@ -8,6 +8,8 @@ import DifferentiatorSection from "@/components/sections/DifferentiatorSection";
 import ValueSection from "@/components/sections/ValueSection";
 import TestimonialsSection from "@/components/sections/TestimonialsSection";
 import CTASection from "@/components/sections/CTASection";
+import CardBook from "@/components/ui/CardBook";
+import FadeIn from "@/components/ui/FadeIn";
 
 export default function HomePage() {
   return (
@@ -24,6 +26,24 @@ export default function HomePage() {
 
         <ProblemSection />
         <AgentsOverview />
+
+        {/* CardBook — every capability at a glance */}
+        <section className="bg-[var(--bg)] section-py overflow-hidden">
+          <div className="container-wide px-edge text-center mb-6">
+            <FadeIn>
+              <p className="type-mono text-[var(--primary)] mb-4">16 CAPABILITIES</p>
+              <h2 className="type-h1 text-[var(--text)] max-w-2xl mx-auto [text-wrap:balance]">
+                Everything your hospital needs —{" "}
+                <span className="gradient-text italic">in one platform.</span>
+              </h2>
+              <p className="type-body-lg text-[var(--text-muted)] mt-4 max-w-xl mx-auto">
+                Drag or tap to explore. Every card is a real workflow Zonov.ai handles today.
+              </p>
+            </FadeIn>
+          </div>
+          <CardBook />
+        </section>
+
         <DifferentiatorSection />
         <ValueSection />
         <TestimonialsSection />
