@@ -44,7 +44,7 @@ const caseStudies: CaseStudy[] = [
     metrics: [
       { value: "8 min", label: "Registration Time", sub: "Down from 25 minutes" },
       { value: "72%", label: "Less Manual Work", sub: "Across registration & billing" },
-      { value: "₹42L", label: "Revenue Leakage Found", sub: "In first 90-day audit" },
+      { value: "20%", label: "Revenue Leakage Found", sub: "In first 90-day audit" },
       { value: "31%", label: "Follow-Up Improvement", sub: "More patients returning" },
       { value: "22%", label: "Patient Satisfaction", sub: "Increase in CSAT score" },
     ],
@@ -100,7 +100,7 @@ const caseStudies: CaseStudy[] = [
       { name: "Executive Dashboard", color: "var(--purple)" },
     ],
     metrics: [
-      { value: "₹1.8Cr", label: "Annual Revenue Recovered", sub: "Unbilled procedures captured" },
+      { value: "20%", label: "Revenue Recovered", sub: "Unbilled procedures captured" },
       { value: "55%", label: "Less Manual Reporting", sub: "Across all departments" },
       { value: "35%", label: "Faster Decisions", sub: "With live dashboards" },
       { value: "25%", label: "Operational Efficiency", sub: "Hospital-wide improvement" },

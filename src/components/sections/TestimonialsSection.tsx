@@ -19,7 +19,7 @@ const TESTIMONIALS = [
     color: "var(--secondary)",
   },
   {
-    quote: "Our billing team recovered ₹18 lakhs in missed charges in the first month. The revenue leakage detection is extraordinary.",
+    quote: "Our billing team recovered significant missed charges in the first month — revenue we never even knew we were losing. The leakage detection is extraordinary.",
     name: "Mr. Anil Mehta",
     role: "CFO",
     org: "Sunshine Hospital Group, Mumbai",
@@ -31,7 +31,7 @@ const TESTIMONIALS = [
 const METRICS = [
   { value: 40, suffix: "%", label: "Reduction in paperwork", icon: "📉", animate: true },
   { value: 90, suffix: "s", label: "Patient registration time", icon: "⚡", animate: true },
-  { value: null, display: "₹18L", label: "Avg. monthly revenue recovered", icon: "💰", animate: false },
+  { value: 20, suffix: "%", label: "Avg. revenue leakage recovered", icon: "💰", animate: true },
   { value: 3, suffix: "×", label: "Improvement in follow-up rates", icon: "📈", animate: true },
 ];
 

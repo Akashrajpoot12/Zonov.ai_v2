@@ -47,7 +47,7 @@ export default function UseCasesPage() {
                     <div className="grid grid-cols-3 gap-4">
                       {[
                         { stat: "40%", label: "less documentation time" },
-                        { stat: "₹3.2Cr", label: "annual savings" },
+                        { stat: "30%", label: "cost reduction" },
                         { stat: "92%", label: "staff satisfaction" },
                       ].map(({ stat, label }) => (
                         <div key={stat} className="text-center">

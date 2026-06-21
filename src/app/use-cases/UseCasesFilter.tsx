@@ -40,7 +40,7 @@ const useCases = [
     ),
     problem: "15–20% of claims are denied due to coding errors, missing documentation, or wrong billing codes.",
     solution: "AI audits every discharge summary, flags gaps, suggests correct ICD codes before claim submission.",
-    result: "18% reduction in claim denials · ₹2.4Cr recovered per year",
+    result: "18% reduction in claim denials · 20% revenue leakage recovered",
   },
   {
     department: "Discharge",

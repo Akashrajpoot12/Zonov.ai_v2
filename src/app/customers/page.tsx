@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const stats = [
   { number: "20+", label: "Hospitals" },
   { number: "4", label: "Cities" },
-  { number: "₹50Cr+", label: "Revenue Recovered" },
+  { number: "20%+", label: "Revenue Leakage Recovered" },
 ];
 
 const customers = [
@@ -52,8 +52,8 @@ const customers = [
     slug: "carefirst-medical",
     quote: "Zonov.ai became our operational command center.",
     author: "Amit Verma, CEO",
-    metric: "₹1.8Cr",
-    metricLabel: "Annual revenue recovered",
+    metric: "20%",
+    metricLabel: "Revenue leakage recovered",
     accent: "var(--purple)",
   },
 ];

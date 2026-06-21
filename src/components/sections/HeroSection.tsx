@@ -128,7 +128,7 @@ export default function HeroSection() {
             >
               <span className="w-8 h-8 rounded-full bg-[var(--success)]/15 flex items-center justify-center text-[var(--success)] text-sm">✓</span>
               <div>
-                <p className="text-[12px] font-semibold text-[var(--text)]">₹42L Revenue Recovered</p>
+                <p className="text-[12px] font-semibold text-[var(--text)]">20% Revenue Recovered</p>
                 <p className="text-[10px] text-[var(--text-muted)]">Sunrise Hospital, Jaipur</p>
               </div>
             </motion.div>

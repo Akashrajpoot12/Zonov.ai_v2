@@ -47,7 +47,7 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0" aria-label="Zonov.ai home">
           <Image
-            src="/logo.png"
+            src="/logo1.png"
             alt="Zonov.ai — The Future of Healthcare"
             width={140}
             height={40}

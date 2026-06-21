@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Inter } from "next/font/google";
+import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
 import "./globals.css";
 import ChatBot from "@/components/ui/ChatBot";
 
-const playfair = Playfair_Display({
+const cormorant = Cormorant_Garamond({
   variable: "--font-playfair",
   subsets: ["latin"],
   weight: ["400", "500", "600"],
@@ -11,10 +11,10 @@ const playfair = Playfair_Display({
   display: "swap",
 });
 
-const inter = Inter({
+const jakarta = Plus_Jakarta_Sans({
   variable: "--font-inter",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -51,7 +51,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${playfair.variable} ${inter.variable} h-full`}
+      className={`${cormorant.variable} ${jakarta.variable} h-full`}
     >
       <body className="min-h-full flex flex-col bg-bg text-text antialiased">
         {children}
