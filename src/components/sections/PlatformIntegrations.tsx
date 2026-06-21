@@ -1,4 +1,4 @@
-import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import FadeIn from "@/components/ui/FadeIn";
 
 const SYSTEMS = [
   { name: "HIS / EMR", examples: "Meditech, Allscripts, Cerner, Epic", icon: "🏥" },
@@ -12,6 +12,22 @@ const SYSTEMS = [
 ];
 
 const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "ABDM", "OAuth 2.0", "SNOMED CT", "ICD-10"];
+
+type System = (typeof SYSTEMS)[number];
+
+function IntegrationCard({ sys }: { sys: System }) {
+  return (
+    <div className="w-[230px] flex-shrink-0 bg-white rounded-[16px] border border-[var(--border)] p-5 hover:border-[var(--primary)]/40 hover:shadow-md transition-all">
+      <div className="text-2xl mb-3">{sys.icon}</div>
+      <p className="text-[14px] font-semibold text-[var(--text)] mb-1">{sys.name}</p>
+      <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">{sys.examples}</p>
+    </div>
+  );
+}
+
+/* First half / second half for the two opposing rows */
+const ROW_A = SYSTEMS.slice(0, 4);
+const ROW_B = SYSTEMS.slice(4);
 
 export default function PlatformIntegrations() {
   return (
@@ -31,17 +47,27 @@ export default function PlatformIntegrations() {
           </p>
         </FadeIn>
 
-        <FadeInStagger className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12" stagger={0.06}>
-          {SYSTEMS.map((sys) => (
-            <FadeInItem key={sys.name}>
-              <div className="bg-white rounded-[16px] border border-[var(--border)] p-5 hover:border-[var(--primary)]/40 hover:shadow-sm transition-all">
-                <div className="text-2xl mb-3">{sys.icon}</div>
-                <p className="text-[14px] font-semibold text-[var(--text)] mb-1">{sys.name}</p>
-                <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">{sys.examples}</p>
+        {/* Auto-scrolling marquee rows */}
+        <FadeIn className="mb-12">
+          <div className="flex flex-col gap-4">
+            {/* Row A → scrolls left */}
+            <div className="marquee-mask overflow-hidden">
+              <div className="marquee-track">
+                {[...ROW_A, ...ROW_A, ...ROW_A, ...ROW_A].map((sys, i) => (
+                  <IntegrationCard key={`a-${i}`} sys={sys} />
+                ))}
               </div>
-            </FadeInItem>
-          ))}
-        </FadeInStagger>
+            </div>
+            {/* Row B → scrolls right */}
+            <div className="marquee-mask overflow-hidden">
+              <div className="marquee-track reverse">
+                {[...ROW_B, ...ROW_B, ...ROW_B, ...ROW_B].map((sys, i) => (
+                  <IntegrationCard key={`b-${i}`} sys={sys} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeIn>
 
         {/* Protocols */}
         <FadeIn>

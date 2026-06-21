@@ -1,106 +1,153 @@
-import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+"use client";
+
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import CountUp from "@/components/ui/CountUp";
+import s from "./TestimonialsSection.module.css";
 
 const TESTIMONIALS = [
   {
-    quote: "Zonov.ai reduced our patient registration time from 12 minutes to under 90 seconds. Our OPD queue has never been shorter.",
+    quote:
+      "Zonov.ai reduced our patient registration time from 12 minutes to under 90 seconds. Our OPD queue has never been shorter.",
     name: "Dr. Priya Sharma",
     role: "Medical Director",
     org: "Apex Multispeciality Hospital, Pune",
     avatar: "PS",
-    color: "var(--primary)",
+    accent: "#1B4FD8",
   },
   {
-    quote: "The voice-to-prescription feature alone saves me 2 hours every day. I can finally focus on what I trained for — treating patients.",
+    quote:
+      "The voice-to-prescription feature alone saves me 2 hours every day. I can finally focus on what I trained for — treating patients.",
     name: "Dr. Rajesh Kumar",
     role: "Senior Consultant, Internal Medicine",
     org: "City Care Hospital, Delhi",
     avatar: "RK",
-    color: "var(--secondary)",
+    accent: "#00B4AE",
   },
   {
-    quote: "Our billing team recovered significant missed charges in the first month — revenue we never even knew we were losing. The leakage detection is extraordinary.",
+    quote:
+      "Our billing team recovered significant missed charges in the first month — revenue we never even knew we were losing. The leakage detection is extraordinary.",
     name: "Mr. Anil Mehta",
     role: "CFO",
     org: "Sunshine Hospital Group, Mumbai",
     avatar: "AM",
-    color: "var(--purple)",
+    accent: "#7C3AED",
   },
 ];
 
 const METRICS = [
-  { value: 40, suffix: "%", label: "Reduction in paperwork", icon: "📉", animate: true },
-  { value: 90, suffix: "s", label: "Patient registration time", icon: "⚡", animate: true },
-  { value: 98, suffix: "%", label: "Clinical documentation accuracy", icon: "🎯", animate: true },
-  { value: 3, suffix: "×", label: "Improvement in follow-up rates", icon: "📈", animate: true },
+  { value: 40, suffix: "%", label: "Reduction in paperwork" },
+  { value: 90, suffix: "s", label: "Patient registration time" },
+  { value: 98, suffix: "%", label: "Documentation accuracy" },
+  { value: 3, suffix: "×", label: "Improvement in follow-ups" },
 ];
 
 export default function TestimonialsSection() {
-  return (
-    <section className="section-py bg-[var(--bg)]">
-      <div className="container-wide">
-        <FadeIn>
-          <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-            <span className="w-6 h-px bg-[var(--primary)]" />
-            Real Results
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.05}>
-          <h2 className="type-h1 text-[var(--text)] max-w-xl [text-wrap:balance] mb-14">
-            Healthcare professionals{" "}
-            <span className="italic gradient-text">love Zonov.ai.</span>
-          </h2>
-        </FadeIn>
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
 
-        {/* Metrics row */}
-        <FadeInStagger className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-12" stagger={0.07}>
-          {METRICS.map((m) => (
-            <FadeInItem key={m.label}>
-              <div className="bg-white rounded-[16px] border border-[var(--border)] p-5 text-center">
-                <div className="text-2xl mb-2">{m.icon}</div>
-                <p
-                  className="text-[clamp(26px,3vw,38px)] leading-none tracking-tight mb-1"
-                  style={{ fontFamily: "var(--font-playfair)", color: "var(--primary)" }}
-                >
-                  <CountUp value={m.value} suffix={m.suffix} />
-                </p>
-                <p className="type-caption text-[var(--text-muted)]">{m.label}</p>
-              </div>
-            </FadeInItem>
+  const y1 = useTransform(scrollYProgress, [0, 1], [60, -60]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [-40, 80]);
+  const y3 = useTransform(scrollYProgress, [0, 1], [30, -90]);
+
+  return (
+    <section ref={sectionRef} className={s.section}>
+
+      {/* ── Parallax blob layers ── */}
+      <motion.div className={s.blobLayer} style={{ y: y1 }}>
+        <div className={`${s.blob} ${s.blobBlue1}`} />
+        <div className={`${s.blob} ${s.blobPurple}`} />
+      </motion.div>
+      <motion.div className={s.blobLayer} style={{ y: y2 }}>
+        <div className={`${s.blob} ${s.blobTeal}`} />
+      </motion.div>
+      <motion.div className={s.blobLayer} style={{ y: y3 }}>
+        <div className={`${s.blob} ${s.blobBlue2}`} />
+      </motion.div>
+
+      {/* ── Floating glass card decorations ── */}
+      <div className={`${s.glassCard} ${s.gc1}`} />
+      <div className={`${s.glassCard} ${s.gc2}`} />
+      <div className={`${s.glassCard} ${s.gc3}`} />
+      <div className={`${s.glassCard} ${s.gc4}`} />
+      <div className={`${s.glassCard} ${s.gc5}`} />
+
+      <div className={`container-wide ${s.inner}`}>
+
+        {/* Label */}
+        <motion.p
+          className={s.label}
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.5 }}
+        >
+          <span className={s.labelLine} />
+          Real Results
+        </motion.p>
+
+        {/* Headline */}
+        <motion.h2
+          className={`type-h1 ${s.headline}`}
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.55, delay: 0.05 }}
+        >
+          Healthcare professionals{" "}
+          <span className="italic gradient-text">love Zonov.ai.</span>
+        </motion.h2>
+
+        {/* Metrics */}
+        <div className={s.metricsGrid}>
+          {METRICS.map((m, i) => (
+            <motion.div
+              key={m.label}
+              className={s.metricCard}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.45, delay: i * 0.07 }}
+            >
+              <p className={s.metricValue}>
+                <CountUp value={m.value} suffix={m.suffix} />
+              </p>
+              <p className={s.metricLabel}>{m.label}</p>
+            </motion.div>
           ))}
-        </FadeInStagger>
+        </div>
 
         {/* Testimonial cards */}
-        <FadeInStagger className="grid grid-cols-1 md:grid-cols-3 gap-5" stagger={0.09}>
-          {TESTIMONIALS.map((t) => (
-            <FadeInItem key={t.name}>
-              <div className="bg-white rounded-[20px] border border-[var(--border)] p-6 flex flex-col h-full hover:shadow-md transition-shadow">
-                {/* Quote mark */}
-                <div
-                  className="text-[40px] leading-none mb-4"
-                  style={{ color: t.color, fontFamily: "Georgia, serif" }}
-                >
-                  &ldquo;
+        <div className={s.cardsGrid}>
+          {TESTIMONIALS.map((t, i) => (
+            <motion.div
+              key={t.name}
+              className={s.card}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: i * 0.1 }}
+              whileHover={{ y: -6, transition: { duration: 0.25 } }}
+            >
+              <div className={s.quoteGlyph} style={{ color: t.accent }}>&ldquo;</div>
+              <p className={s.quoteText}>{t.quote}</p>
+              <div className={s.divider} />
+              <div className={s.author}>
+                <div className={s.avatar} style={{ background: t.accent }}>
+                  {t.avatar}
                 </div>
-                <p className="text-[14px] text-[var(--text)] leading-relaxed mb-6 flex-grow italic">
-                  {t.quote}
-                </p>
-                <div className="flex items-center gap-3 pt-5 border-t border-[var(--border)]">
-                  <div
-                    className="w-9 h-9 rounded-full flex items-center justify-center text-white text-[11px] font-bold flex-shrink-0"
-                    style={{ background: t.color }}
-                  >
-                    {t.avatar}
-                  </div>
-                  <div>
-                    <p className="text-[13px] font-semibold text-[var(--text)]">{t.name}</p>
-                    <p className="text-[11px] text-[var(--text-muted)]">{t.role} · {t.org}</p>
-                  </div>
+                <div>
+                  <p className={s.authorName}>{t.name}</p>
+                  <p className={s.authorRole}>{t.role} · {t.org}</p>
                 </div>
               </div>
-            </FadeInItem>
+            </motion.div>
           ))}
-        </FadeInStagger>
+        </div>
+
       </div>
     </section>
   );

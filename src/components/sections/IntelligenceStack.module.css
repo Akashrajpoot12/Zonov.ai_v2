@@ -1,0 +1,139 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 440px;
+  perspective: 1400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.stack {
+  position: relative;
+  width: 300px;
+  height: 220px;
+  transform-style: preserve-3d;
+  animation: stack-float 8s ease-in-out infinite;
+}
+
+@keyframes stack-float {
+  0%, 100% { transform: translateX(-70px) translateY(0); }
+  50%      { transform: translateX(-70px) translateY(-12px); }
+}
+
+.layer {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 300px;
+  height: 210px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.03));
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  transform:
+    translate(-50%, -50%)
+    rotateX(56deg)
+    rotateZ(-42deg)
+    translateZ(calc(var(--i) * 42px));
+  animation: layer-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+  animation-delay: calc(var(--i) * 0.12s);
+  transition: transform 0.55s cubic-bezier(0.22, 1, 0.36, 1), background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
+  cursor: pointer;
+  padding: 0;
+  text-align: left;
+}
+
+/* Active layer "opens" — flattens, comes forward, shows its content */
+.layerActive {
+  transform:
+    translate(-50%, -50%)
+    translate3d(150px, 0, 200px)
+    rotateX(2deg)
+    rotateZ(0deg)
+    scale(1.06) !important;
+  z-index: 6;
+  border-color: rgba(167, 139, 250, 0.7);
+  background: linear-gradient(150deg, #20264f 0%, #161a3a 100%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  box-shadow:
+    0 0 50px rgba(124, 58, 237, 0.55),
+    0 0 100px rgba(27, 79, 216, 0.35);
+}
+
+.label {
+  position: absolute;
+  right: 16px;
+  bottom: 14px;
+  font-family: var(--font-mono, monospace);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.6);
+  white-space: nowrap;
+  transition: opacity 0.3s ease;
+}
+
+/* Content shown inside the active (opened) card */
+.content {
+  position: absolute;
+  inset: 0;
+  padding: 22px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 8px;
+  opacity: 0;
+  transition: opacity 0.4s ease 0.15s;
+  pointer-events: none;
+}
+.contentOn { opacity: 1; }
+
+.contentNum {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: #c4b5fd;
+}
+.contentTitle {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: 22px;
+  line-height: 1.15;
+  color: #ffffff;
+}
+.contentDesc {
+  font-size: 13px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+@keyframes layer-in {
+  from {
+    opacity: 0;
+    transform:
+      translate(-50%, -50%)
+      rotateX(56deg)
+      rotateZ(-42deg)
+      translateZ(calc(var(--i) * 42px - 80px));
+  }
+  to {
+    opacity: 1;
+    transform:
+      translate(-50%, -50%)
+      rotateX(56deg)
+      rotateZ(-42deg)
+      translateZ(calc(var(--i) * 42px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .layer { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .scene { height: 360px; }
+  .stack, .layer { width: 240px; }
+  .layer { height: 170px; }
+}

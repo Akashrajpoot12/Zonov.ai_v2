@@ -113,9 +113,9 @@ export default function PlatformSteps() {
             <div>
               {/* Progress track */}
               <div className="relative pl-6">
-                <div className="absolute left-[10px] top-0 bottom-0 w-px bg-[var(--border-strong)]" />
+                <div className="absolute left-[2px] top-0 bottom-0 w-[5px] rounded-full bg-[var(--border-strong)]" />
                 <div
-                  className="absolute left-[10px] top-0 w-px bg-[var(--primary)] transition-all duration-500 ease-out"
+                  className="absolute left-[2px] top-0 w-[5px] rounded-full bg-[var(--primary)] transition-all duration-500 ease-out"
                   style={{ height: `${((activeStep + 1) / STEPS.length) * 100}%` }}
                 />
                 <div className="flex flex-col gap-1">

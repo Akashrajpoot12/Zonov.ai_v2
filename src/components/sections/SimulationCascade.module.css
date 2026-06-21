@@ -1,0 +1,151 @@
+.scene {
+  position: relative;
+  width: 100%;
+  height: 460px;
+  perspective: 1300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deck {
+  position: relative;
+  width: 260px;
+  height: 340px;
+  transform-style: preserve-3d;
+  animation: deck-float 9s ease-in-out infinite;
+}
+
+.card {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 260px;
+  height: 340px;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.14), rgba(255, 255, 255, 0.04));
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  transform:
+    translate(-50%, -50%)
+    rotateY(-24deg)
+    translateX(calc(var(--p) * 34px))
+    translateY(calc(var(--p) * -20px))
+    translateZ(calc(var(--p) * -70px));
+  box-shadow: -8px 12px 40px rgba(0, 0, 0, 0.25);
+}
+
+/* Receding ghost cards continuously stream toward the front */
+.cardGhost {
+  animation: cascade-flow 7s linear infinite;
+  animation-delay: calc(var(--i) * -0.78s);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cardGhost { animation: none; }
+}
+
+/* Front card highlight */
+.cardFront {
+  border-color: rgba(255, 255, 255, 0.4);
+  background: linear-gradient(150deg, rgba(255, 255, 255, 0.92), rgba(235, 240, 255, 0.85));
+}
+
+@keyframes deck-float {
+  0%, 100% { transform: translateY(0) rotateX(0deg); }
+  50%      { transform: translateY(-14px) rotateX(2deg); }
+}
+
+/* ── Mini conversation on the front card ── */
+.convo {
+  position: absolute;
+  inset: 0;
+  padding: 20px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #1B4FD8, #7C3AED);
+  flex-shrink: 0;
+}
+.bubble {
+  border-radius: 12px;
+  padding: 9px 12px;
+  font-size: 11px;
+  line-height: 1.4;
+  max-width: 80%;
+}
+.bubbleIn {
+  background: #EEF2F8;
+  color: #1f2937;
+  align-self: flex-start;
+  border-bottom-left-radius: 3px;
+}
+.bubbleOut {
+  background: linear-gradient(135deg, #1B4FD8, #1340B8);
+  color: #fff;
+  align-self: flex-end;
+  border-bottom-right-radius: 3px;
+}
+.row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* Typing indicator */
+.typingBubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #EEF2F8;
+  border-radius: 12px;
+  border-bottom-left-radius: 3px;
+  padding: 11px 12px;
+  align-self: flex-start;
+}
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: dot-blink 1.2s infinite ease-in-out;
+}
+.dot:nth-child(2) { animation-delay: 0.18s; }
+.dot:nth-child(3) { animation-delay: 0.36s; }
+@keyframes dot-blink {
+  0%, 60%, 100% { opacity: 0.3; transform: translateY(0); }
+  30%           { opacity: 1; transform: translateY(-2px); }
+}
+
+/* Faint placeholder content on receding cards */
+.ghost {
+  position: absolute;
+  inset: 0;
+  padding: 22px 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  opacity: 0.5;
+}
+.ghostBar {
+  height: 28px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.18);
+}
+.ghostBar.short { width: 55%; }
+.ghostBar.mid { width: 72%; align-self: flex-end; background: rgba(255,255,255,0.12); }
+
+@media (prefers-reduced-motion: reduce) {
+  .deck { animation: none; }
+}
+
+@media (max-width: 640px) {
+  .scene { height: 380px; }
+  .deck, .card { width: 210px; height: 280px; }
+}

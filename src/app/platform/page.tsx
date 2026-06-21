@@ -3,6 +3,8 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import PlatformHero from "@/components/sections/PlatformHero";
 import PlatformSteps from "@/components/sections/PlatformSteps";
+import IntelligenceStack from "@/components/sections/IntelligenceStack";
+import SimulationCascade from "@/components/sections/SimulationCascade";
 import PlatformIntegrations from "@/components/sections/PlatformIntegrations";
 
 export const metadata: Metadata = {
@@ -17,6 +19,8 @@ export default function PlatformPage() {
       <main className="flex-grow">
         <PlatformHero />
         <PlatformSteps />
+        <IntelligenceStack />
+        <SimulationCascade />
         <PlatformIntegrations />
       </main>
       <Footer />

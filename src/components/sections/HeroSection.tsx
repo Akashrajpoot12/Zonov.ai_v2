@@ -53,7 +53,7 @@ export default function HeroSection() {
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
             >
               The AI Workforce for{" "}
-              <span className="gradient-text italic">Healthcare.</span>
+              <span className="gradient-text-shimmer italic">Healthcare.</span>
             </motion.h1>
 
             <motion.div
@@ -96,8 +96,12 @@ export default function HeroSection() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
           >
+            {/* Ambient glows behind screenshot for depth */}
+            <div className="ambient-glow" style={{ width: "55%", height: "55%", top: "-12%", right: "-8%", background: "var(--primary)", opacity: 0.18 }} />
+            <div className="ambient-glow" style={{ width: "45%", height: "45%", bottom: "-10%", left: "-6%", background: "var(--secondary)", opacity: 0.16, animationDelay: "3s" }} />
+
             {/* Browser chrome frame */}
-            <div className="rounded-[20px] overflow-hidden border border-[var(--border)] shadow-2xl shadow-[var(--primary)]/10">
+            <div className="relative z-10 rounded-[20px] overflow-hidden border border-[var(--border)] shadow-2xl shadow-[var(--primary)]/10">
               {/* Browser top bar */}
               <div className="bg-[#F8F9FA] border-b border-[var(--border)] px-4 py-3 flex items-center gap-3">
                 <div className="flex gap-1.5">
