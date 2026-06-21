@@ -109,7 +109,7 @@ export default function PlatformSteps() {
         <div className="hidden lg:flex gap-10 pb-24">
 
           {/* LEFT — sticky step navigator */}
-          <div className="w-64 flex-shrink-0 self-start sticky top-[90px]">
+          <div className="w-64 flex-shrink-0 self-start sticky top-[100px]">
             <div>
               {/* Progress track */}
               <div className="relative pl-6">

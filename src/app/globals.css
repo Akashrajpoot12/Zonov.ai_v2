@@ -80,8 +80,8 @@
    ═══════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; }
 
-html { scroll-behavior: smooth; overflow-x: hidden; }
-body { overflow-x: hidden; }
+html { scroll-behavior: smooth; overflow-x: clip; }
+body { overflow-x: clip; }
 
 body {
   background: var(--bg);
