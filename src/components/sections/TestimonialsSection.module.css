@@ -1,0 +1,178 @@
+.section {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(160deg, #0D1F3C 0%, #122050 55%, #0A1830 100%);
+  padding: clamp(5rem, 8vw, 9rem) 0;
+}
+
+/* ── Background blobs ── */
+.blobLayer {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.18;
+  pointer-events: none;
+}
+
+.blobBlue1  { width: 520px; height: 520px; top: -10%;  left: -8%;  background: #1B4FD8; }
+.blobPurple { width: 400px; height: 400px; bottom: 5%; right: 10%; background: #7C3AED; }
+.blobTeal   { width: 360px; height: 360px; top: 30%;   right: -5%; background: #00B4AE; }
+.blobBlue2  { width: 280px; height: 280px; bottom: 15%;left: 30%;  background: #1B4FD8; }
+
+/* ── Floating glass cards (background decorations) ── */
+.glassCard {
+  position: absolute;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+}
+
+.gc1 { width: 220px; height: 140px; top: 12%;    left: 4%;   transform: rotate(-8deg);  }
+.gc2 { width: 180px; height: 110px; top: 55%;    left: 1%;   transform: rotate(6deg);   }
+.gc3 { width: 200px; height: 130px; bottom: 8%;  left: 22%;  transform: rotate(-4deg);  }
+.gc4 { width: 240px; height: 150px; top: 8%;     right: 3%;  transform: rotate(7deg);   }
+.gc5 { width: 160px; height: 100px; top: 45%;    right: 1%;  transform: rotate(-10deg); }
+
+/* ── Content ── */
+.inner {
+  position: relative;
+  z-index: 2;
+}
+
+.label {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #00B4AE;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.labelLine {
+  width: 24px;
+  height: 1px;
+  background: #00B4AE;
+  display: inline-block;
+}
+
+.headline {
+  color: #fff;
+  max-width: 560px;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+/* ── Metrics ── */
+.metricsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 16px;
+  margin-bottom: clamp(3rem, 5vw, 5rem);
+}
+
+.metricCard {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  padding: 1.5rem 1rem;
+  text-align: center;
+}
+
+.metricValue {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(28px, 3vw, 40px);
+  line-height: 1;
+  color: #fff;
+  margin-bottom: 8px;
+}
+
+.metricLabel {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.55);
+  line-height: 1.4;
+}
+
+/* ── Testimonial cards ── */
+.cardsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  border-radius: 24px;
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: flex;
+  flex-direction: column;
+  cursor: default;
+}
+
+.quoteGlyph {
+  font-family: Georgia, serif;
+  font-size: 72px;
+  line-height: 0.8;
+  opacity: 0.7;
+  margin-bottom: 16px;
+  user-select: none;
+}
+
+.quoteText {
+  font-family: var(--font-display, Georgia, serif);
+  font-size: clamp(15px, 1.4vw, 18px);
+  line-height: 1.65;
+  color: rgba(255, 255, 255, 0.88);
+  font-style: italic;
+  flex-grow: 1;
+  margin-bottom: 1.5rem;
+}
+
+.divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 1.25rem;
+}
+
+.author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.authorName {
+  font-size: 13px;
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 2px;
+}
+
+.authorRole {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.45);
+}

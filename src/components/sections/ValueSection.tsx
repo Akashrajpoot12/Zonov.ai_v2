@@ -72,7 +72,7 @@ export default function ValueSection() {
         <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.08}>
           {STAKEHOLDERS.map((s) => (
             <FadeInItem key={s.title}>
-              <div className="group flex flex-col h-full rounded-[20px] border border-[var(--border)] bg-white p-6 hover:shadow-lg transition-all duration-300"
+              <div className="group glass-card gradient-border flex flex-col h-full p-6 hover:shadow-lg transition-all duration-300"
                 style={{ "--hover-color": s.color } as React.CSSProperties}
               >
                 <div

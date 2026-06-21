@@ -2,6 +2,7 @@ import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 type AgentData = {
   name: string;
@@ -14,473 +15,275 @@ type AgentData = {
   useCases: string[];
 };
 
+/**
+ * NOTE (positioning): these pages sell OUTCOMES, not mechanics.
+ * Capability themes stay high-level; exact "how it works" (models,
+ * integration protocols, precise specs) lives behind the demo wall.
+ * Metrics are deliberately stated as ranges ("up to") so every claim
+ * is defensible. Unreleased agents are intentionally not listed here.
+ */
 const AGENTS: Record<string, AgentData> = {
   "patient-registration": {
-    name: "Patient Registration AI",
-    tagline: "Zero-friction intake from first contact to first care.",
+    name: "Registration Agent",
+    tagline: "Zero-friction intake, from first contact to first care.",
     description:
-      "Automate every step of patient onboarding — from insurance verification and demographic capture to consent forms and queue assignment — so your front desk focuses on people, not paperwork.",
+      "Turn patient onboarding into a calm, guided experience — so your front desk spends its time on people, not paperwork.",
     color: "#1B4FD8",
     icon: "🪪",
     features: [
       {
-        title: "Smart Insurance Verification",
-        desc: "Real-time eligibility checks across all major payers in under 3 seconds, flagging coverage gaps before the patient walks in.",
+        title: "Effortless Intake",
+        desc: "Patients are guided through registration conversationally, capturing the right details the first time — without long forms or queues.",
       },
       {
-        title: "Conversational Intake Forms",
-        desc: "AI-guided digital forms that adapt to the patient's answers, reducing form abandonment and capturing richer clinical context.",
+        title: "Accurate, Verified Records",
+        desc: "Every record is checked for completeness and consistency before it reaches your system, so your team starts from clean data.",
       },
       {
-        title: "Duplicate MRN Detection",
-        desc: "Cross-references name, DOB, and contact details to prevent duplicate records before they enter your EHR.",
-      },
-      {
-        title: "Automated Consent Management",
-        desc: "Delivers the right consent bundles via SMS or portal, collects e-signatures, and archives them instantly to the patient record.",
-      },
-      {
-        title: "Queue Intelligence",
-        desc: "Routes patients to the correct department, provider, or triage lane based on their chief complaint and appointment type.",
-      },
-      {
-        title: "Multi-language Support",
-        desc: "Engages patients in 40+ languages without requiring bilingual staff, ensuring equal access for every community you serve.",
+        title: "Smart Routing",
+        desc: "Patients are directed to the right department and provider automatically, keeping the front desk moving and wait times short.",
       },
     ],
     metrics: [
-      { num: "92%", label: "Reduction in registration errors" },
-      { num: "4 min", label: "Average intake time (down from 18)" },
-      { num: "99%", label: "Same-day eligibility verification" },
-      { num: "3×", label: "Front-desk capacity freed" },
+      { num: "Up to 60%", label: "Faster OPD registration" },
+      { num: "Minutes", label: "Intake time — not the usual wait" },
+      { num: "Same-day", label: "Verification, every time" },
     ],
     useCases: [
-      "High-volume emergency and outpatient departments overwhelmed by manual intake",
-      "Multi-site networks needing consistent registration across every location",
-      "Specialty clinics reducing no-shows through proactive pre-registration workflows",
-      "Federally Qualified Health Centers serving diverse, multilingual populations",
+      "High-volume outpatient and emergency departments",
+      "Multi-site networks needing consistent registration everywhere",
+      "Clinics serving diverse, multilingual communities",
     ],
   },
 
   "doctor-prescription": {
     name: "Doctor Prescription Agent",
-    tagline: "Every word captured. Every prescription precise.",
+    tagline: "Every conversation captured. Every doctor's time given back.",
     description:
-      "An ambient AI scribe that listens to physician-patient conversations, generates structured SOAP notes in real time, and drafts prescriptions — so doctors spend their time healing, not typing.",
+      "An AI clinical companion that turns the consultation into structured notes and a ready-to-review prescription — so doctors spend their time healing, not typing.",
     color: "#00B4AE",
     icon: "🩺",
     features: [
       {
-        title: "Ambient Clinical Transcription",
-        desc: "Passively listens to the encounter through any device, producing a timestamped transcript with speaker diarization and medical terminology accuracy above 98%.",
+        title: "Ambient Documentation",
+        desc: "The encounter becomes a structured clinical note in the background — ready for the physician to review and approve, not write from scratch.",
       },
       {
-        title: "Real-time SOAP Note Generation",
-        desc: "Structures the conversation into Subjective, Objective, Assessment, and Plan sections mapped to your EHR template — ready for physician review in under 60 seconds.",
+        title: "Assisted Prescriptions",
+        desc: "Draft prescriptions are prepared from the consultation with safety checks in place, leaving the clinical decision firmly with the doctor.",
       },
       {
-        title: "Intelligent Prescription Drafting",
-        desc: "Suggests medication, dosage, and duration based on diagnosis and patient history, with drug-interaction and allergy checks before the physician signs.",
-      },
-      {
-        title: "ICD-10 & CPT Auto-coding",
-        desc: "Tags diagnoses and procedures with the correct codes during documentation, removing the coding bottleneck from the clinical workflow.",
-      },
-      {
-        title: "EHR Push Integration",
-        desc: "Pushes finalized notes directly into Epic, Oracle Health, or any HL7-compliant system with a single physician approval tap.",
-      },
-      {
-        title: "Physician Feedback Loop",
-        desc: "Learns from individual physician corrections over time, personalizing note style and vocabulary to each provider's preferences.",
+        title: "Fits Your Workflow",
+        desc: "Works with the systems your team already uses, so finalized notes land where they belong with a single approval.",
       },
     ],
     metrics: [
-      { num: "73%", label: "Less time on documentation" },
-      { num: "98.2%", label: "Transcription accuracy" },
-      { num: "2 hrs", label: "Extra patient time per physician/day" },
-      { num: "40%", label: "Reduction in after-hours charting" },
+      { num: "~2 hrs", label: "Given back to each doctor, daily" },
+      { num: "Less", label: "After-hours charting" },
+      { num: "More", label: "Time with patients" },
     ],
     useCases: [
-      "Physicians spending more than 2 hours per day on documentation after clinic hours",
-      "High-acuity inpatient units where every minute with the patient matters",
-      "Outpatient practices looking to increase daily patient volume without adding staff",
-      "Residency programs wanting to reduce trainee administrative burden",
+      "Physicians losing hours to after-clinic documentation",
+      "High-acuity units where minutes with the patient matter most",
+      "Practices growing patient volume without growing admin",
     ],
   },
 
   investigation: {
-    name: "Investigation AI",
+    name: "Investigation Agent",
     tagline: "From order to insight — at the speed of care.",
     description:
-      "Streamline the entire diagnostics loop: intelligent order entry, real-time lab and radiology tracking, AI-assisted result interpretation, and instant delivery to the care team.",
-    color: "#8280FF",
+      "Keep the diagnostics loop moving — orders, tracking, and results flow to the right person at the right moment, with nothing lost in between.",
+    color: "#7C3AED",
     icon: "🔬",
     features: [
       {
-        title: "Smart Order Entry",
-        desc: "Suggests evidence-based lab and imaging panels based on the clinical presentation, reducing unnecessary orders and missed investigations.",
+        title: "Nothing Falls Through",
+        desc: "Every investigation is tracked from order to result, so delays and duplicates are caught before they affect care.",
       },
       {
-        title: "Real-time Result Tracking",
-        desc: "Live dashboard showing every pending, in-progress, and completed investigation across the patient journey, with automated escalation for critical values.",
+        title: "Critical Results, Fast",
+        desc: "Urgent findings reach the responsible clinician quickly, with confirmation that the message was received.",
       },
       {
-        title: "AI-Assisted Radiology Triage",
-        desc: "Flags abnormal imaging findings for urgent radiologist review, reducing time-to-read for stroke, PE, and fracture cases.",
-      },
-      {
-        title: "Critical Value Alerts",
-        desc: "Automatically notifies the responsible physician via in-app, SMS, or pager when a result crosses a critical threshold — with acknowledgment tracking.",
-      },
-      {
-        title: "Result Interpretation Summaries",
-        desc: "Provides plain-language summaries of complex panels and trend analysis, helping clinicians act on data faster.",
-      },
-      {
-        title: "Integrated PACS & LIS Connectivity",
-        desc: "Connects to any PACS or LIS via HL7/FHIR, unifying radiology reports and lab results in a single clinical view.",
+        title: "Clearer Insight",
+        desc: "Results are presented in a way that helps clinicians act sooner, without wading through scattered reports.",
       },
     ],
     metrics: [
-      { num: "55%", label: "Faster critical result notification" },
-      { num: "30%", label: "Reduction in duplicate orders" },
-      { num: "18 min", label: "Average time saved per investigation cycle" },
-      { num: "99.7%", label: "Critical value alert delivery rate" },
+      { num: "Up to 40%", label: "Faster result delivery" },
+      { num: "Fewer", label: "Duplicate and lost orders" },
+      { num: "Reliable", label: "Critical-value alerts" },
     ],
     useCases: [
-      "Emergency departments needing sub-30-minute turnaround on critical lab results",
-      "Radiology departments managing high imaging volumes with limited radiologist bandwidth",
-      "ICUs where real-time trend monitoring can prevent clinical deterioration",
-      "Multi-specialty outpatient clinics coordinating complex diagnostic workups",
-    ],
-  },
-
-  "follow-up": {
-    name: "Follow-up AI",
-    tagline: "Care that continues long after discharge.",
-    description:
-      "Proactively engage every patient post-visit with personalized check-ins, medication reminders, and recovery guidance — driving adherence, reducing readmissions, and building lasting loyalty.",
-    color: "#06C270",
-    icon: "💬",
-    features: [
-      {
-        title: "Automated Post-Discharge Check-ins",
-        desc: "Sends personalized SMS, WhatsApp, or voice messages 24, 48, and 72 hours after discharge to monitor recovery and flag deterioration early.",
-      },
-      {
-        title: "Medication Adherence Reminders",
-        desc: "Schedules smart reminders tied to the patient's actual prescription regimen, with escalation to the care team if doses are repeatedly missed.",
-      },
-      {
-        title: "Readmission Risk Scoring",
-        desc: "Continuously models each patient's readmission probability using vitals, responses, and EHR data, prompting proactive interventions for high-risk patients.",
-      },
-      {
-        title: "Appointment Recall & Rescheduling",
-        desc: "Automatically reminds patients of upcoming follow-up appointments and handles rescheduling requests via conversational AI — no call center needed.",
-      },
-      {
-        title: "Patient-Reported Outcomes Collection",
-        desc: "Gathers structured PRO data at pre-defined intervals for chronic disease management, clinical trials, and value-based care reporting.",
-      },
-      {
-        title: "Care Gap Identification",
-        desc: "Cross-references patient history against clinical guidelines to surface overdue screenings, vaccinations, and preventive care opportunities.",
-      },
-    ],
-    metrics: [
-      { num: "34%", label: "Reduction in 30-day readmissions" },
-      { num: "87%", label: "Patient engagement rate" },
-      { num: "4.8★", label: "Average post-care satisfaction score" },
-      { num: "60%", label: "Improvement in medication adherence" },
-    ],
-    useCases: [
-      "Cardiac and surgical units targeting 30-day readmission rate reductions",
-      "Chronic disease programs managing diabetes, hypertension, and COPD populations",
-      "Value-based care organizations with quality metrics tied to patient outcomes",
-      "Primary care practices automating preventive care recall at scale",
-    ],
-  },
-
-  billing: {
-    name: "Billing AI",
-    tagline: "Maximize revenue. Minimize denials.",
-    description:
-      "Automate the full revenue cycle from charge capture to payment posting — with AI that catches coding errors before submission, predicts denial risk, and accelerates appeals.",
-    color: "#F59E0B",
-    icon: "💰",
-    features: [
-      {
-        title: "Automated Charge Capture",
-        desc: "Pulls chargeable events directly from clinical documentation and orders, eliminating missed charges that silently erode revenue.",
-      },
-      {
-        title: "Pre-submission Claim Scrubbing",
-        desc: "Validates every claim against payer-specific rules and CMS edits before submission, cutting first-pass denial rates dramatically.",
-      },
-      {
-        title: "Denial Prediction & Prevention",
-        desc: "ML models trained on your denial history flag high-risk claims for human review before they leave the building.",
-      },
-      {
-        title: "Intelligent Appeals Drafting",
-        desc: "Auto-generates appeal letters with supporting clinical evidence pulled from the patient record, reducing appeals turnaround from weeks to hours.",
-      },
-      {
-        title: "Payment Variance Detection",
-        desc: "Compares every EOB against contracted rates and flags underpayments automatically, recovering revenue you didn't know you were losing.",
-      },
-      {
-        title: "Real-time Revenue Dashboard",
-        desc: "Live visibility into AR aging, denial trends, payer performance, and collection forecasts — all in a single executive view.",
-      },
-    ],
-    metrics: [
-      { num: "28%", label: "Increase in net collections" },
-      { num: "67%", label: "Reduction in denial rate" },
-      { num: "< 2 days", label: "Average claims submission time" },
-      { num: "$1.4M", label: "Average annual revenue recovered per facility" },
-    ],
-    useCases: [
-      "Health systems losing significant revenue to preventable claim denials",
-      "Mid-size practices without dedicated revenue cycle management staff",
-      "Multi-specialty groups seeking consistent coding quality across all providers",
-      "Hospital CFOs needing real-time visibility into revenue cycle performance",
-    ],
-  },
-
-  operations: {
-    name: "Operations AI",
-    tagline: "Run your hospital like a precision machine.",
-    description:
-      "Optimize scheduling, bed management, and staff allocation in real time — so every resource is in the right place at the right time, and your hospital runs at peak efficiency every day.",
-    color: "#EC4899",
-    icon: "⚙️",
-    features: [
-      {
-        title: "Intelligent Bed Management",
-        desc: "Predicts admissions and discharges up to 12 hours ahead, enabling proactive bed assignments and eliminating ED boarding.",
-      },
-      {
-        title: "Smart Staff Scheduling",
-        desc: "Generates optimized rosters that match staffing levels to predicted patient volumes, reducing overtime costs and agency spend.",
-      },
-      {
-        title: "OR Utilization Optimization",
-        desc: "Analyzes historical case times and surgeon patterns to fill schedule gaps, increase block utilization, and add profitable cases.",
-      },
-      {
-        title: "Predictive Demand Forecasting",
-        desc: "Models patient volume 7–30 days out using seasonal trends, local events, and historical data to inform resource planning.",
-      },
-      {
-        title: "Patient Flow Command Center",
-        desc: "Real-time visibility into every patient, bed, and staff member across the facility — in a single operational dashboard.",
-      },
-      {
-        title: "Automated Escalation Protocols",
-        desc: "Triggers capacity alerts and escalation workflows automatically when census thresholds are crossed, keeping leadership ahead of surges.",
-      },
-    ],
-    metrics: [
-      { num: "22%", label: "Increase in OR utilization" },
-      { num: "3.1 hrs", label: "Reduction in average ED boarding time" },
-      { num: "18%", label: "Decrease in agency staffing spend" },
-      { num: "95%", label: "Bed assignment accuracy" },
-    ],
-    useCases: [
-      "Health systems struggling with chronic ED overcrowding and boarding",
-      "Surgical services trying to maximize OR throughput and block utilization",
-      "CNOs looking to replace manual scheduling with demand-driven staffing",
-      "Multi-hospital networks needing coordinated capacity management",
+      "Emergency departments needing fast critical-result turnaround",
+      "Radiology teams managing high imaging volumes",
+      "ICUs where early signals prevent deterioration",
     ],
   },
 
   pharmacy: {
     name: "Pharmacy Agent",
     tagline: "Near-expiry alerts. Zero wastage.",
-    description: "Keep your pharmacy running at zero waste — with AI that tracks stock, alerts on near-expiry medicines, and auto-reorders before shortages hit.",
+    description:
+      "Keep the pharmacy running lean — stock stays visible, expiries are caught early, and shortages are headed off before they happen.",
     color: "#059669",
     icon: "💊",
     features: [
-      { title: "Near-expiry Medicine Alerts", desc: "Automatically flags medicines approaching expiry with enough lead time to redistribute or return stock." },
-      { title: "Smart Inventory Management", desc: "Real-time stock visibility across all pharmacy locations with automated reorder triggers." },
-      { title: "Dispensing Error Prevention", desc: "Cross-checks prescriptions against available stock and patient allergies before dispensing." },
-      { title: "Controlled Substance Tracking", desc: "Audit trail for every controlled substance movement — from receipt to dispensing." },
-      { title: "Supplier Integration", desc: "Auto-raises purchase orders with preferred suppliers when stock falls below threshold." },
-      { title: "Cost Optimization", desc: "Identifies generic substitution opportunities and highlights high-cost prescribing patterns." },
+      {
+        title: "Stay Ahead of Expiry",
+        desc: "Medicines approaching expiry are surfaced with enough lead time to act — protecting both safety and margin.",
+      },
+      {
+        title: "Always-Visible Stock",
+        desc: "A clear, real-time view of inventory across locations means fewer surprises and smoother replenishment.",
+      },
+      {
+        title: "Safer Dispensing",
+        desc: "Checks happen behind the scenes so the right medicine reaches the right patient, every time.",
+      },
     ],
     metrics: [
-      { num: "0%", label: "Expiry wastage after deployment" },
-      { num: "30%", label: "Reduction in pharmacy costs" },
-      { num: "99%", label: "Dispensing accuracy rate" },
-      { num: "2×", label: "Faster stock replenishment" },
+      { num: "Near-zero", label: "Expiry wastage" },
+      { num: "Lower", label: "Pharmacy costs" },
+      { num: "Faster", label: "Stock replenishment" },
     ],
     useCases: [
-      "Hospital pharmacies losing revenue to preventable medicine wastage",
-      "Multi-location hospital chains needing centralized pharmacy oversight",
-      "Facilities managing high volumes of controlled substances",
-      "Pharmacies wanting to reduce manual stock reconciliation effort",
+      "Pharmacies losing revenue to preventable wastage",
+      "Multi-location chains needing centralized oversight",
+      "Facilities reducing manual stock reconciliation",
     ],
   },
 
   ipd: {
     name: "IPD Agent",
-    tagline: "Nursing handovers. Mistreatment alerts.",
-    description: "Digitize every nursing handover and monitor in-patient care quality in real time — so no critical information is lost between shifts and no patient goes unnoticed.",
+    tagline: "Nursing handovers. Quality, never lost between shifts.",
+    description:
+      "Make in-patient care visible and consistent — so critical information carries cleanly across every shift and no patient goes unnoticed.",
     color: "#D97706",
     icon: "🛏️",
     features: [
-      { title: "Structured Nursing Handover", desc: "Replaces verbal shift handovers with a structured digital protocol — capturing vitals, pending tasks, and care notes for every patient." },
-      { title: "Mistreatment & Neglect Alerts", desc: "AI monitors care delivery patterns and flags anomalies that indicate potential patient neglect or mistreatment in real time." },
-      { title: "Automated Care Plan Tracking", desc: "Tracks adherence to prescribed care plans and alerts nursing staff to missed interventions or overdue assessments." },
-      { title: "Patient Fall Risk Monitoring", desc: "Continuously scores fall risk based on medications, mobility, and vitals — triggering preventive protocols for high-risk patients." },
-      { title: "Ward Round Support", desc: "Prepares structured patient summaries for ward rounds, reducing preparation time and ensuring no case is overlooked." },
-      { title: "Nursing Staff Workload Balancing", desc: "Distributes patient assignments based on acuity and nurse capacity to prevent overload and ensure consistent care quality." },
+      {
+        title: "Structured Handovers",
+        desc: "Shift changes follow a clear, complete protocol — so the next team always knows exactly where each patient stands.",
+      },
+      {
+        title: "Early Warnings",
+        desc: "Care patterns are monitored quietly in the background, surfacing risks before they become incidents.",
+      },
+      {
+        title: "Care Plans on Track",
+        desc: "Prescribed care stays on schedule, with gentle nudges when something is due or overdue.",
+      },
     ],
     metrics: [
-      { num: "100%", label: "Handover completion rate" },
-      { num: "60%", label: "Reduction in care plan deviations" },
-      { num: "40%", label: "Fewer patient falls" },
-      { num: "15 min", label: "Saved per nurse per shift on handovers" },
+      { num: "Complete", label: "Shift handovers" },
+      { num: "Fewer", label: "Care-plan deviations" },
+      { num: "Safer", label: "In-patient care" },
     ],
     useCases: [
-      "IPD wards with high patient-to-nurse ratios and frequent handover errors",
-      "Hospitals with accreditation requirements around nursing documentation",
-      "Facilities looking to reduce patient safety incidents and adverse events",
-      "Multi-ward hospitals needing real-time visibility into in-patient care quality",
+      "Wards with high patient-to-nurse ratios",
+      "Hospitals with strict nursing-documentation standards",
+      "Facilities focused on patient-safety outcomes",
     ],
   },
 
   ot: {
     name: "OT Agent",
-    tagline: "OT scheduling, monitoring and emergency management.",
-    description: "Eliminate OT delays and conflicts with AI-powered scheduling, real-time monitoring, and intelligent emergency case insertion — so your operation theatres run at maximum utilization.",
+    tagline: "Scheduling, monitoring, and emergencies — under control.",
+    description:
+      "Keep operation theatres running at their best — fewer delays, clearer coordination, and emergencies handled without throwing the day off course.",
     color: "#0D1F3C",
     icon: "🏥",
     features: [
-      { title: "AI-powered OT Scheduling", desc: "Optimizes surgery schedules across all OTs based on surgeon availability, equipment, and case complexity — filling gaps automatically." },
-      { title: "Real-time OT Monitoring", desc: "Live dashboard showing every OT's current status, case progress, and expected completion time — visible to surgeons, anaesthetists, and coordinators." },
-      { title: "Emergency Case Management", desc: "Intelligently inserts emergency cases into the schedule with minimal disruption to elective cases." },
-      { title: "Pre-op Checklist Automation", desc: "Ensures all pre-operative requirements are completed before the patient enters OT, reducing last-minute cancellations." },
-      { title: "Anaesthesia Coordination", desc: "Syncs OT schedule with anaesthesia team availability and pre-assessment completion status." },
-      { title: "OT Utilization Analytics", desc: "Tracks block utilization, case cancellations, turnover times, and surgeon performance to drive continuous improvement." },
+      {
+        title: "Smarter Scheduling",
+        desc: "Theatre time is planned to make the most of every slot, reducing the gaps and clashes that cause delays.",
+      },
+      {
+        title: "Live Coordination",
+        desc: "Everyone involved sees the same up-to-date picture of each theatre, so the team stays in sync through the day.",
+      },
+      {
+        title: "Emergencies, Absorbed",
+        desc: "Urgent cases are slotted in with the least possible disruption to everything else on the list.",
+      },
     ],
     metrics: [
-      { num: "30%", label: "Fewer OT delays" },
-      { num: "25%", label: "Increase in OT utilization" },
-      { num: "50%", label: "Reduction in emergency case conflicts" },
-      { num: "20 min", label: "Average turnover time reduction" },
+      { num: "Up to 30%", label: "Fewer OT delays" },
+      { num: "Higher", label: "Theatre utilization" },
+      { num: "Smoother", label: "Emergency handling" },
     ],
     useCases: [
-      "Surgical hospitals with multiple OTs running concurrent speciality cases",
-      "Facilities with high emergency surgery volumes needing dynamic scheduling",
-      "Hospital administrators targeting OT utilization above 85%",
-      "Multi-speciality chains standardizing OT protocols across all facilities",
+      "Surgical hospitals running multiple concurrent theatres",
+      "Facilities with high emergency-surgery volumes",
+      "Teams targeting higher, predictable OT utilization",
     ],
   },
 
   claim: {
     name: "Claim Agent",
-    tagline: "Reduce 20% claim rejection. Recover more revenue.",
-    description: "Cut claim rejections by 20% with AI that validates, scrubs, and submits insurance claims with zero manual errors — and automatically manages appeals for denied claims.",
+    tagline: "Fewer rejections. More of the revenue you earned.",
+    description:
+      "Get claims right the first time and recover what slips through — so your team chases fewer denials and collects more of what's owed.",
     color: "#7C3AED",
     icon: "📋",
     features: [
-      { title: "Pre-submission Claim Scrubbing", desc: "Validates every claim against payer-specific rules before submission, eliminating the most common rejection reasons." },
-      { title: "Auto-coding from Clinical Notes", desc: "Extracts ICD-10 and procedure codes directly from clinical documentation, reducing manual coding errors." },
-      { title: "Rejection Analysis & Prevention", desc: "Learns from your rejection history to flag high-risk claims for review before they are submitted." },
-      { title: "Automated Appeal Generation", desc: "Drafts appeal letters with supporting clinical evidence for denied claims — reducing appeals turnaround from weeks to hours." },
-      { title: "Payer-specific Rule Engine", desc: "Maintains an up-to-date library of payer rules across all major insurers and TPAs to ensure compliant submissions." },
-      { title: "Real-time Claims Dashboard", desc: "Live visibility into submission status, rejection rates, pending appeals, and collections by payer." },
+      {
+        title: "Right the First Time",
+        desc: "Claims are checked for the issues that cause rejections before they ever leave the building.",
+      },
+      {
+        title: "Denials, Handled",
+        desc: "When a claim is denied, the groundwork for a strong, evidence-backed response is prepared for your team.",
+      },
+      {
+        title: "Always in View",
+        desc: "A clear picture of claim status and payer performance keeps finance ahead, not reacting.",
+      },
     ],
     metrics: [
-      { num: "20%", label: "Reduction in claim rejections" },
-      { num: "70%", label: "Faster appeal resolution" },
-      { num: "99%", label: "First-pass claim accuracy" },
-      { num: "3×", label: "Faster claims processing" },
+      { num: "Up to 20%", label: "Fewer claim rejections" },
+      { num: "Faster", label: "Appeal resolution" },
+      { num: "Higher", label: "First-pass accuracy" },
     ],
     useCases: [
-      "Hospitals with high TPA rejection rates eating into collections",
-      "Cashless empanelled hospitals needing faster claim turnaround",
-      "Billing teams overwhelmed by manual coding and rejection management",
-      "CFOs needing real-time visibility into claims performance by payer",
+      "Hospitals with high TPA rejection rates",
+      "Cashless empanelled hospitals needing faster turnaround",
+      "Billing teams stretched by manual rejection management",
     ],
   },
 
   finance: {
     name: "Finance Agent",
-    tagline: "20% revenue leakage reduced. Per-patient P&L.",
-    description: "Stop revenue leakage and start managing every patient as a profit centre — with real-time financial dashboards, per-patient P&L tracking, and AI-driven cost optimization.",
+    tagline: "Stop the leak. See every rupee.",
+    description:
+      "Bring hospital finances into real time — catch revenue leakage as it happens and understand profitability at a level that week-old spreadsheets never could.",
     color: "#1B4FD8",
     icon: "💰",
     features: [
-      { title: "Revenue Leakage Detection", desc: "Identifies unbilled procedures, missed charges, and billing gaps in real time — recovering revenue before it is lost." },
-      { title: "Per-patient P&L Tracking", desc: "Calculates the full cost and revenue for every patient encounter, enabling true per-patient profitability analysis." },
-      { title: "Real-time Financial Dashboards", desc: "Live visibility into revenue, costs, EBITDA, and cash flow — broken down by department, doctor, and payer." },
-      { title: "Budget vs Actuals Monitoring", desc: "Tracks departmental spending against budget in real time and alerts finance teams to variances early." },
-      { title: "Predictive Revenue Forecasting", desc: "Models next 30/60/90-day revenue based on current census, payer mix, and seasonal trends." },
-      { title: "Cost Reduction Intelligence", desc: "Identifies high-cost outliers in supplies, staffing, and procedures and benchmarks them against best-in-class peers." },
-    ],
-    metrics: [
-      { num: "20%", label: "Revenue leakage recovered" },
-      { num: "100%", label: "Per-patient P&L visibility" },
-      { num: "40%", label: "Faster month-end close" },
-      { num: "15%", label: "Average cost reduction" },
-    ],
-    useCases: [
-      "Hospital CFOs needing real-time financial performance visibility",
-      "Multi-speciality chains wanting per-department and per-doctor P&L analysis",
-      "Hospitals struggling with unexplained revenue shortfalls",
-      "Finance teams spending weeks on manual month-end reporting",
-    ],
-  },
-
-  analytics: {
-    name: "Analytics AI",
-    tagline: "Intelligence that drives every decision.",
-    description:
-      "Transform your clinical and operational data into actionable intelligence — with automated reporting, predictive models, and natural-language queries that put insights in every leader's hands.",
-    color: "#1B4FD8",
-    icon: "📊",
-    features: [
       {
-        title: "Natural Language Data Queries",
-        desc: "Ask any question about your hospital in plain English and get an accurate, chart-backed answer in seconds — no SQL, no waiting for the analytics team.",
+        title: "Catch Leakage Early",
+        desc: "Missed charges and billing gaps are surfaced while they can still be recovered — not discovered months later.",
       },
       {
-        title: "Automated Quality Reporting",
-        desc: "Generates CMS, Joint Commission, and payer quality reports automatically, eliminating hundreds of hours of manual abstraction per year.",
+        title: "Real Profitability",
+        desc: "See revenue and cost with the clarity to understand what's actually driving — or draining — your margins.",
       },
       {
-        title: "Population Health Dashboards",
-        desc: "Surfaces chronic disease prevalence, care gap rates, and risk stratification across your patient population for proactive intervention.",
-      },
-      {
-        title: "Predictive Clinical Models",
-        desc: "Deploys pre-built and custom ML models for sepsis prediction, length-of-stay forecasting, and readmission risk — directly in the clinical workflow.",
-      },
-      {
-        title: "Financial Intelligence",
-        desc: "Connects clinical outcomes to financial performance, enabling service line profitability analysis and cost-per-case benchmarking.",
-      },
-      {
-        title: "Anomaly Detection & Alerting",
-        desc: "Continuously monitors KPIs and flags statistically significant deviations before they become patient safety or financial problems.",
+        title: "Live Financial View",
+        desc: "Leadership gets an always-current picture of performance instead of waiting on month-end reports.",
       },
     ],
     metrics: [
-      { num: "80%", label: "Faster time to insight" },
-      { num: "500+ hrs", label: "Annual reporting time saved per facility" },
-      { num: "94%", label: "Sepsis prediction model AUC" },
-      { num: "1 query", label: "To answer any operational question" },
+      { num: "Up to 20%", label: "Revenue leakage recovered" },
+      { num: "Faster", label: "Month-end close" },
+      { num: "Clearer", label: "Per-department view" },
     ],
     useCases: [
-      "CMOs and CNOs needing real-time quality and safety performance visibility",
-      "Value-based care leaders managing population health at scale",
-      "CFOs requiring service line and payer-mix financial intelligence",
-      "Clinical informatics teams replacing manual reporting with automated pipelines",
+      "CFOs needing real-time financial visibility",
+      "Chains wanting per-department profitability clarity",
+      "Hospitals facing unexplained revenue shortfalls",
     ],
   },
 };
@@ -489,8 +292,9 @@ export function generateStaticParams() {
   return Object.keys(AGENTS).map((slug) => ({ slug }));
 }
 
-export default function AgentPage({ params }: { params: { slug: string } }) {
-  const agent = AGENTS[params.slug];
+export default async function AgentPage({ params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const agent = AGENTS[slug];
   if (!agent) notFound();
 
   const { name, tagline, description, color, icon, features, metrics, useCases } = agent;
@@ -541,7 +345,7 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
             </FadeIn>
 
             <FadeIn delay={0.15}>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-px rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-px rounded-2xl overflow-hidden" style={{ background: "rgba(255,255,255,0.07)" }}>
                 {metrics.map((m, i) => (
                   <div
                     key={i}
@@ -549,12 +353,12 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                     style={{ background: "rgba(255,255,255,0.04)" }}
                   >
                     <span
-                      className="text-[clamp(28px,4vw,44px)] font-bold leading-none mb-2 tracking-tight"
+                      className="text-[clamp(24px,3.4vw,38px)] font-bold leading-none mb-2 tracking-tight"
                       style={{ color, fontFamily: "var(--font-playfair)" }}
                     >
                       {m.num}
                     </span>
-                    <span className="type-caption text-white/50 leading-snug max-w-[120px]">{m.label}</span>
+                    <span className="type-caption text-white/50 leading-snug max-w-[160px]">{m.label}</span>
                   </div>
                 ))}
               </div>
@@ -562,7 +366,7 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        {/* ── Feature Grid ─────────────────────────────────────── */}
+        {/* ── Capability Themes ────────────────────────────────── */}
         <section className="section-py bg-[var(--surface)]">
           <div className="container-wide px-edge">
             <FadeIn>
@@ -597,6 +401,17 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                 </FadeInItem>
               ))}
             </FadeInStagger>
+
+            {/* Tease the rest behind a demo */}
+            <FadeIn delay={0.1}>
+              <p className="mt-10 type-body text-[var(--text-dim)] max-w-xl">
+                See exactly how {name} works inside your hospital —{" "}
+                <Link href="/book-demo" className="font-medium underline underline-offset-2" style={{ color }}>
+                  book a private demo
+                </Link>
+                .
+              </p>
+            </FadeIn>
           </div>
         </section>
 
@@ -605,12 +420,12 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
           <div className="container-wide px-edge">
             <div className="grid md:grid-cols-2 gap-16 items-center">
               <FadeIn>
-                <p className="type-mono mb-3" style={{ color }}>Who it's for</p>
+                <p className="type-mono mb-3" style={{ color }}>Who it&apos;s for</p>
                 <h2 className="type-h2 text-[var(--text)] mb-6 [text-wrap:balance]">
                   Designed for organizations where precision matters.
                 </h2>
                 <p className="type-body-lg text-[var(--text-muted)]">
-                  {name} is deployed across health systems of every size — from community hospitals to academic medical centers — wherever clinical teams need to move faster without sacrificing accuracy.
+                  {name} is deployed across hospitals of every size — wherever clinical teams need to move faster without sacrificing accuracy.
                 </p>
               </FadeIn>
 
@@ -659,9 +474,12 @@ export default function AgentPage({ params }: { params: { slug: string } }) {
                 </span>
                 ?
               </h2>
-              <p className="type-body-lg text-white/50 max-w-lg mx-auto">
+              <p className="type-body-lg text-white/50 max-w-lg mx-auto mb-8">
                 Go live in 1–2 weeks with zero disruption to existing workflows. Our implementation team handles everything.
               </p>
+              <Link href="/book-demo" className="btn btn-primary-lg">
+                Book a Demo
+              </Link>
             </FadeIn>
           </div>
         </section>

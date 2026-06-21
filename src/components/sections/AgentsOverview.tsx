@@ -1,82 +1,25 @@
+"use client";
+import { useState } from "react";
 import Link from "next/link";
-import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import { motion, AnimatePresence } from "framer-motion";
+import FadeIn from "@/components/ui/FadeIn";
 
+/* Teaser data only — coverage + outcome, no mechanics. */
 const AGENTS = [
-  {
-    num: "01",
-    name: "Registration Agent",
-    href: "/agents/patient-registration",
-    color: "var(--primary)",
-    icon: "🪪",
-    features: ["Voice-based registration", "ABHA/insurance auto-fill", "Queue assignment in 90s"],
-    metric: "60% faster OPD",
-  },
-  {
-    num: "02",
-    name: "Doctor Prescription Agent",
-    href: "/agents/doctor-prescription",
-    color: "var(--secondary)",
-    icon: "🩺",
-    features: ["Voice-to-prescription", "Voice-to-EMR notes", "ICD-10 auto-coding"],
-    metric: "2 hrs saved/doctor/day",
-  },
-  {
-    num: "03",
-    name: "Investigation Agent",
-    href: "/agents/investigation",
-    color: "var(--purple)",
-    icon: "🔬",
-    features: ["AI diagnostic reporting", "Critical value alerts", "LIS/RIS auto-routing"],
-    metric: "40% faster results",
-  },
-  {
-    num: "04",
-    name: "Pharmacy Agent",
-    href: "/agents/pharmacy",
-    color: "#059669",
-    icon: "💊",
-    features: ["Near-expiry alerts", "Auto stock reorder", "Dispensing error prevention"],
-    metric: "Zero expiry wastage",
-  },
-  {
-    num: "05",
-    name: "IPD Agent",
-    href: "/agents/ipd",
-    color: "#D97706",
-    icon: "🛏️",
-    features: ["Structured nursing handover", "Mistreatment alerts", "Care plan tracking"],
-    metric: "100% handover completion",
-  },
-  {
-    num: "06",
-    name: "OT Agent",
-    href: "/agents/ot",
-    color: "#0D1F3C",
-    icon: "🏥",
-    features: ["AI OT scheduling", "Real-time OT monitoring", "Emergency case management"],
-    metric: "30% fewer OT delays",
-  },
-  {
-    num: "07",
-    name: "Claim Agent",
-    href: "/agents/claim",
-    color: "var(--purple)",
-    icon: "📋",
-    features: ["Pre-submission scrubbing", "Auto appeal generation", "Payer rule engine"],
-    metric: "20% fewer rejections",
-  },
-  {
-    num: "08",
-    name: "Finance Agent",
-    href: "/agents/finance",
-    color: "var(--primary)",
-    icon: "💰",
-    features: ["Revenue leakage detection", "Per-patient P&L", "Real-time dashboards", "Budget vs actuals", "Cost optimization"],
-    metric: "20% leakage recovered",
-  },
+  { slug: "patient-registration", num: "01", name: "Registration Agent", short: "Registration", icon: "🪪", area: "Front desk & OPD", tagline: "Zero-friction intake, from first contact to first care.", outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
+  { slug: "doctor-prescription", num: "02", name: "Doctor Prescription Agent", short: "Prescription", icon: "🩺", area: "Clinical documentation", tagline: "Every conversation captured. Every doctor's time given back.", outcome: "~2 hrs back / doctor", color: "#00B4AE" },
+  { slug: "investigation", num: "03", name: "Investigation Agent", short: "Investigation", icon: "🔬", area: "Diagnostics & labs", tagline: "From order to insight — at the speed of care.", outcome: "Up to 40% faster results", color: "#7C3AED" },
+  { slug: "pharmacy", num: "04", name: "Pharmacy Agent", short: "Pharmacy", icon: "💊", area: "Pharmacy & inventory", tagline: "Near-expiry alerts. Zero wastage.", outcome: "Near-zero wastage", color: "#059669" },
+  { slug: "ipd", num: "05", name: "IPD Agent", short: "IPD", icon: "🛏️", area: "In-patient care", tagline: "Nursing handovers. Quality, never lost between shifts.", outcome: "Complete handovers", color: "#D97706" },
+  { slug: "ot", num: "06", name: "OT Agent", short: "OT", icon: "🏥", area: "Operation theatres", tagline: "Scheduling, monitoring, and emergencies — under control.", outcome: "Up to 30% fewer delays", color: "#0D1F3C" },
+  { slug: "claim", num: "07", name: "Claim Agent", short: "Claims", icon: "📋", area: "Insurance & claims", tagline: "Fewer rejections. More of the revenue you earned.", outcome: "Up to 20% fewer rejections", color: "#7C3AED" },
+  { slug: "finance", num: "08", name: "Finance Agent", short: "Finance", icon: "💰", area: "Hospital finance", tagline: "Stop the leak. See every rupee.", outcome: "Up to 20% leakage recovered", color: "#1B4FD8" },
 ];
 
 export default function AgentsOverview() {
+  const [active, setActive] = useState(0);
+  const a = AGENTS[active];
+
   return (
     <section className="section-py bg-[var(--bg)]">
       <div className="container-wide">
@@ -86,7 +29,7 @@ export default function AgentsOverview() {
             What We Provide
           </p>
         </FadeIn>
-        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14">
+        <div className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-10">
           <FadeIn>
             <h2 className="type-h1 text-[var(--text)] max-w-xl [text-wrap:balance]">
               AI Agents for every stage of{" "}
@@ -94,76 +37,127 @@ export default function AgentsOverview() {
             </h2>
           </FadeIn>
           <FadeIn delay={0.1}>
-            <Link href="/platform" className="btn btn-ghost whitespace-nowrap flex-shrink-0">
-              Explore Platform →
+            <Link href="/agents" className="btn btn-ghost whitespace-nowrap flex-shrink-0">
+              Explore all agents →
             </Link>
           </FadeIn>
         </div>
 
-        <FadeInStagger className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5" stagger={0.07}>
-          {AGENTS.slice(0, 6).map((agent) => (
-            <FadeInItem key={agent.num}>
-              <Link href={agent.href} className="group block card h-full hover:no-underline">
-                <div className="flex items-start justify-between mb-5">
-                  <div
-                    className="w-10 h-10 rounded-[10px] flex items-center justify-center text-lg flex-shrink-0"
-                    style={{ background: `${agent.color}18` }}
-                  >
-                    {agent.icon}
-                  </div>
-                  <span className="type-mono text-[var(--text-dim)]">{agent.num}</span>
-                </div>
-                <h3 className="text-[15px] font-semibold text-[var(--text)] mb-3 tracking-tight group-hover:text-[var(--primary)] transition-colors">
-                  {agent.name}
-                </h3>
-                <ul className="flex flex-col gap-1.5 mb-5">
-                  {agent.features.slice(0, 3).map((f) => (
-                    <li key={f} className="flex items-center gap-2 text-[12px] text-[var(--text-muted)]">
-                      <span className="w-1 h-1 rounded-full flex-shrink-0" style={{ background: agent.color }} />
-                      {f}
-                    </li>
-                  ))}
-                </ul>
-                <div
-                  className="mt-auto inline-flex items-center gap-1.5 text-[11px] font-semibold px-3 py-1.5 rounded-full"
-                  style={{ background: `${agent.color}15`, color: agent.color }}
+        {/* ── Agent selector tabs ── */}
+        <FadeIn delay={0.05}>
+          <div className="flex flex-wrap gap-2 mb-8">
+            {AGENTS.map((ag, i) => {
+              const on = i === active;
+              return (
+                <button
+                  key={ag.slug}
+                  type="button"
+                  onClick={() => setActive(i)}
+                  className="flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-medium transition-all border"
+                  style={
+                    on
+                      ? { background: ag.color, color: "#fff", borderColor: ag.color }
+                      : { background: "#fff", color: "var(--text-muted)", borderColor: "var(--border)" }
+                  }
                 >
-                  {agent.metric}
-                </div>
-              </Link>
-            </FadeInItem>
-          ))}
-        </FadeInStagger>
+                  <span className="text-base leading-none">{ag.icon}</span>
+                  {ag.short}
+                </button>
+              );
+            })}
+          </div>
+        </FadeIn>
 
-        {/* Last 2 agents — full width */}
-        <div className="flex flex-col gap-4 mt-5">
-          {AGENTS.slice(6).map((agent) => (
-            <FadeIn key={agent.num} delay={0.1}>
-              <Link href={agent.href} className="group block card hover:no-underline">
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-                  <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 rounded-[12px] flex items-center justify-center text-2xl flex-shrink-0" style={{ background: `${agent.color}18` }}>
-                      {agent.icon}
-                    </div>
-                    <div>
-                      <p className="type-mono text-[var(--text-dim)] mb-1">{agent.num}</p>
-                      <h3 className="text-[17px] font-semibold text-[var(--text)] group-hover:text-[var(--primary)] transition-colors">
-                        {agent.name}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="flex flex-wrap gap-2">
-                    {agent.features.map((f) => (
-                      <span key={f} className="text-[11px] text-[var(--text-muted)] bg-[var(--bg)] px-3 py-1.5 rounded-full border border-[var(--border)]">
-                        {f}
-                      </span>
-                    ))}
-                  </div>
-                  <span className="flex-shrink-0 btn btn-ghost btn-sm">Learn more →</span>
+        {/* ── Showcase ── */}
+        <div className="grid lg:grid-cols-2 gap-8 items-stretch">
+
+          {/* LEFT — text */}
+          <div className="flex flex-col justify-center min-h-[300px]">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={a.slug}
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -12 }}
+                transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <p className="type-mono mb-3" style={{ color: a.color }}>
+                  {a.num} — {a.area}
+                </p>
+                <h3 className="type-h2 text-[var(--text)] mb-4 [text-wrap:balance]">{a.name}</h3>
+                <p className="type-body-lg text-[var(--text-muted)] max-w-md mb-6">{a.tagline}</p>
+                <div className="flex flex-wrap items-center gap-3">
+                  <span
+                    className="inline-block text-[13px] font-semibold px-4 py-2 rounded-full"
+                    style={{ background: `${a.color}15`, color: a.color }}
+                  >
+                    {a.outcome}
+                  </span>
+                  <Link
+                    href={`/agents/${a.slug}`}
+                    className="text-[13px] font-medium inline-flex items-center gap-1 hover:gap-2 transition-all"
+                    style={{ color: a.color }}
+                  >
+                    Learn more →
+                  </Link>
                 </div>
-              </Link>
-            </FadeIn>
-          ))}
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
+          {/* RIGHT — animated visual panel */}
+          <div
+            className="noise relative rounded-[24px] overflow-hidden min-h-[340px] flex items-center justify-center"
+            style={{ background: "linear-gradient(160deg,#0D1F3C 0%,#122050 60%,#0A1830 100%)" }}
+          >
+            {/* ambient glow (per agent) */}
+            <div className="ambient-glow" style={{ width: "60%", height: "60%", top: "10%", left: "20%", background: a.color, opacity: 0.22 }} />
+
+            {/* live header */}
+            <div className="absolute top-5 left-5 flex items-center gap-2 z-10">
+              <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: a.color }} />
+              <span className="type-mono text-[10px] text-white/60">{a.short} · live</span>
+            </div>
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={a.slug}
+                initial={{ opacity: 0, scale: 0.92 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0.96 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                className="relative z-10 flex flex-col items-center"
+              >
+                {/* central icon orb */}
+                <div className="relative flex items-center justify-center mb-6">
+                  <span className="absolute w-28 h-28 rounded-full animate-pulse-ring" style={{ border: `1px solid ${a.color}` }} />
+                  <span
+                    className="relative w-24 h-24 rounded-full flex items-center justify-center text-4xl"
+                    style={{ background: `${a.color}22`, border: `1px solid ${a.color}55` }}
+                  >
+                    {a.icon}
+                  </span>
+                </div>
+
+                {/* floating chips */}
+                <div className="flex flex-col items-center gap-3">
+                  <div
+                    className="glass-card-dark px-4 py-2 rounded-full animate-float"
+                    style={{ animationDelay: "0s" }}
+                  >
+                    <span className="text-[12px] text-white/85 font-medium">{a.outcome}</span>
+                  </div>
+                  <div
+                    className="glass-card-dark px-4 py-2 rounded-full animate-float"
+                    style={{ animationDelay: "1.2s" }}
+                  >
+                    <span className="text-[11px] text-white/60">{a.area}</span>
+                  </div>
+                </div>
+              </motion.div>
+            </AnimatePresence>
+          </div>
+
         </div>
       </div>
     </section>

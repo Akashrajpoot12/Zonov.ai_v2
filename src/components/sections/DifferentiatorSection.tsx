@@ -1,4 +1,5 @@
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import CursorSpotlight from "@/components/ui/CursorSpotlight";
 
 const COMPARISON = [
   { label: "Data Storage", hims: true, zonov: true },
@@ -35,8 +36,9 @@ const WHY_DIFFERENT = [
 
 export default function DifferentiatorSection() {
   return (
-    <section className="section-py transition-theme bg-[var(--dark-navy)] section-dark">
-      <div className="container-wide">
+    <section className="noise relative overflow-hidden section-py transition-theme bg-[var(--dark-navy)] section-dark">
+      <CursorSpotlight color="rgba(0,180,174,0.16)" size={560} />
+      <div className="container-wide relative z-10">
         <FadeIn>
           <p className="type-mono text-white/40 mb-4 flex items-center gap-3">
             <span className="w-6 h-px bg-white/20" />

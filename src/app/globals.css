@@ -427,6 +427,267 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
+   PREMIUM GRAPHICS — Tier 1 (amigo-inspired, Zonov colors)
+   ═══════════════════════════════════════════════════ */
+
+/* ── 1. Shine sweep (buttons) ──
+   A light streak that sweeps across on hover. */
+@keyframes shine-sweep {
+  0%   { transform: translateX(-120%) skewX(-18deg); }
+  100% { transform: translateX(220%)  skewX(-18deg); }
+}
+
+.btn-primary,
+.btn-primary-lg {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-primary::after,
+.btn-primary-lg::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 40%;
+  height: 100%;
+  background: linear-gradient(
+    100deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transform: translateX(-120%) skewX(-18deg);
+  pointer-events: none;
+  z-index: 1;
+}
+.btn-primary:hover::after,
+.btn-primary-lg:hover::after {
+  animation: shine-sweep 0.8s ease-out;
+}
+
+/* ── 2. Glass-morphism card (heavy blur + gradient border) ── */
+.glass-card {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.55)
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  border-radius: var(--radius-lg);
+  box-shadow:
+    0 8px 32px rgba(27, 79, 216, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Glass card for dark backgrounds */
+.glass-card-dark {
+  position: relative;
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.08),
+    rgba(255, 255, 255, 0.03)
+  );
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+}
+
+/* ── 3. Animated gradient border (conic, rotating) ── */
+@property --gb-angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes gb-spin {
+  to { --gb-angle: 360deg; }
+}
+
+.gradient-border {
+  position: relative;
+  border-radius: var(--radius-lg);
+  z-index: 0;
+}
+.gradient-border::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1.5px;
+  background: conic-gradient(
+    from var(--gb-angle),
+    transparent 35%,
+    var(--primary),
+    var(--purple),
+    var(--secondary),
+    transparent 65%
+  );
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: -1;
+}
+.gradient-border:hover::before {
+  opacity: 1;
+  animation: gb-spin 4s linear infinite;
+}
+
+/* ── 4. Text shimmer (gradient headings) ── */
+@keyframes text-shimmer {
+  0%   { background-position: 200% center; }
+  100% { background-position: -200% center; }
+}
+
+/* ── 9. Hover lift (cards) ── */
+.hover-lift {
+  transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.hover-lift:hover {
+  transform: translateY(-5px);
+}
+@media (prefers-reduced-motion: reduce) {
+  .hover-lift:hover { transform: none; }
+}
+
+/* ── Card treatment A: soft radial glow reveal (Mission/Vision) ── */
+.card-glow { position: relative; overflow: hidden; }
+.card-glow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% -10%, rgba(27, 79, 216, 0.12), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.45s ease;
+  pointer-events: none;
+}
+.card-glow:hover::before { opacity: 1; }
+
+/* ── Card treatment B: per-color accent border + glow (Built for India) ── */
+.card-accent {
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+.card-accent:hover {
+  border-color: var(--ac, var(--primary));
+  box-shadow: 0 10px 34px -8px var(--ac, var(--primary));
+}
+
+/* ── Card treatment C: growing left accent bar (Values) ── */
+.card-bar { position: relative; overflow: hidden; }
+.card-bar::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 0;
+  border-radius: 0 3px 3px 0;
+  background: linear-gradient(180deg, var(--primary), var(--purple));
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.card-bar:hover::before { height: 72%; }
+
+@media (prefers-reduced-motion: reduce) {
+  .card-glow::before, .card-bar::before { transition: none; }
+}
+
+/* ── 8. Streaming cascade (simulation deck) ── */
+@property --p {
+  syntax: '<number>';
+  inherits: false;
+  initial-value: 0;
+}
+@keyframes cascade-flow {
+  0%   { --p: 9; opacity: 0; }
+  14%  { opacity: 0.7; }
+  82%  { opacity: 0.7; }
+  100% { --p: 0; opacity: 0; }
+}
+
+/* ── 7. Card marquee rows (integrations) ── */
+.marquee-mask {
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+}
+.marquee-track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: marquee-scroll 38s linear infinite;
+  will-change: transform;
+}
+.marquee-track.reverse { animation-direction: reverse; }
+.marquee-mask:hover .marquee-track { animation-play-state: paused; }
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}
+
+/* ── 6. Flowing wires (agent tree diagram) ── */
+@keyframes wire-dash {
+  to { stroke-dashoffset: -220; }
+}
+.agent-wire-flow {
+  stroke-dasharray: 5 9;
+  animation: wire-dash 7s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-wire-flow { animation: none; }
+}
+
+/* ── 5. Ambient floating glow (depth behind imagery) ── */
+@keyframes glow-drift {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%      { transform: translate(20px, -16px) scale(1.08); }
+}
+
+.ambient-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(70px);
+  pointer-events: none;
+  z-index: 0;
+  animation: glow-drift 9s ease-in-out infinite;
+}
+
+.gradient-text-shimmer {
+  display: inline-block;
+  background: linear-gradient(
+    100deg,
+    #1B4FD8 20%,
+    #7C3AED 40%,
+    #00B4AE 60%,
+    #1B4FD8 80%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  animation: text-shimmer 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary:hover::after,
+  .btn-primary-lg:hover::after,
+  .gradient-border:hover::before,
+  .gradient-text-shimmer {
+    animation: none;
+  }
+}
+
+/* ═══════════════════════════════════════════════════
    MOBILE FIXES
    ═══════════════════════════════════════════════════ */
 

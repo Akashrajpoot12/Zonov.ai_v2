@@ -37,7 +37,7 @@ export default function Navbar() {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 pointer-events-none">
       <nav
-        className={`pointer-events-auto flex items-center justify-between h-[56px] px-4 w-full max-w-[900px] transition-all duration-300 rounded-full ${
+        className={`pointer-events-auto flex items-center justify-between h-[76px] px-5 w-full max-w-[1196px] transition-all duration-300 rounded-full ${
           scrolled
             ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/8 border border-[var(--border)]"
             : "bg-white/80 backdrop-blur-sm border border-[var(--border-strong)]/60 shadow-md shadow-black/5"
@@ -52,7 +52,7 @@ export default function Navbar() {
             width={140}
             height={40}
             priority
-            style={{ height: "36px", width: "auto" }}
+            style={{ height: "70px", width: "auto" }}
           />
         </Link>
 
