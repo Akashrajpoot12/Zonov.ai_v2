@@ -78,11 +78,11 @@ export default function CustomersPage() {
               </p>
             </FadeIn>
 
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-3xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-5 mt-16">
               {stats.map((stat) => (
-                <div key={stat.label} className="card-dark rounded-xl p-5 text-center flex flex-col items-center justify-center" style={{ minHeight: "96px" }}>
-                  <p className="font-semibold gradient-text-light leading-tight whitespace-nowrap" style={{ fontSize: "clamp(18px, 2.5vw, 28px)", fontFamily: "var(--font-playfair)" }}>{stat.number}</p>
-                  <p className="type-caption mt-1.5 text-center" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</p>
+                <div key={stat.label} className="card-dark rounded-2xl p-7 text-center flex flex-col items-center justify-center" style={{ minHeight: "120px" }}>
+                  <p className="font-bold gradient-text-light leading-none" style={{ fontSize: "clamp(26px, 3vw, 38px)", fontFamily: "var(--font-playfair)" }}>{stat.number}</p>
+                  <p className="type-caption mt-2 text-center" style={{ color: "rgba(255,255,255,0.5)", fontSize: "12px" }}>{stat.label}</p>
                 </div>
               ))}
             </div>
