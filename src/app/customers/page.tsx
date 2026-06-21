@@ -14,6 +14,7 @@ const stats = [
   { number: "20+", label: "Hospitals" },
   { number: "4", label: "Cities" },
   { number: "20%+", label: "Revenue Leakage Recovered" },
+  { number: "6–8 wks", label: "Avg. Implementation Time" },
 ];
 
 const customers = [
@@ -77,11 +78,11 @@ export default function CustomersPage() {
               </p>
             </FadeIn>
 
-            <div className="grid grid-cols-3 gap-4 mt-16 max-w-2xl">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-16 max-w-3xl">
               {stats.map((stat) => (
-                <div key={stat.label} className="card-dark rounded-xl p-6 text-center">
-                  <p className="type-h1 gradient-text-light">{stat.number}</p>
-                  <p className="type-caption mt-1" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</p>
+                <div key={stat.label} className="card-dark rounded-xl p-5 text-center flex flex-col items-center justify-center" style={{ minHeight: "96px" }}>
+                  <p className="font-semibold gradient-text-light leading-tight whitespace-nowrap" style={{ fontSize: "clamp(18px, 2.5vw, 28px)", fontFamily: "var(--font-playfair)" }}>{stat.number}</p>
+                  <p className="type-caption mt-1.5 text-center" style={{ color: "rgba(255,255,255,0.5)" }}>{stat.label}</p>
                 </div>
               ))}
             </div>

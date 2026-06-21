@@ -31,7 +31,7 @@ const TESTIMONIALS = [
 const METRICS = [
   { value: 40, suffix: "%", label: "Reduction in paperwork", icon: "📉", animate: true },
   { value: 90, suffix: "s", label: "Patient registration time", icon: "⚡", animate: true },
-  { value: 20, suffix: "%", label: "Avg. revenue leakage recovered", icon: "💰", animate: true },
+  { value: 98, suffix: "%", label: "Clinical documentation accuracy", icon: "🎯", animate: true },
   { value: 3, suffix: "×", label: "Improvement in follow-up rates", icon: "📈", animate: true },
 ];
 
@@ -62,9 +62,7 @@ export default function TestimonialsSection() {
                   className="text-[clamp(26px,3vw,38px)] leading-none tracking-tight mb-1"
                   style={{ fontFamily: "var(--font-playfair)", color: "var(--primary)" }}
                 >
-                  {m.animate && m.value !== null
-                    ? <CountUp value={m.value} suffix={m.suffix} />
-                    : m.display}
+                  <CountUp value={m.value} suffix={m.suffix} />
                 </p>
                 <p className="type-caption text-[var(--text-muted)]">{m.label}</p>
               </div>
