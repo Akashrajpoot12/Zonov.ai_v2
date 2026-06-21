@@ -1,10 +1,6 @@
 import Groq from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server";
 
-const client = new Groq({
-  apiKey: process.env.GROQ_API_KEY,
-});
-
 const SYSTEM_PROMPT = `You are Zara, Zonov.ai's intelligent assistant on their website. Zonov.ai builds specialized AI agents for Indian hospitals and healthcare organizations.
 
 ## About Zonov.ai
@@ -61,8 +57,11 @@ const SYSTEM_PROMPT = `You are Zara, Zonov.ai's intelligent assistant on their w
 - Start every response with a one-line direct answer, then details below
 - Do NOT use headers (##) in responses — only bold, bullets, and numbered lists`;
 
+export const runtime = "nodejs";
+
 export async function POST(req: NextRequest) {
   try {
+    const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
     const { messages } = await req.json();
 
     if (!messages || !Array.isArray(messages)) {
