@@ -124,8 +124,9 @@ export default function HeroSection() {
               />
             </div>
             {/* Floating badge */}
+            <div className="absolute -bottom-4 -left-6 z-20 animate-float">
             <motion.div
-              className="absolute -bottom-4 -left-6 bg-white rounded-[14px] border border-[var(--border)] shadow-lg px-4 py-3 flex items-center gap-3"
+              className="bg-white rounded-[14px] border border-[var(--border)] shadow-lg px-4 py-3 flex items-center gap-3"
               initial={{ opacity: 0, x: -16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.5 }}
@@ -136,8 +137,10 @@ export default function HeroSection() {
                 <p className="text-[10px] text-[var(--text-muted)]">Sunrise Hospital, Jaipur</p>
               </div>
             </motion.div>
+            </div>
+            <div className="absolute -top-4 -right-4 z-20 animate-float" style={{ animationDelay: "1.5s" }}>
             <motion.div
-              className="absolute -top-4 -right-4 bg-white rounded-[14px] border border-[var(--border)] shadow-lg px-4 py-3 flex items-center gap-3"
+              className="bg-white rounded-[14px] border border-[var(--border)] shadow-lg px-4 py-3 flex items-center gap-3"
               initial={{ opacity: 0, x: 16 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.85, duration: 0.5 }}
@@ -148,6 +151,7 @@ export default function HeroSection() {
                 <p className="text-[10px] text-[var(--text-muted)]">Was 25 minutes</p>
               </div>
             </motion.div>
+            </div>
           </motion.div>
         </div>
 
