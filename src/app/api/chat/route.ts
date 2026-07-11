@@ -1,5 +1,6 @@
 import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, clientIp, escapeHtml } from "@/lib/security";
 
 const SYSTEM_PROMPT = `You are the Zonov.ai Assistant — the intelligent AI assistant on Zonov.ai's website. If asked your name, say you are the Zonov.ai assistant. Zonov.ai builds specialized AI agents for Indian hospitals and healthcare organizations.
 
@@ -133,7 +134,7 @@ async function sendLead(lead: Record<string, unknown>): Promise<void> {
       ([label, value]) => `
       <tr>
         <td style="padding:8px 0;font-size:13px;color:#6B7280;width:140px;vertical-align:top;">${label}</td>
-        <td style="padding:8px 0;font-size:14px;color:#111827;vertical-align:top;">${value || "—"}</td>
+        <td style="padding:8px 0;font-size:14px;color:#111827;vertical-align:top;">${escapeHtml(value || "—")}</td>
       </tr>`
     )
     .join("");
@@ -167,18 +168,39 @@ async function sendLead(lead: Record<string, unknown>): Promise<void> {
 
 export async function POST(req: NextRequest) {
   try {
+    // Per-IP rate limit — the loop below can call GPT-4o up to 3x per request.
+    const limit = rateLimit(`chat:${clientIp(req)}`, 15, 60_000);
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: "Too many requests. Please slow down." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
+      );
+    }
+
     const client = new OpenAI(); // reads OPENAI_API_KEY from env
     const { messages } = (await req.json()) as { messages?: IncomingMessage[] };
 
-    if (!messages || !Array.isArray(messages)) {
+    if (!messages || !Array.isArray(messages) || messages.length === 0 || messages.length > 50) {
+      return NextResponse.json({ error: "Invalid request" }, { status: 400 });
+    }
+
+    // Only accept user/assistant turns with string content within a length cap.
+    // Prevents clients injecting a "system" role (prompt-injection) or oversized payloads.
+    const clean = messages.filter(
+      (m): m is IncomingMessage =>
+        m != null &&
+        (m.role === "user" || m.role === "assistant") &&
+        typeof m.content === "string" &&
+        m.content.length > 0 &&
+        m.content.length <= 4000
+    );
+    if (clean.length === 0) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });
     }
 
     const convo: OpenAI.Chat.Completions.ChatCompletionMessageParam[] = [
       { role: "system", content: SYSTEM_PROMPT },
-      ...messages
-        .slice(-10)
-        .map((m) => ({ role: m.role, content: m.content })),
+      ...clean.slice(-10).map((m) => ({ role: m.role, content: m.content })),
     ];
 
     // Manual tool-use loop: the assistant may call capture_lead, then continue to a text reply.

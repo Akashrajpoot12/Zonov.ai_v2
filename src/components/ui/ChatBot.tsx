@@ -64,7 +64,16 @@ function renderMarkdown(text: string) {
 }
 
 function inlineMd(text: string): string {
-  return text
+  // Escape HTML FIRST so any raw markup in the (model-influenced) reply is inert
+  // (prevents XSS via prompt injection). The markdown transforms below then add
+  // only our own trusted tags. `[` `]` `(` `)` `*` ` aren't HTML-special, so
+  // markdown syntax still matches on the escaped string.
+  const esc = text
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
+  return esc
     // Markdown links [label](url) — allow internal paths, http(s), and mailto only
     .replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|mailto:[^\s)]+)\)/g,
@@ -85,7 +94,7 @@ type Message = {
 
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
-  content: "Hi! I'm the Zonov.ai assistant <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:-3px;margin:0 1px\" aria-hidden=\"true\"><path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\"/><path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\"/><path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\"/><path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\"/></svg> I can help you learn about our 8 AI agents, implementation, pricing, or anything else. What would you like to know?",
+  content: "Hi! I'm the Zonov.ai assistant. I can help you learn about our 8 AI agents, implementation, pricing, or anything else — what would you like to know?",
 };
 
 const QUICK_REPLIES = [
