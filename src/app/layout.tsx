@@ -6,17 +6,17 @@ import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
-// Self-hosted Montserrat (variable font — full 100–900 weight range + italics).
-// Exposed as --font-montserrat; globals.css aliases the legacy font variables
+// Self-hosted Nunito Sans (variable font — full weight range + italics).
+// Exposed as --font-nunito; globals.css aliases the legacy font variables
 // (--font-playfair / --font-inter / --font-google-sans) onto it, so every
-// existing usage across the site resolves to Montserrat with no per-file edits.
-const montserrat = localFont({
+// existing usage across the site resolves to Nunito Sans with no per-file edits.
+const nunitoSans = localFont({
   src: [
-    { path: "../fonts/Montserrat-VariableFont_wght.ttf", style: "normal" },
-    { path: "../fonts/Montserrat-Italic-VariableFont_wght.ttf", style: "italic" },
+    { path: "../fonts/NunitoSans-Variable.ttf", style: "normal" },
+    { path: "../fonts/NunitoSans-Italic-Variable.ttf", style: "italic" },
   ],
-  variable: "--font-montserrat",
-  weight: "100 900",
+  variable: "--font-nunito",
+  weight: "200 1000",
   display: "swap",
 });
 
@@ -65,7 +65,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${montserrat.variable} h-full`}
+      className={`${nunitoSans.variable} h-full`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-bg text-text antialiased">
         <SmoothScroll />

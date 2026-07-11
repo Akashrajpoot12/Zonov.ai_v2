@@ -53,11 +53,15 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 px-4 pointer-events-none">
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 flex justify-center px-4 pointer-events-none transition-all duration-300 ${
+        scrolled ? "pt-0" : "pt-3"
+      }`}
+    >
       <nav
-        className={`pointer-events-auto flex items-center justify-between h-[60px] px-6 w-full max-w-[1360px] transition-all duration-300 rounded-full ${
+        className={`pointer-events-auto flex items-center justify-between h-[60px] px-6 w-full max-w-[1360px] rounded-full transition-all duration-300 ${
           scrolled
-            ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/8 border border-[var(--border)]"
+            ? "bg-white/95 backdrop-blur-md shadow-lg shadow-black/8 border border-[var(--border)]"
             : "bg-white/80 backdrop-blur-sm border border-[var(--border-strong)]/60 shadow-md shadow-black/5"
         }`}
         style={{ WebkitBackdropFilter: "blur(12px)" }}
@@ -86,7 +90,7 @@ export default function Navbar() {
             const linkClass = `type-nav relative px-4 py-2 rounded-full transition-colors ${
               active
                 ? "text-[var(--primary)] font-semibold"
-                : "text-[var(--text-muted)] hover:text-[var(--text)]"
+                : "text-[#374151] hover:text-[var(--text)]"
             }`;
 
             return link.dropdown ? (
