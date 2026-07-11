@@ -46,7 +46,7 @@
   --radius-xl:  32px;
 
   /* Navbar */
-  --nav-h: 64px;
+  --nav-h: 60px;
 
   /* Typography — every legacy font variable now resolves to self-hosted
      Montserrat (--font-montserrat is set on <html> by next/font/local). */
