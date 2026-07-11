@@ -1,11 +1,12 @@
 "use client";
 import { useState } from "react";
+import { Check } from "lucide-react";
 
 export default function NewsletterForm() {
   const [submitted, setSubmitted] = useState(false);
   return submitted ? (
-    <p className="type-body mt-6" style={{ color: "var(--secondary)" }}>
-      ✓ You&apos;re subscribed. We&apos;ll be in touch.
+    <p className="type-body mt-6 inline-flex items-center gap-1.5" style={{ color: "var(--secondary)" }}>
+      <Check className="w-4 h-4" strokeWidth={2.5} /> You&apos;re subscribed. We&apos;ll be in touch.
     </p>
   ) : (
     <form

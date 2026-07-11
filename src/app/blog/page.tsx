@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import { Check } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Blog — Zonov.ai",
@@ -157,7 +157,6 @@ const categoryStyle: Record<string, { bg: string; color: string }> = {
 export default function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
 
         <section className="bg-[var(--bg)] pt-40 pb-16">
@@ -220,16 +219,16 @@ export default function BlogPage() {
                       <p className="type-caption text-white/40 pb-2 border-b border-white/10 text-right">Handled by AI</p>
 
                       <p className="type-body py-2">Registration</p>
-                      <p className="type-body py-2 text-right text-[var(--secondary)]">✓</p>
+                      <p className="type-body py-2 flex justify-end text-[var(--secondary)]"><Check className="w-4 h-4" strokeWidth={2.5} /></p>
 
                       <p className="type-body py-2">Follow-Up</p>
-                      <p className="type-body py-2 text-right text-[var(--secondary)]">✓</p>
+                      <p className="type-body py-2 flex justify-end text-[var(--secondary)]"><Check className="w-4 h-4" strokeWidth={2.5} /></p>
 
                       <p className="type-body py-2">Billing Audit</p>
-                      <p className="type-body py-2 text-right text-[var(--secondary)]">✓</p>
+                      <p className="type-body py-2 flex justify-end text-[var(--secondary)]"><Check className="w-4 h-4" strokeWidth={2.5} /></p>
 
                       <p className="type-body py-2">Documentation</p>
-                      <p className="type-body py-2 text-right text-[var(--secondary)]">✓</p>
+                      <p className="type-body py-2 flex justify-end text-[var(--secondary)]"><Check className="w-4 h-4" strokeWidth={2.5} /></p>
                     </div>
                   </div>
                 </div>

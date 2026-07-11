@@ -4,20 +4,29 @@ import Lenis from "lenis";
 
 export default function SmoothScroll() {
   useEffect(() => {
+    // Respect users who prefer reduced motion — skip smooth scroll entirely.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
     const lenis = new Lenis({
-      duration: 0.8,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      lerp: 0.15, // snappy — low latency between wheel input and scroll position
       smoothWheel: true,
-      wheelMultiplier: 1.1,
+      wheelMultiplier: 1.0,
+      // NOTE: syncTouch intentionally omitted. It hijacks native touch/trackpad
+      // scrolling and adds noticeable latency/jank on precision touchpads and
+      // mobile — the main cause of the "delayed / slow" scroll feel.
     });
 
+    let rafId = 0;
     function raf(time: number) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      rafId = requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    rafId = requestAnimationFrame(raf);
 
-    return () => lenis.destroy();
+    return () => {
+      cancelAnimationFrame(rafId); // stop the loop so remounts don't stack RAFs
+      lenis.destroy();
+    };
   }, []);
 
   return null;

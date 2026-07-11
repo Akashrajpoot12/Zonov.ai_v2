@@ -46,7 +46,13 @@
   --radius-xl:  32px;
 
   /* Navbar */
-  --nav-h: 72px;
+  --nav-h: 64px;
+
+  /* Typography — every legacy font variable now resolves to self-hosted
+     Montserrat (--font-montserrat is set on <html> by next/font/local). */
+  --font-playfair:    var(--font-montserrat);
+  --font-inter:       var(--font-montserrat);
+  --font-google-sans: var(--font-montserrat);
 }
 
 /* ═══════════════════════════════════════════════════
@@ -68,8 +74,9 @@
   --color-success:        var(--success);
   --color-error:          var(--error);
 
-  --font-display: var(--font-playfair), Georgia, serif;
-  --font-body:    var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-montserrat), system-ui, sans-serif;
+  --font-body:    var(--font-montserrat), system-ui, sans-serif;
+  --font-google-sans: var(--font-montserrat), system-ui, sans-serif;
   --font-mono:    'Courier New', monospace;
 
   --radius-btn: var(--radius-sm);
@@ -190,6 +197,25 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════
+   GOOGLE SANS FONT STYLES
+   ═══════════════════════════════════════════════════ */
+.google-sans,
+.google-sans-400,
+.google-sans-500,
+.google-sans-600,
+.google-sans-700 {
+  font-family: var(--font-google-sans);
+  font-optical-sizing: auto;
+  font-style: normal;
+  font-variation-settings: "GRAD" 0;
+}
+
+.google-sans-400 { font-weight: 400; }
+.google-sans-500 { font-weight: 500; }
+.google-sans-600 { font-weight: 600; }
+.google-sans-700 { font-weight: 700; }
+
+/* ═══════════════════════════════════════════════════
    LAYOUT UTILITIES
    ═══════════════════════════════════════════════════ */
 .px-edge {
@@ -279,7 +305,9 @@ body {
    ═══════════════════════════════════════════════════ */
 .transition-theme {
   transition: background-color 0.3s ease, color 0.3s ease;
-  will-change: color, background-color;
+  /* No will-change here: color/background aren't GPU-composited, so hinting
+     them only forces needless compositor layers on large section wrappers,
+     adding memory pressure and repaint cost during scroll. */
 }
 
 /* Dark section text overrides */
@@ -475,8 +503,8 @@ body {
     rgba(255, 255, 255, 0.85),
     rgba(255, 255, 255, 0.55)
   );
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.6);
   border-radius: var(--radius-lg);
   box-shadow:
@@ -492,8 +520,8 @@ body {
     rgba(255, 255, 255, 0.08),
     rgba(255, 255, 255, 0.03)
   );
-  -webkit-backdrop-filter: blur(20px);
-  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: var(--radius-lg);
 }

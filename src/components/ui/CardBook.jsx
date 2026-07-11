@@ -1,118 +1,136 @@
 'use client';
 
 import { useEffect, useRef, useState, useCallback } from 'react';
+import {
+  Mic,
+  IdCard,
+  Stethoscope,
+  TriangleAlert,
+  Microscope,
+  Bone,
+  Pill,
+  BedDouble,
+  Syringe,
+  ReceiptText,
+  TrendingUp,
+  LineChart,
+  CheckCircle2,
+  Phone,
+  Lock,
+  Link2,
+} from 'lucide-react';
 import styles from './CardBook.module.css';
 
 const ZONOV_CARDS = [
   {
     id: 1,
     label: 'REGISTRATION',
-    emoji: '🎙️',
+    icon: Mic,
     title: 'Voice Registration',
     desc: 'Patient registered in under 90 seconds — just speak, no typing, no forms.',
   },
   {
     id: 2,
     label: 'REGISTRATION',
-    emoji: '🪪',
+    icon: IdCard,
     title: 'ABHA Auto-Fetch',
     desc: 'Scans health ID and pulls complete patient history instantly from ABDM.',
   },
   {
     id: 3,
     label: 'PRESCRIPTION',
-    emoji: '🩺',
+    icon: Stethoscope,
     title: 'Voice Prescription',
     desc: 'Doctors dictate — AI writes, codes, and saves the prescription error-free.',
   },
   {
     id: 4,
     label: 'PRESCRIPTION',
-    emoji: '⚠️',
+    icon: TriangleAlert,
     title: 'Drug Safety Check',
     desc: 'Flags dangerous drug interactions before the prescription is signed.',
   },
   {
     id: 5,
     label: 'DIAGNOSTICS',
-    emoji: '🔬',
+    icon: Microscope,
     title: 'Lab Intelligence',
     desc: 'Reads lab results against patient history and flags critical values in <2 min.',
   },
   {
     id: 6,
     label: 'DIAGNOSTICS',
-    emoji: '🩻',
+    icon: Bone,
     title: 'Report Generation',
     desc: 'AI-assisted radiology and pathology report drafting — 40% faster turnaround.',
   },
   {
     id: 7,
     label: 'PHARMACY',
-    emoji: '💊',
+    icon: Pill,
     title: 'Expiry Alerts',
     desc: 'Near-expiry and low-stock alerts in real time — zero wastage, zero stockouts.',
   },
   {
     id: 8,
     label: 'IPD',
-    emoji: '🛏️',
+    icon: BedDouble,
     title: 'Nursing Handovers',
     desc: 'Structured, voice-captured shift handovers — nothing missed, ever.',
   },
   {
     id: 9,
     label: 'OT',
-    emoji: '🏥',
+    icon: Syringe,
     title: 'OT Scheduling',
     desc: 'Intelligent OT allocation that eliminates conflicts and reduces delays by 30%.',
   },
   {
     id: 10,
     label: 'CLAIMS',
-    emoji: '📋',
+    icon: ReceiptText,
     title: 'Claim Scrubbing',
     desc: 'Every claim validated before submission — 20% fewer rejections guaranteed.',
   },
   {
     id: 11,
     label: 'FINANCE',
-    emoji: '📈',
+    icon: TrendingUp,
     title: 'Revenue Recovery',
     desc: 'Unbilled procedures caught automatically — 20% revenue leakage recovered.',
   },
   {
     id: 12,
     label: 'FINANCE',
-    emoji: '💹',
+    icon: LineChart,
     title: 'Live P&L Dashboard',
     desc: 'Per-patient profitability visible to hospital leadership in real time.',
   },
   {
     id: 13,
     label: 'DISCHARGE',
-    emoji: '✅',
+    icon: CheckCircle2,
     title: 'Discharge Planning',
     desc: 'AI coordinates discharge checklists across departments — cuts time by 60%.',
   },
   {
     id: 14,
     label: 'FOLLOW-UP',
-    emoji: '📞',
+    icon: Phone,
     title: 'Patient Follow-up',
     desc: 'AI calls patients post-discharge daily, monitors recovery, escalates if needed.',
   },
   {
     id: 15,
     label: 'COMPLIANCE',
-    emoji: '🔒',
+    icon: Lock,
     title: 'ABDM Compliant',
     desc: 'Fully ABDM/ABHA compliant by design — audit trails on every interaction.',
   },
   {
     id: 16,
     label: 'INTEGRATIONS',
-    emoji: '🔗',
+    icon: Link2,
     title: 'HIS Integration',
     desc: 'Works with Practo, eHospital, HIS Pro, and 20+ systems. No rip-and-replace.',
   },
@@ -131,7 +149,8 @@ export default function CardBook({
   tilt = 20,
   autoSpin = true,
 }) {
-  const [rotation, setRotation] = useState(gapFront);
+  const [activeKey, setActiveKey] = useState(null);
+  const activeKeyRef = useRef(null);
   const rotationRef = useRef(gapFront);
   const targetRef = useRef(null);
   const draggingRef = useRef(false);
@@ -140,6 +159,8 @@ export default function CardBook({
   const rafRef = useRef(null);
   const lastTsRef = useRef(0);
   const reduce = useRef(false);
+  const ringRef = useRef(null);
+  const placedRef = useRef([]);
 
   const half = Math.ceil(cards.length / 2);
   const left = cards.slice(0, half);
@@ -154,6 +175,7 @@ export default function CardBook({
     const f = left.length <= 1 ? 0 : i / (left.length - 1);
     placed.push({ card: c, angle: -(gapFront + f * arc), key: `l${i}` });
   });
+  placedRef.current = placed;
 
   useEffect(() => {
     reduce.current =
@@ -161,7 +183,7 @@ export default function CardBook({
       window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;
   }, []);
 
-  useEffect(() => { rotationRef.current = rotation; }, [rotation]);
+
 
   useEffect(() => {
     const tick = (ts) => {
@@ -179,20 +201,29 @@ export default function CardBook({
         r += speed * dt;
       }
       rotationRef.current = r;
-      setRotation(r);
+      
+      if (ringRef.current) {
+        ringRef.current.style.transform = `rotateY(${r}deg)`;
+      }
+
+      let newFrontKey = null;
+      let best = Infinity;
+      for (const p of placedRef.current) {
+        const eff = (((p.angle + r) % 360) + 540) % 360 - 180;
+        const d = Math.abs(eff);
+        if (d < best) { best = d; newFrontKey = p.key; }
+      }
+      
+      if (newFrontKey !== activeKeyRef.current) {
+        activeKeyRef.current = newFrontKey;
+        setActiveKey(newFrontKey);
+      }
+
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(rafRef.current);
   }, [autoSpin, speed]);
-
-  let frontKey = null;
-  let best = Infinity;
-  for (const p of placed) {
-    const eff = (((p.angle + rotation) % 360) + 540) % 360 - 180;
-    const d = Math.abs(eff);
-    if (d < best) { best = d; frontKey = p.key; }
-  }
 
   const onDown = (e) => {
     draggingRef.current = true;
@@ -211,7 +242,6 @@ export default function CardBook({
     lastXRef.current = x;
     const next = rotationRef.current + dx * 0.3;
     rotationRef.current = next;
-    setRotation(next);
   };
 
   const end = () => {
@@ -241,9 +271,10 @@ export default function CardBook({
         onPointerCancel={end}
       >
         <div className={styles.world} style={{ transform: `rotateX(${tilt}deg)` }}>
-          <div className={styles.ring} style={{ transform: `rotateY(${rotation}deg)` }}>
+          <div className={styles.ring} ref={ringRef} style={{ transform: `rotateY(${rotationRef.current}deg)` }}>
             {placed.map(({ card, angle, key }) => {
-              const isFront = key === frontKey;
+              const isFront = key === activeKey;
+              const Icon = card.icon;
               const w = isFront ? cardW + expandPadW : cardW;
               const h = isFront ? cardH + expandPadH : cardH;
               const z = isFront ? radius + 60 : radius;
@@ -271,10 +302,8 @@ export default function CardBook({
                           <div className={styles.eyebrow}>{card.label}</div>
                         )}
                         <div className={styles.icon} aria-hidden="true">
-                          {card.emoji ? (
-                            <span>{card.emoji}</span>
-                          ) : card.icon ? (
-                            <img src={card.icon} alt="" />
+                          {Icon ? (
+                            <Icon className="w-5 h-5 text-white" strokeWidth={1.5} />
                           ) : null}
                         </div>
                         {card.title && (

@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
@@ -62,7 +61,6 @@ const customers = [
 export default function CustomersPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
         <section className="noise relative pt-40 pb-24" style={{ backgroundColor: "var(--dark-navy)" }}>
           <div className="container-wide">

@@ -182,8 +182,8 @@ export default function Footer() {
           {/* Brand column */}
           <div className="col-span-2 lg:col-span-1 lg:pr-12">
             <Image
-              src="/logo1.png"
-              alt="Zonov.ai"
+              src="/logo-footer.png"
+              alt="Zonov.ai — The Future of Healthcare, Now!"
               width={110}
               height={32}
               style={{ height: "85px", width: "auto" }}
@@ -231,9 +231,19 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="type-caption text-white/30 text-center sm:text-left">
-            © {new Date().getFullYear()} Zonov.ai. All rights reserved. · Made in India 🇮🇳
+        <div className="mt-16 pt-8 border-t border-white/10 flex flex-col-reverse sm:flex-row items-center justify-between gap-3">
+          <p className="type-caption text-white/30 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-center">
+            <span>© {new Date().getFullYear()} Zonov.ai. All rights reserved.</span>
+            <span className="text-white/20" aria-hidden="true">·</span>
+            <span className="inline-flex items-center gap-1.5">
+              Made in India
+              <svg viewBox="0 0 36 24" width="16" height="11" className="shrink-0 rounded-[1px] ring-1 ring-white/10" aria-hidden="true">
+                <rect width="36" height="8" y="0" fill="#FF9933" />
+                <rect width="36" height="8" y="8" fill="#fff" />
+                <rect width="36" height="8" y="16" fill="#138808" />
+                <circle cx="18" cy="12" r="3" fill="none" stroke="#000080" strokeWidth="0.6" />
+              </svg>
+            </span>
           </p>
           <p className="type-caption text-white/20 hidden md:block">
             Building the AI Operating System for Healthcare.

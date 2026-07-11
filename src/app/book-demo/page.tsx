@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 
@@ -87,7 +86,6 @@ export default function BookDemoPage() {
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow">
         <section className="bg-[var(--dark-navy)] section-py">
           <div className="container-wide px-edge text-center">

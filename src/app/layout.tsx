@@ -1,22 +1,22 @@
 import type { Metadata } from "next";
-import { Plus_Jakarta_Sans, Cormorant_Garamond } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import ChatBot from "@/components/ui/ChatBot";
+import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 
-const cormorant = Cormorant_Garamond({
-  variable: "--font-playfair",
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  display: "swap",
-});
-
-const jakarta = Plus_Jakarta_Sans({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+// Self-hosted Montserrat (variable font — full 100–900 weight range + italics).
+// Exposed as --font-montserrat; globals.css aliases the legacy font variables
+// (--font-playfair / --font-inter / --font-google-sans) onto it, so every
+// existing usage across the site resolves to Montserrat with no per-file edits.
+const montserrat = localFont({
+  src: [
+    { path: "../fonts/Montserrat-VariableFont_wght.ttf", style: "normal" },
+    { path: "../fonts/Montserrat-Italic-VariableFont_wght.ttf", style: "italic" },
+  ],
+  variable: "--font-montserrat",
+  weight: "100 900",
   display: "swap",
 });
 
@@ -42,20 +42,13 @@ export const metadata: Metadata = {
     url: "https://zonov.ai",
     siteName: "Zonov.ai",
     type: "website",
-    images: [
-      {
-        url: "/og-image.png",
-        width: 1200,
-        height: 630,
-        alt: "Zonov.ai — AI Operating System for Healthcare",
-      },
-    ],
+    // OG image is generated automatically by src/app/opengraph-image.tsx
   },
   twitter: {
     card: "summary_large_image",
     title: "Zonov.ai — AI Operating System for Healthcare",
     description: "Deploy AI agents across every hospital workflow.",
-    images: ["/og-image.png"],
+    // Twitter image falls back to the generated opengraph-image
   },
   robots: { index: true, follow: true },
   icons: {
@@ -72,11 +65,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${cormorant.variable} ${jakarta.variable} h-full`}
+      className={`${montserrat.variable} h-full`}
     >
-      <body className="min-h-full flex flex-col bg-bg text-text antialiased">
+      <body suppressHydrationWarning className="min-h-full flex flex-col bg-bg text-text antialiased">
         <SmoothScroll />
         <ScrollProgress />
+        <Navbar />
         {children}
         <ChatBot />
       </body>

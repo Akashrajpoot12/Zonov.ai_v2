@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
@@ -429,7 +428,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
   if (!article) {
     return (
       <div className="flex flex-col min-h-screen">
-        <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <div className="text-center">
             <h1 className="type-h1 mb-4">Article Not Found</h1>
@@ -446,7 +444,6 @@ export default async function BlogArticlePage({ params }: { params: Promise<{ sl
 
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
 
         <section className="bg-[var(--dark-navy)] pt-40 pb-20">

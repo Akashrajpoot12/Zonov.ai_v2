@@ -2,6 +2,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { Check, Zap } from "lucide-react";
 import CountUp from "@/components/ui/CountUp";
 
 const STATS = [
@@ -47,7 +48,7 @@ export default function HeroSection() {
         <div className="hidden lg:grid gap-12 items-center" style={{ gridTemplateColumns: "1.8fr 2.2fr" }}>
           <div className="flex flex-col gap-10">
             <motion.h1
-              className="type-display text-[var(--text)] [text-wrap:balance]"
+              className="type-display text-[var(--text)] [text-wrap:balance] google-sans-700"
               initial={{ opacity: 0, y: 24 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
@@ -75,7 +76,7 @@ export default function HeroSection() {
                 animate={{ scaleY: 1 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
               />
-              <p className="type-subtitle text-[var(--text-muted)] max-w-[440px] [text-wrap:pretty]">
+              <p className="type-subtitle text-[var(--text-muted)] max-w-[440px] [text-wrap:pretty] google-sans-400">
                 Zonov.ai automates every hospital workflow — from patient registration to final billing — using specialized AI agents, so healthcare professionals can focus on saving lives.
               </p>
               <div className="flex gap-3 flex-wrap">
@@ -131,7 +132,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.7, duration: 0.5 }}
             >
-              <span className="w-8 h-8 rounded-full bg-[var(--success)]/15 flex items-center justify-center text-[var(--success)] text-sm">✓</span>
+              <span className="w-8 h-8 rounded-full bg-[var(--success)]/15 flex items-center justify-center text-[var(--success)]"><Check className="w-4 h-4" strokeWidth={2.5} /></span>
               <div>
                 <p className="text-[12px] font-semibold text-[var(--text)]">20% Revenue Recovered</p>
                 <p className="text-[10px] text-[var(--text-muted)]">Sunrise Hospital, Jaipur</p>
@@ -145,7 +146,7 @@ export default function HeroSection() {
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.85, duration: 0.5 }}
             >
-              <span className="text-lg">⚡</span>
+              <span className="text-[var(--primary)]"><Zap className="w-4 h-4" strokeWidth={2} /></span>
               <div>
                 <p className="text-[12px] font-semibold text-[var(--text)]">90s Registration</p>
                 <p className="text-[10px] text-[var(--text-muted)]">Was 25 minutes</p>

@@ -1,15 +1,17 @@
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
+import { IdCard, Stethoscope, Microscope, Pill, BedDouble, Syringe, ReceiptText, Wallet } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 type AgentData = {
   name: string;
   tagline: string;
   description: string;
   color: string;
-  icon: string;
+  icon: LucideIcon;
   features: { title: string; desc: string }[];
   metrics: { num: string; label: string }[];
   useCases: string[];
@@ -29,7 +31,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Turn patient onboarding into a calm, guided experience — so your front desk spends its time on people, not paperwork.",
     color: "#1B4FD8",
-    icon: "🪪",
+    icon: IdCard,
     features: [
       {
         title: "Effortless Intake",
@@ -62,7 +64,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "An AI clinical companion that turns the consultation into structured notes and a ready-to-review prescription — so doctors spend their time healing, not typing.",
     color: "#00B4AE",
-    icon: "🩺",
+    icon: Stethoscope,
     features: [
       {
         title: "Ambient Documentation",
@@ -95,7 +97,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Keep the diagnostics loop moving — orders, tracking, and results flow to the right person at the right moment, with nothing lost in between.",
     color: "#7C3AED",
-    icon: "🔬",
+    icon: Microscope,
     features: [
       {
         title: "Nothing Falls Through",
@@ -128,7 +130,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Keep the pharmacy running lean — stock stays visible, expiries are caught early, and shortages are headed off before they happen.",
     color: "#059669",
-    icon: "💊",
+    icon: Pill,
     features: [
       {
         title: "Stay Ahead of Expiry",
@@ -161,7 +163,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Make in-patient care visible and consistent — so critical information carries cleanly across every shift and no patient goes unnoticed.",
     color: "#D97706",
-    icon: "🛏️",
+    icon: BedDouble,
     features: [
       {
         title: "Structured Handovers",
@@ -194,7 +196,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Keep operation theatres running at their best — fewer delays, clearer coordination, and emergencies handled without throwing the day off course.",
     color: "#0D1F3C",
-    icon: "🏥",
+    icon: Syringe,
     features: [
       {
         title: "Smarter Scheduling",
@@ -227,7 +229,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Get claims right the first time and recover what slips through — so your team chases fewer denials and collects more of what's owed.",
     color: "#7C3AED",
-    icon: "📋",
+    icon: ReceiptText,
     features: [
       {
         title: "Right the First Time",
@@ -260,7 +262,7 @@ const AGENTS: Record<string, AgentData> = {
     description:
       "Bring hospital finances into real time — catch revenue leakage as it happens and understand profitability at a level that week-old spreadsheets never could.",
     color: "#1B4FD8",
-    icon: "💰",
+    icon: Wallet,
     features: [
       {
         title: "Catch Leakage Early",
@@ -292,16 +294,43 @@ export function generateStaticParams() {
   return Object.keys(AGENTS).map((slug) => ({ slug }));
 }
 
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+  const { slug } = await params;
+  const agent = AGENTS[slug];
+  if (!agent) return {};
+
+  const title = `${agent.name} — Healthcare AI Agent`;
+  const description = agent.description;
+  const url = `/agents/${slug}`;
+
+  return {
+    title,
+    description,
+    keywords: [agent.name, "Healthcare AI agent", "Hospital automation", "Zonov.ai"],
+    alternates: { canonical: url },
+    openGraph: {
+      title: `${agent.name} | Zonov.ai`,
+      description: agent.tagline,
+      url,
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${agent.name} | Zonov.ai`,
+      description: agent.tagline,
+    },
+  };
+}
+
 export default async function AgentPage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const agent = AGENTS[slug];
   if (!agent) notFound();
 
-  const { name, tagline, description, color, icon, features, metrics, useCases } = agent;
+  const { name, tagline, description, color, icon: Icon, features, metrics, useCases } = agent;
 
   return (
     <div className="relative min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow">
 
         {/* ── Hero ─────────────────────────────────────────────── */}
@@ -321,7 +350,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
           <div className="container-wide px-edge relative z-10">
             <FadeIn>
               <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border" style={{ borderColor: `${color}40`, background: `${color}15` }}>
-                <span className="text-xl">{icon}</span>
+                <Icon className="w-5 h-5" strokeWidth={1.5} style={{ color }} />
                 <span className="type-mono text-sm" style={{ color }}>AI Agent</span>
               </div>
 
@@ -459,10 +488,10 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
           <div className="container-wide px-edge text-center">
             <FadeIn>
               <div
-                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl text-3xl mb-8"
+                className="inline-flex items-center justify-center w-16 h-16 rounded-2xl mb-8"
                 style={{ background: `${color}20`, border: `1px solid ${color}40` }}
               >
-                {icon}
+                <Icon className="w-8 h-8" strokeWidth={1.5} style={{ color }} />
               </div>
               <h2
                 className="text-[clamp(28px,4vw,52px)] leading-tight tracking-tight text-white mb-5 max-w-2xl mx-auto [text-wrap:balance]"

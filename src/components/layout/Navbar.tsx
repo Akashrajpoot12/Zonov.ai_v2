@@ -22,6 +22,24 @@ const NAV_LINKS = [
   },
 ];
 
+/* Shared transparent "capsule" that slides between nav items on route change.
+   All items reuse layoutId="navPill", so framer-motion animates it from the
+   previously-active link to the newly-active one. */
+function NavPill() {
+  return (
+    <motion.span
+      layoutId="navPill"
+      aria-hidden
+      className="absolute inset-0 rounded-full"
+      style={{
+        background: "color-mix(in srgb, var(--primary) 10%, transparent)",
+        border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+      }}
+      transition={{ type: "spring", stiffness: 380, damping: 32 }}
+    />
+  );
+}
+
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
@@ -35,9 +53,9 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-4 px-4 pointer-events-none">
+    <header className="fixed top-0 left-0 right-0 z-50 flex justify-center pt-3 px-4 pointer-events-none">
       <nav
-        className={`pointer-events-auto flex items-center justify-between h-[76px] px-5 w-full max-w-[1196px] transition-all duration-300 rounded-full ${
+        className={`pointer-events-auto flex items-center justify-between h-[66px] px-5 w-full max-w-[1196px] transition-all duration-300 rounded-full ${
           scrolled
             ? "bg-white/90 backdrop-blur-md shadow-lg shadow-black/8 border border-[var(--border)]"
             : "bg-white/80 backdrop-blur-sm border border-[var(--border-strong)]/60 shadow-md shadow-black/5"
@@ -57,20 +75,35 @@ export default function Navbar() {
         </Link>
 
         {/* Desktop Nav — absolutely centered */}
-        <div className="hidden lg:flex items-center gap-8 absolute left-1/2 -translate-x-1/2">
-          {NAV_LINKS.map((link) =>
-            link.dropdown ? (
+        <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 google-sans-500">
+          {NAV_LINKS.map((link) => {
+            const active = link.dropdown
+              ? link.dropdown.some((d) => pathname.startsWith(d.href))
+              : link.href === "/"
+              ? pathname === "/"
+              : pathname.startsWith(link.href);
+
+            const linkClass = `type-nav relative px-4 py-2 rounded-full transition-colors ${
+              active
+                ? "text-[var(--primary)] font-semibold"
+                : "text-[var(--text-muted)] hover:text-[var(--text)]"
+            }`;
+
+            return link.dropdown ? (
               <div
                 key={link.label}
                 className="relative"
                 onMouseEnter={() => setOpenDropdown(link.label)}
                 onMouseLeave={() => setOpenDropdown(null)}
               >
-                <Link href={link.href} className={`type-nav transition-colors flex items-center gap-1 ${pathname.startsWith(link.href) && link.href !== "/" ? "text-[var(--primary)] font-semibold" : "text-[var(--text-muted)] hover:text-[var(--text)]"}`}>
-                  {link.label}
-                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
-                    <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  </svg>
+                <Link href={link.href} className={`${linkClass} flex items-center gap-1`}>
+                  {active && <NavPill />}
+                  <span className="relative z-10 flex items-center gap-1">
+                    {link.label}
+                    <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                      <path d="M3 4.5L6 7.5L9 4.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                  </span>
                 </Link>
                 <AnimatePresence>
                   {openDropdown === link.label && (
@@ -96,22 +129,12 @@ export default function Navbar() {
                 </AnimatePresence>
               </div>
             ) : (
-              <Link
-                key={link.label}
-                href={link.href}
-                className={`type-nav transition-colors relative ${
-                  (link.href === "/" ? pathname === "/" : pathname.startsWith(link.href))
-                    ? "text-[var(--primary)] font-semibold"
-                    : "text-[var(--text-muted)] hover:text-[var(--text)]"
-                }`}
-              >
-                {link.label}
-                {(link.href === "/" ? pathname === "/" : pathname.startsWith(link.href)) && (
-                  <span className="absolute -bottom-1 left-0 right-0 h-[2px] rounded-full bg-[var(--primary)]" />
-                )}
+              <Link key={link.label} href={link.href} className={linkClass}>
+                {active && <NavPill />}
+                <span className="relative z-10">{link.label}</span>
               </Link>
-            )
-          )}
+            );
+          })}
         </div>
 
         {/* Right side */}

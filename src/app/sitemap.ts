@@ -19,12 +19,12 @@ const BLOG_SLUGS = [
   "revenue-leakage-in-healthcare",
   "ai-vs-traditional-hims",
   "how-ai-reduces-doctor-burnout",
-  "ai-powered-patient-followup",
-  "digital-transformation-healthcare",
+  "ai-powered-patient-follow-up",
+  "digital-transformation-in-healthcare",
   "hospital-efficiency-metrics",
   "voice-ai-for-doctors",
   "ai-in-revenue-cycle-management",
-  "reducing-waiting-time-automation",
+  "reducing-waiting-time-through-automation",
   "intelligent-hospital-operations",
   "ai-for-multi-hospital-chains",
   "hospital-analytics-explained",
@@ -33,7 +33,7 @@ const BLOG_SLUGS = [
   "ai-agents-in-healthcare",
   "building-smart-hospitals",
   "healthcare-automation-trends",
-  "autonomous-hospitals-next-decade",
+  "autonomous-hospitals-the-next-decade",
 ];
 
 const CUSTOMER_SLUGS = [

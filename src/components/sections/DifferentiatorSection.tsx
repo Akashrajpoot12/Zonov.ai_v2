@@ -1,5 +1,15 @@
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
+import { Bot, Zap, Lock, Check, X } from "lucide-react";
+
+const IndiaFlag = () => (
+  <svg viewBox="0 0 36 24" width="20" height="14" className="inline-block rounded-[1px] align-middle" aria-hidden="true">
+    <rect width="36" height="8" y="0" fill="#FF9933" />
+    <rect width="36" height="8" y="8" fill="#fff" />
+    <rect width="36" height="8" y="16" fill="#138808" />
+    <circle cx="18" cy="12" r="3" fill="none" stroke="#000080" strokeWidth="0.6" />
+  </svg>
+);
 
 const COMPARISON = [
   { label: "Data Storage", hims: true, zonov: true },
@@ -11,24 +21,24 @@ const COMPARISON = [
   { label: "Works Like Digital Employees", hims: false, zonov: true },
 ];
 
-const WHY_DIFFERENT = [
+const WHY_DIFFERENT: { icon: React.ReactNode; title: string; desc: string }[] = [
   {
-    icon: "🤖",
+    icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
     title: "AI Employees, Not Just Software",
     desc: "Traditional HIMS stores information. Zonov.ai agents perform work — automatically, intelligently, continuously.",
   },
   {
-    icon: "⚡",
+    icon: <Zap className="w-5 h-5" strokeWidth={1.5} />,
     title: "Deploy in 1–2 Weeks",
     desc: "No 18-month IT projects. Our agents integrate with your existing systems and go live fast.",
   },
   {
-    icon: "🇮🇳",
+    icon: <IndiaFlag />,
     title: "Built for Indian Healthcare",
     desc: "Aadhaar integration, multilingual support, ABHA, insurance workflows — designed from day one for India.",
   },
   {
-    icon: "🔒",
+    icon: <Lock className="w-5 h-5" strokeWidth={1.5} />,
     title: "HIPAA & DPDP Compliant",
     desc: "Patient data is protected with enterprise-grade security and full compliance with Indian data protection laws.",
   },
@@ -77,13 +87,13 @@ export default function DifferentiatorSection() {
                     <span className="text-[13px] text-white/70">{row.label}</span>
                     <div className="flex justify-center">
                       {row.hims ? (
-                        <span className="text-white/40">✓</span>
+                        <Check className="w-4 h-4 text-white/40" strokeWidth={2} />
                       ) : (
-                        <span className="text-red-400/60">✗</span>
+                        <X className="w-4 h-4 text-red-400/60" strokeWidth={2} />
                       )}
                     </div>
                     <div className="flex justify-center">
-                      <span className="text-[var(--secondary)]">✓</span>
+                      <Check className="w-4 h-4 text-[var(--secondary)]" strokeWidth={2} />
                     </div>
                   </div>
                 ))}
@@ -97,7 +107,7 @@ export default function DifferentiatorSection() {
               {WHY_DIFFERENT.map((item) => (
                 <FadeInItem key={item.title}>
                   <div className="card-dark rounded-[16px] p-5 flex gap-4 items-start hover:bg-white/10 transition-colors">
-                    <div className="w-10 h-10 rounded-[10px] bg-white/8 flex items-center justify-center text-xl flex-shrink-0">
+                    <div className="w-10 h-10 rounded-[10px] bg-white/8 flex items-center justify-center text-white flex-shrink-0">
                       {item.icon}
                     </div>
                     <div>
@@ -111,15 +121,7 @@ export default function DifferentiatorSection() {
               ))}
             </FadeInStagger>
 
-            {/* Big quote */}
-            <FadeIn delay={0.2}>
-              <div className="mt-6 p-6 rounded-[20px] border border-[var(--secondary)]/30 bg-[var(--secondary)]/5">
-                <p className="text-[22px] text-white leading-tight mb-3 italic" style={{ fontFamily: "var(--font-playfair)" }}>
-                  &ldquo;We are building the AI Operating System for every hospital in the world.&rdquo;
-                </p>
-                <p className="type-mono text-[var(--secondary)]">Zonov.ai Vision</p>
-              </div>
-            </FadeIn>
+
           </div>
         </div>
       </div>

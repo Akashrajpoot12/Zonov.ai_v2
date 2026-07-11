@@ -45,17 +45,16 @@
   text-align: left;
 }
 
-/* Active layer "opens" — flattens, comes forward, shows its content */
+/* Active layer "opens" — flattens fully to face the viewer (no rotate/scale,
+   so the text rasterizes crisply instead of blurring) and pulls far enough
+   forward in Z to clear the tilted stack behind it (avoids card overlap) */
 .layerActive {
   transform:
     translate(-50%, -50%)
-    translate3d(150px, 0, 200px)
-    rotateX(2deg)
-    rotateZ(0deg)
-    scale(1.06) !important;
+    translate3d(150px, 0, 240px) !important;
   z-index: 6;
   border-color: rgba(167, 139, 250, 0.7);
-  background: linear-gradient(150deg, #20264f 0%, #161a3a 100%);
+  background: linear-gradient(150deg, #232a5c 0%, #171c3e 100%);
   -webkit-backdrop-filter: none;
   backdrop-filter: none;
   box-shadow:
@@ -80,14 +79,17 @@
 .content {
   position: absolute;
   inset: 0;
-  padding: 22px 24px;
+  padding: 24px 26px;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  gap: 8px;
+  gap: 9px;
   opacity: 0;
   transition: opacity 0.4s ease 0.15s;
   pointer-events: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
 }
 .contentOn { opacity: 1; }
 
@@ -99,14 +101,16 @@
 }
 .contentTitle {
   font-family: var(--font-display, Georgia, serif);
-  font-size: 22px;
-  line-height: 1.15;
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.2;
   color: #ffffff;
+  letter-spacing: -0.01em;
 }
 .contentDesc {
-  font-size: 13px;
-  line-height: 1.55;
-  color: rgba(255, 255, 255, 0.85);
+  font-size: 14px;
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.92);
 }
 
 @keyframes layer-in {

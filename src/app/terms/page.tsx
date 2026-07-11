@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
@@ -10,7 +9,6 @@ export const metadata: Metadata = {
 export default function TermsPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
 
         <div className="bg-[var(--bg)] pt-40 pb-12">
