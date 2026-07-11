@@ -15,7 +15,7 @@ export default function CTASection() {
             <div className="relative z-10">
               <p className="type-mono text-white/40 mb-5">Get Started Today</p>
               <h2
-                className="text-[clamp(28px,4vw,52px)] leading-tight tracking-tight mb-6 [text-wrap:balance] text-white"
+                className="text-[clamp(28px,4vw,52px)] leading-tight tracking-tight mb-6 [text-wrap:balance] text-white google-sans-700"
                 style={{ fontFamily: "var(--font-playfair)" }}
               >
                 Give your hospital an{" "}

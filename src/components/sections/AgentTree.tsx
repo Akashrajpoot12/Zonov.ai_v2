@@ -1,6 +1,18 @@
 "use client";
 import Link from "next/link";
 import { motion } from "framer-motion";
+import {
+  IdCard,
+  Stethoscope,
+  Microscope,
+  ReceiptText,
+  Wallet,
+  Syringe,
+  BedDouble,
+  Pill,
+  Brain,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 /* ── Coordinate space (matches SVG viewBox) ── */
 const VW = 1200;
@@ -14,21 +26,21 @@ type Agent = {
   slug: string;
   name: string;
   short: string;
-  icon: string;
+  icon: LucideIcon;
   outcome: string;
   color: string;
 };
 
 /* Ordered clockwise from top */
 const AGENTS: Agent[] = [
-  { slug: "patient-registration", name: "Registration Agent", short: "Registration", icon: "🪪", outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
-  { slug: "doctor-prescription", name: "Doctor Prescription Agent", short: "Prescription", icon: "🩺", outcome: "~2 hrs back / doctor", color: "#00B4AE" },
-  { slug: "investigation", name: "Investigation Agent", short: "Investigation", icon: "🔬", outcome: "Up to 40% faster results", color: "#7C3AED" },
-  { slug: "claim", name: "Claim Agent", short: "Claims", icon: "📋", outcome: "Up to 20% fewer rejections", color: "#7C3AED" },
-  { slug: "finance", name: "Finance Agent", short: "Finance", icon: "💰", outcome: "Up to 20% leakage recovered", color: "#1B4FD8" },
-  { slug: "ot", name: "OT Agent", short: "OT", icon: "🏥", outcome: "Up to 30% fewer delays", color: "#0D1F3C" },
-  { slug: "ipd", name: "IPD Agent", short: "IPD", icon: "🛏️", outcome: "Complete handovers", color: "#D97706" },
-  { slug: "pharmacy", name: "Pharmacy Agent", short: "Pharmacy", icon: "💊", outcome: "Near-zero wastage", color: "#059669" },
+  { slug: "patient-registration", name: "Registration Agent", short: "Registration", icon: IdCard, outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
+  { slug: "doctor-prescription", name: "Doctor Prescription Agent", short: "Prescription", icon: Stethoscope, outcome: "~2 hrs back / doctor", color: "#00B4AE" },
+  { slug: "investigation", name: "Investigation Agent", short: "Investigation", icon: Microscope, outcome: "Up to 40% faster results", color: "#7C3AED" },
+  { slug: "claim", name: "Claim Agent", short: "Claims", icon: ReceiptText, outcome: "Up to 20% fewer rejections", color: "#7C3AED" },
+  { slug: "finance", name: "Finance Agent", short: "Finance", icon: Wallet, outcome: "Up to 20% leakage recovered", color: "#1B4FD8" },
+  { slug: "ot", name: "OT Agent", short: "OT", icon: Syringe, outcome: "Up to 30% fewer delays", color: "#0D1F3C" },
+  { slug: "ipd", name: "IPD Agent", short: "IPD", icon: BedDouble, outcome: "Complete handovers", color: "#D97706" },
+  { slug: "pharmacy", name: "Pharmacy Agent", short: "Pharmacy", icon: Pill, outcome: "Near-zero wastage", color: "#059669" },
 ];
 
 const N = AGENTS.length;
@@ -124,7 +136,7 @@ export default function AgentTree() {
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="gradient-primary relative w-[150px] h-[150px] rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-[#1B4FD8]/40"
             >
-              <span className="text-3xl mb-1">🧠</span>
+              <Brain className="w-7 h-7 text-white mb-1" strokeWidth={1.5} />
               <span className="text-white text-[15px] font-semibold tracking-tight leading-none" style={{ fontFamily: "var(--font-playfair)" }}>
                 Zonov.ai
               </span>
@@ -156,10 +168,10 @@ export default function AgentTree() {
                       style={{ background: a.color }}
                     />
                     <span
-                      className="relative w-16 h-16 rounded-full flex items-center justify-center text-2xl bg-white border-2 transition-all duration-300 group-hover:scale-110"
+                      className="relative w-16 h-16 rounded-full flex items-center justify-center bg-white border-2 transition-all duration-300 group-hover:scale-110"
                       style={{ borderColor: `${a.color}40`, boxShadow: `0 6px 20px ${a.color}22` }}
                     >
-                      {a.icon}
+                      <a.icon className="w-7 h-7" strokeWidth={1.5} style={{ color: a.color }} />
                     </span>
                   </span>
                   {/* label */}
@@ -202,8 +214,8 @@ export default function AgentTree() {
                 href={`/agents/${a.slug}`}
                 className="group flex items-center gap-3 bg-white border border-[var(--border)] rounded-[16px] p-3 hover:shadow-md transition-all"
               >
-                <span className="w-10 h-10 rounded-[12px] flex items-center justify-center text-xl flex-shrink-0" style={{ background: `${a.color}18` }}>
-                  {a.icon}
+                <span className="w-10 h-10 rounded-[12px] flex items-center justify-center flex-shrink-0" style={{ background: `${a.color}18` }}>
+                  <a.icon className="w-5 h-5" strokeWidth={1.5} style={{ color: a.color }} />
                 </span>
                 <span className="flex flex-col flex-1">
                   <span className="text-[14px] font-semibold text-[var(--text)] leading-tight">{a.name}</span>

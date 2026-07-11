@@ -1,5 +1,6 @@
 import FadeIn from "@/components/ui/FadeIn";
 import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
 export default function PlatformHero() {
   return (
@@ -27,8 +28,8 @@ export default function PlatformHero() {
         <FadeIn delay={0.15}>
           <div className="flex gap-4 flex-wrap">
             <Link href="/book-demo" className="btn btn-primary-lg">Book a Demo</Link>
-            <Link href="#steps" className="btn btn-glass" style={{ height: "50px", padding: "0 24px", fontSize: "16px", borderRadius: "var(--radius-md)" }}>
-              See How It Works ↓
+            <Link href="#steps" className="btn btn-glass inline-flex items-center gap-2" style={{ height: "50px", padding: "0 24px", fontSize: "16px", borderRadius: "var(--radius-md)" }}>
+              See How It Works <ChevronDown className="w-4 h-4" strokeWidth={2} />
             </Link>
           </div>
         </FadeIn>

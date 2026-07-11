@@ -1,14 +1,16 @@
 import FadeIn from "@/components/ui/FadeIn";
+import { Building2, TestTube, Stethoscope, CreditCard, Pill, Smartphone, Landmark, Link2 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
-const SYSTEMS = [
-  { name: "HIS / EMR", examples: "Meditech, Allscripts, Cerner, Epic", icon: "🏥" },
-  { name: "LIS", examples: "Sunquest, Cerner PathNet, SCC Lab", icon: "🧪" },
-  { name: "RIS / PACS", examples: "GE Healthcare, Philips, Fujifilm", icon: "🩺" },
-  { name: "Billing & Insurance", examples: "Kareo, NexGen, custom TPA portals", icon: "💳" },
-  { name: "Pharmacy", examples: "Rx30, QS/1, Medispan", icon: "💊" },
-  { name: "Patient Apps", examples: "WhatsApp, iOS, Android, web", icon: "📱" },
-  { name: "Government / NHA", examples: "ABHA, Ayushman Bharat, NDHM", icon: "🏛️" },
-  { name: "Custom Systems", examples: "Any REST API or HL7 FHIR endpoint", icon: "🔗" },
+const SYSTEMS: { name: string; examples: string; icon: LucideIcon }[] = [
+  { name: "HIS / EMR", examples: "Meditech, Allscripts, Cerner, Epic", icon: Building2 },
+  { name: "LIS", examples: "Sunquest, Cerner PathNet, SCC Lab", icon: TestTube },
+  { name: "RIS / PACS", examples: "GE Healthcare, Philips, Fujifilm", icon: Stethoscope },
+  { name: "Billing & Insurance", examples: "Kareo, NexGen, custom TPA portals", icon: CreditCard },
+  { name: "Pharmacy", examples: "Rx30, QS/1, Medispan", icon: Pill },
+  { name: "Patient Apps", examples: "WhatsApp, iOS, Android, web", icon: Smartphone },
+  { name: "Government / NHA", examples: "ABHA, Ayushman Bharat, NDHM", icon: Landmark },
+  { name: "Custom Systems", examples: "Any REST API or HL7 FHIR endpoint", icon: Link2 },
 ];
 
 const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "ABDM", "OAuth 2.0", "SNOMED CT", "ICD-10"];
@@ -16,9 +18,10 @@ const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "ABDM", "OAut
 type System = (typeof SYSTEMS)[number];
 
 function IntegrationCard({ sys }: { sys: System }) {
+  const Icon = sys.icon;
   return (
     <div className="w-[230px] flex-shrink-0 bg-white rounded-[16px] border border-[var(--border)] p-5 hover:border-[var(--primary)]/40 hover:shadow-md transition-all">
-      <div className="text-2xl mb-3">{sys.icon}</div>
+      <div className="mb-3 text-[var(--primary)]"><Icon className="w-6 h-6" strokeWidth={1.5} /></div>
       <p className="text-[14px] font-semibold text-[var(--text)] mb-1">{sys.name}</p>
       <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">{sys.examples}</p>
     </div>
@@ -38,7 +41,7 @@ export default function PlatformIntegrations() {
             <span className="w-6 h-px bg-[var(--primary)]" />
             Integrations
           </p>
-          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4">
+          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4 google-sans-700">
             Works with everything{" "}
             <span className="italic gradient-text">your hospital already uses.</span>
           </h2>

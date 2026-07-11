@@ -1,8 +1,10 @@
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import type { LucideIcon } from "lucide-react";
+import { UserRound, Stethoscope, Building2, Landmark } from "lucide-react";
 
-const STAKEHOLDERS = [
+const STAKEHOLDERS: { icon: LucideIcon; title: string; color: string; values: string[] }[] = [
   {
-    icon: "🧑‍⚕️",
+    icon: UserRound,
     title: "For Patients",
     color: "var(--primary)",
     values: [
@@ -13,7 +15,7 @@ const STAKEHOLDERS = [
     ],
   },
   {
-    icon: "👨‍⚕️",
+    icon: Stethoscope,
     title: "For Doctors",
     color: "var(--secondary)",
     values: [
@@ -24,7 +26,7 @@ const STAKEHOLDERS = [
     ],
   },
   {
-    icon: "🏥",
+    icon: Building2,
     title: "For Hospitals",
     color: "var(--purple)",
     values: [
@@ -35,7 +37,7 @@ const STAKEHOLDERS = [
     ],
   },
   {
-    icon: "🏛️",
+    icon: Landmark,
     title: "For Governments",
     color: "#F59E0B",
     values: [
@@ -58,7 +60,7 @@ export default function ValueSection() {
           </p>
         </FadeIn>
         <FadeIn delay={0.05}>
-          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4">
+          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4 google-sans-700">
             Better outcomes for{" "}
             <span className="italic gradient-text">everyone in healthcare.</span>
           </h2>
@@ -70,16 +72,18 @@ export default function ValueSection() {
         </FadeIn>
 
         <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.08}>
-          {STAKEHOLDERS.map((s) => (
+          {STAKEHOLDERS.map((s) => {
+            const Icon = s.icon;
+            return (
             <FadeInItem key={s.title}>
               <div className="group glass-card gradient-border flex flex-col h-full p-6 hover:shadow-lg transition-all duration-300"
                 style={{ "--hover-color": s.color } as React.CSSProperties}
               >
                 <div
-                  className="w-12 h-12 rounded-[14px] flex items-center justify-center text-2xl mb-5 transition-transform group-hover:scale-110"
-                  style={{ background: `${s.color}15` }}
+                  className="w-12 h-12 rounded-[14px] flex items-center justify-center mb-5 transition-transform group-hover:scale-110"
+                  style={{ background: `${s.color}15`, color: s.color }}
                 >
-                  {s.icon}
+                  <Icon className="w-6 h-6" strokeWidth={1.5} />
                 </div>
                 <h3
                   className="text-[15px] font-semibold mb-4 tracking-tight"
@@ -100,7 +104,8 @@ export default function ValueSection() {
                 </ul>
               </div>
             </FadeInItem>
-          ))}
+            );
+          })}
         </FadeInStagger>
 
         {/* Mission statement */}

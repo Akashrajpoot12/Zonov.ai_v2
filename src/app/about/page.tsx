@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import CountUp from "@/components/ui/CountUp";
@@ -58,7 +57,6 @@ const faqs = [
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow">
 
         <section className="bg-[var(--dark-navy)] section-py">

@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import NewsletterForm from "@/components/ui/NewsletterForm";
@@ -82,7 +81,6 @@ const filters = ["All", "Implementation", "Clinical AI", "Compliance", "ROI"];
 export default function GuidesPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
         <section style={{ backgroundColor: "var(--bg)" }} className="pt-32 pb-10">
           <div className="container-wide">

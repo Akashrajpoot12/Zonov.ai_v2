@@ -65,6 +65,14 @@ function renderMarkdown(text: string) {
 
 function inlineMd(text: string): string {
   return text
+    // Markdown links [label](url) — allow internal paths, http(s), and mailto only
+    .replace(
+      /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|mailto:[^\s)]+)\)/g,
+      (_m, label, url) => {
+        const ext = /^https?:/.test(url);
+        return `<a href="${url}"${ext ? ' target="_blank" rel="noopener noreferrer"' : ""} style="color:var(--primary);text-decoration:underline;font-weight:500">${label}</a>`;
+      }
+    )
     .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
     .replace(/\*(.+?)\*/g, '<em>$1</em>')
     .replace(/`(.+?)`/g, '<code style="background:rgba(27,79,216,0.1);padding:1px 5px;border-radius:4px;font-size:12px">$1</code>');
@@ -77,8 +85,15 @@ type Message = {
 
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
-  content: "Hi! I'm Zara, Zonov.ai's assistant 👋 I can help you learn about our 8 AI agents, implementation, pricing, or anything else. What would you like to know?",
+  content: "Hi! I'm the Zonov.ai assistant <svg width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" style=\"display:inline-block;vertical-align:-3px;margin:0 1px\" aria-hidden=\"true\"><path d=\"M18 11V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2\"/><path d=\"M14 10V4a2 2 0 0 0-2-2a2 2 0 0 0-2 2v2\"/><path d=\"M10 10.5V6a2 2 0 0 0-2-2a2 2 0 0 0-2 2v8\"/><path d=\"M18 8a2 2 0 1 1 4 0v6a8 8 0 0 1-8 8h-2c-2.8 0-4.5-.86-5.99-2.34l-3.6-3.6a2 2 0 0 1 2.83-2.82L7 15\"/></svg> I can help you learn about our 8 AI agents, implementation, pricing, or anything else. What would you like to know?",
 };
+
+const QUICK_REPLIES = [
+  "What can your AI agents do?",
+  "How long does setup take?",
+  "Pricing",
+  "Book a demo",
+];
 
 export default function ChatBot() {
   const [open, setOpen] = useState(false);
@@ -95,8 +110,8 @@ export default function ChatBot() {
     }
   }, [open, messages]);
 
-  async function sendMessage() {
-    const text = input.trim();
+  async function sendMessage(preset?: string) {
+    const text = (typeof preset === "string" ? preset : input).trim();
     if (!text || loading) return;
     const userMsg: Message = { role: "user", content: text };
     const updated = [...messages, userMsg];
@@ -136,22 +151,31 @@ export default function ChatBot() {
             style={{ border: "1px solid var(--border)" }}
           >
             {/* Header */}
-            <div className="flex items-center gap-3 px-4 py-3.5" style={{ background: "var(--dark-navy)" }}>
-              <div className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0" style={{ background: "var(--primary)" }}>
+            <div
+              className="flex items-center gap-3 px-4 py-3.5"
+              style={{ background: "linear-gradient(120deg, var(--dark-navy) 0%, #14275a 100%)" }}
+            >
+              <div
+                className="w-9 h-9 rounded-full flex items-center justify-center text-sm font-bold text-white flex-shrink-0 shadow-lg shadow-black/20"
+                style={{ background: "linear-gradient(135deg, #1B4FD8, #7C3AED, #00B4AE)" }}
+              >
                 Z
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-[13px] font-semibold text-white leading-tight">Zara</p>
-                <p className="text-[11px] text-white/50 leading-tight">Zonov.ai Assistant</p>
+                <p className="text-[13px] font-semibold text-white leading-tight">Zonov.ai</p>
+                <p className="text-[11px] text-white/50 leading-tight">AI Assistant</p>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2 h-2 rounded-full bg-green-400" />
+                <span className="relative flex w-2 h-2">
+                  <span className="absolute inline-flex w-full h-full rounded-full bg-green-400 opacity-75 animate-ping" />
+                  <span className="relative inline-flex w-2 h-2 rounded-full bg-green-400" />
+                </span>
                 <span className="text-[11px] text-white/50">Online</span>
               </div>
             </div>
 
             {/* Messages */}
-            <div className="flex-1 overflow-y-auto px-4 py-4 flex flex-col gap-3" style={{ background: "#F8FAFF", maxHeight: "360px" }}>
+            <div data-lenis-prevent className="flex-1 overflow-y-auto overscroll-contain px-4 py-4 flex flex-col gap-3" style={{ background: "#F8FAFF", maxHeight: "360px" }}>
               {messages.map((msg, i) => (
                 <div key={i} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
                   <div
@@ -169,6 +193,22 @@ export default function ChatBot() {
                   </div>
                 </div>
               ))}
+              {/* Quick-reply suggestions — shown only on the opening message */}
+              {messages.length === 1 && !loading && (
+                <div className="flex flex-wrap gap-2 pt-0.5">
+                  {QUICK_REPLIES.map((q) => (
+                    <button
+                      key={q}
+                      type="button"
+                      onClick={() => sendMessage(q)}
+                      className="text-[12px] px-3 py-1.5 rounded-full border transition-colors"
+                      style={{ borderColor: "var(--primary)", color: "var(--primary)", background: "rgba(27,79,216,0.06)" }}
+                    >
+                      {q}
+                    </button>
+                  ))}
+                </div>
+              )}
               {loading && (
                 <div className="flex justify-start">
                   <div className="rounded-[14px] px-4 py-3 flex gap-1 items-center" style={{ background: "#fff", border: "1px solid var(--border)", borderBottomLeftRadius: "4px" }}>
@@ -195,13 +235,15 @@ export default function ChatBot() {
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKey}
                 placeholder="Ask about our AI agents..."
+                aria-label="Ask the Zonov.ai assistant"
                 className="flex-1 text-[13px] outline-none bg-transparent"
                 style={{ color: "var(--text)" }}
               />
               <button
                 type="button"
-                onClick={sendMessage}
+                onClick={() => sendMessage()}
                 disabled={!input.trim() || loading}
+                aria-label="Send message"
                 className="w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 transition-all"
                 style={{
                   background: input.trim() && !loading ? "var(--primary)" : "var(--border)",
@@ -224,10 +266,16 @@ export default function ChatBot() {
         onClick={() => setOpen((v) => !v)}
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
-        className="w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-black/20 transition-all"
+        className="relative w-14 h-14 rounded-full flex items-center justify-center shadow-lg shadow-black/20 transition-all"
         style={{ background: open ? "var(--dark-navy)" : "var(--primary)", color: "#fff" }}
-        aria-label="Open chat"
+        aria-label={open ? "Close chat" : "Chat with the Zonov.ai assistant"}
       >
+        {!open && (
+          <span
+            className="absolute inset-0 rounded-full animate-ping opacity-40 pointer-events-none"
+            style={{ background: "var(--primary)", animationDuration: "2.2s" }}
+          />
+        )}
         <AnimatePresence mode="wait">
           {open ? (
             <motion.svg key="close" initial={{ rotate: -90, opacity: 0 }} animate={{ rotate: 0, opacity: 1 }} exit={{ rotate: 90, opacity: 0 }} transition={{ duration: 0.15 }} width="20" height="20" viewBox="0 0 24 24" fill="none">

@@ -91,7 +91,7 @@ export default function TestimonialsSection() {
 
         {/* Headline */}
         <motion.h2
-          className={`type-h1 ${s.headline}`}
+          className={`type-h1 ${s.headline} google-sans-700`}
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}

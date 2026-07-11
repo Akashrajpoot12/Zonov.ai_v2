@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import UseCasesFilter from "./UseCasesFilter";
@@ -13,7 +12,6 @@ export const metadata: Metadata = {
 export default function UseCasesPage() {
   return (
     <div className="relative min-h-screen flex flex-col">
-      <Navbar />
       <main className="flex-grow">
         <section className="bg-[var(--dark-navy)] section-py">
           <div className="container-wide px-edge text-center">

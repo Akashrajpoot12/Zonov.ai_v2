@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import Navbar from "@/components/layout/Navbar";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
+import { ChevronDown } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Careers — Zonov.ai",
@@ -55,7 +55,6 @@ const jobs = [
 export default function CareersPage() {
   return (
     <div className="flex flex-col min-h-screen">
-      <Navbar />
       <main className="flex-grow">
 
         <section className="bg-[var(--dark-navy)] noise relative pt-44 pb-28 text-center">
@@ -70,7 +69,7 @@ export default function CareersPage() {
               <p className="type-body-lg text-white/60 max-w-xl mx-auto mt-6">
                 We&apos;re building the AI layer that runs India&apos;s hospitals. Small team, large surface area, and problems nobody has solved before.
               </p>
-              <p className="type-caption text-white/20 mt-10">6 open positions below ↓</p>
+              <p className="type-caption text-white/20 mt-10 flex items-center justify-center gap-1.5">6 open positions below <ChevronDown className="w-4 h-4" strokeWidth={2} /></p>
             </FadeIn>
           </div>
         </section>
