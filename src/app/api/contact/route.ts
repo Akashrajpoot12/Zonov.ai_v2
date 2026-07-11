@@ -1,19 +1,29 @@
 import { NextRequest, NextResponse } from "next/server";
+import { rateLimit, clientIp, escapeHtml, isValidEmail, clampStr } from "@/lib/security";
 
 export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json();
-    const { name, email, phone, hospital, hospitalName, city, beds, hospitalSize, role, message, useCase, preferredTime, agents, type } = body;
+    // Per-IP rate limit — this endpoint sends an email per request.
+    const limit = rateLimit(`contact:${clientIp(req)}`, 5, 60_000);
+    if (!limit.ok) {
+      return NextResponse.json(
+        { error: "Too many requests. Please try again shortly." },
+        { status: 429, headers: { "Retry-After": String(limit.retryAfter) } }
+      );
+    }
 
-    const recipientName = name || "";
-    const recipientEmail = email || "";
-    const hospitalDisplay = hospital || hospitalName || "";
+    const body = await req.json();
+    const { phone, hospital, hospitalName, city, beds, hospitalSize, role, message, useCase, preferredTime, agents, type } = body;
+
+    const recipientName = clampStr(body.name, 120);
+    const recipientEmail = clampStr(body.email, 254);
+    const hospitalDisplay = clampStr(hospital || hospitalName, 160);
     const formType = type === "book-demo" ? "Book a Demo Request" : "Contact Form";
 
-    if (!recipientEmail || !recipientName) {
-      return NextResponse.json({ error: "Name and email required" }, { status: 400 });
+    if (!recipientName || !isValidEmail(recipientEmail)) {
+      return NextResponse.json({ error: "A valid name and email are required" }, { status: 400 });
     }
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -43,12 +53,12 @@ export async function POST(req: NextRequest) {
           ].map(([label, value]) => `
             <tr>
               <td style="padding: 8px 0; font-size: 13px; color: #6B7280; width: 140px; vertical-align: top;">${label}</td>
-              <td style="padding: 8px 0; font-size: 14px; color: #111827; vertical-align: top;">${value}</td>
+              <td style="padding: 8px 0; font-size: 14px; color: #111827; vertical-align: top;">${escapeHtml(value)}</td>
             </tr>
           `).join("")}
         </table>
         <div style="margin-top: 32px; padding: 16px; background: #EBF0FF; border-radius: 8px;">
-          <p style="margin: 0; font-size: 13px; color: #1B4FD8;">Reply to: <a href="mailto:${recipientEmail}" style="color: #1B4FD8;">${recipientEmail}</a></p>
+          <p style="margin: 0; font-size: 13px; color: #1B4FD8;">Reply to: <a href="mailto:${escapeHtml(recipientEmail)}" style="color: #1B4FD8;">${escapeHtml(recipientEmail)}</a></p>
         </div>
       </div>
     `;
