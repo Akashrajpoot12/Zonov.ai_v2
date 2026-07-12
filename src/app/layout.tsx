@@ -5,6 +5,7 @@ import ChatBot from "@/components/ui/ChatBot";
 import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
+import DisableContextMenu from "@/components/ui/DisableContextMenu";
 
 // Self-hosted Nunito Sans (variable font — full weight range + italics).
 // Exposed as --font-nunito; globals.css aliases the legacy font variables
@@ -70,6 +71,7 @@ export default function RootLayout({
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-bg text-text antialiased">
         <SmoothScroll />
         <ScrollProgress />
+        <DisableContextMenu />
         <Navbar />
         {children}
         <ChatBot />

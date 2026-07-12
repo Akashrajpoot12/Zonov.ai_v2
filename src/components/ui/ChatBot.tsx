@@ -156,7 +156,7 @@ export default function ChatBot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.95 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="w-[360px] max-h-[520px] flex flex-col rounded-[20px] overflow-hidden shadow-2xl shadow-black/20"
+            className="w-[calc(100vw-3rem)] sm:w-[360px] max-h-[520px] flex flex-col rounded-[20px] overflow-hidden shadow-2xl shadow-black/20"
             style={{ border: "1px solid var(--border)" }}
           >
             {/* Header */}

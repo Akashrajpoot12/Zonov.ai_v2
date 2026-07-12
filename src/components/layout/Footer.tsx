@@ -116,6 +116,7 @@ export default function Footer() {
             borderRadius: "20px",
             border: "1px solid rgba(255,255,255,0.08)",
             transform: "perspective(800px) rotateY(-18deg) rotateX(8deg)",
+            WebkitBackdropFilter: "blur(2px)",
             backdropFilter: "blur(2px)",
           }} />
           {/* Panel 2 — medium, overlapping */}
