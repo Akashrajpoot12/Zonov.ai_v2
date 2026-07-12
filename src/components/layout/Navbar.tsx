@@ -32,8 +32,9 @@ function NavPill() {
       aria-hidden
       className="absolute inset-0 rounded-full"
       style={{
-        background: "color-mix(in srgb, var(--primary) 10%, transparent)",
-        border: "1px solid color-mix(in srgb, var(--primary) 22%, transparent)",
+        // rgba (not color-mix) for full browser support — brand primary #1B4FD8
+        background: "rgba(27, 79, 216, 0.1)",
+        border: "1px solid rgba(27, 79, 216, 0.22)",
       }}
       transition={{ type: "spring", stiffness: 380, damping: 32 }}
     />

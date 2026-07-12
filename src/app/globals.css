@@ -88,8 +88,10 @@
 *, *::before, *::after { box-sizing: border-box; }
 
 /* No CSS smooth-scroll — Lenis handles smooth scrolling (avoids scroll conflict/jank) */
-html { overflow-x: clip; }
-body { overflow-x: clip; }
+/* `hidden` is the fallback for Safari <=15 (which ignores `clip`); modern
+   browsers use the later `clip` (no sticky/positioning side-effects). */
+html { overflow-x: hidden; overflow-x: clip; }
+body { overflow-x: hidden; overflow-x: clip; }
 
 body {
   background: var(--bg);
