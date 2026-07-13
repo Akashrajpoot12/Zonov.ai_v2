@@ -141,9 +141,12 @@ export default function Navbar() {
         </div>
 
         {/* Right side */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2">
           <Link href="/book-demo" className="hidden lg:inline-flex items-center justify-center bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white text-[13px] font-medium transition-colors rounded-full px-5 h-[36px]">
             Book a Demo
+          </Link>
+          <Link href="https://app.zonov.ai/login" className="hidden lg:inline-flex items-center justify-center bg-[var(--primary)] hover:bg-[var(--primary-dark)] text-white text-[13px] font-medium transition-colors rounded-full px-5 h-[36px]">
+            Login
           </Link>
           {/* Mobile menu button */}
           <button
@@ -201,13 +204,20 @@ export default function Navbar() {
                   )}
                 </div>
               ))}
-              <div className="pt-3 border-t border-[var(--border)] mt-2">
+              <div className="pt-3 border-t border-[var(--border)] mt-2 flex flex-col gap-2">
                 <Link
                   href="/book-demo"
                   onClick={() => setMobileOpen(false)}
                   className="btn btn-primary w-full justify-center"
                 >
                   Book a Demo
+                </Link>
+                <Link
+                  href="https://app.zonov.ai/login"
+                  onClick={() => setMobileOpen(false)}
+                  className="btn btn-primary w-full justify-center"
+                >
+                  Login
                 </Link>
               </div>
             </div>
