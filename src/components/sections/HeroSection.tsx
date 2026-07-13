@@ -8,7 +8,7 @@ import CountUp from "@/components/ui/CountUp";
 const STATS = [
   { value: 8, suffix: "", label: "AI Agents", animate: true },
   { value: null, display: "1–2", suffix: " wks", label: "Weeks to Deploy", animate: false },
-  { value: 40, suffix: "%", label: "Less Paperwork", animate: true },
+  { value: 90, suffix: "%", label: "Less Paperwork", animate: true },
   { value: 100, suffix: "%", label: "HIPAA Compliant", animate: true },
 ];
 
@@ -58,24 +58,11 @@ export default function HeroSection() {
             </motion.h1>
 
             <motion.div
-              className="relative pl-6 flex flex-col gap-8 items-start"
+              className="flex flex-col gap-8 items-start"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1], delay: 0.25 }}
             >
-              {/* Left accent line */}
-              <motion.div
-                className="absolute left-0 top-0 h-full w-px bg-[var(--border-strong)] origin-top"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }}
-              />
-              <motion.div
-                className="absolute left-0 top-0 w-[5px] h-6 bg-[var(--primary)] rounded-sm -translate-x-1/2"
-                initial={{ scaleY: 0 }}
-                animate={{ scaleY: 1 }}
-                transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
-              />
               <p className="type-subtitle text-[var(--text-muted)] max-w-[440px] [text-wrap:pretty] google-sans-400">
                 Zonov.ai automates every hospital workflow, from patient registration to final billing, using specialized AI agents, so healthcare professionals can focus on saving lives.
               </p>
