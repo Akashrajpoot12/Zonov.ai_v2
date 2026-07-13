@@ -77,7 +77,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0.5 }}
               />
               <p className="type-subtitle text-[var(--text-muted)] max-w-[440px] [text-wrap:pretty] google-sans-400">
-                Zonov.ai automates every hospital workflow — from patient registration to final billing — using specialized AI agents, so healthcare professionals can focus on saving lives.
+                Zonov.ai automates every hospital workflow, from patient registration to final billing, using specialized AI agents, so healthcare professionals can focus on saving lives.
               </p>
               <div className="flex gap-3 flex-wrap">
                 <Link href="/book-demo" className="btn btn-primary-lg">

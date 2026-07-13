@@ -12,10 +12,10 @@ export default function SmoothScroll() {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
-      lerp: 0.2, // higher = snappier, reaches target faster (less "floaty" lag)
+      lerp: 0.32, // higher = snappier, reaches target faster (less "floaty" lag)
       smoothWheel: true,
-      wheelMultiplier: 1.6, // each wheel notch travels more distance = feels fast
-      touchMultiplier: 2,
+      wheelMultiplier: 2.3, // each wheel notch travels more distance = feels fast
+      touchMultiplier: 2.5,
       // syncTouch omitted on purpose — it hijacks native touch/trackpad and adds lag.
     });
     lenisRef.current = lenis;

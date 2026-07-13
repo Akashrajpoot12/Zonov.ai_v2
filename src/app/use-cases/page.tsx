@@ -40,7 +40,7 @@ export default function UseCasesPage() {
                       Apollo-style hospital reduces paperwork by 40%
                     </h2>
                     <p className="type-body text-[var(--text-muted)] mb-8">
-                      A 450-bed multi-specialty hospital deployed four Zonov AI agents across ICU documentation, OPD registration, discharge coordination, and billing. Within six months, the hospital saw dramatic reductions in administrative overhead, faster patient throughput, and a measurable return on investment — all without replacing existing HIS infrastructure.
+                      A 450-bed multi-specialty hospital deployed four Zonov AI agents across ICU documentation, OPD registration, discharge coordination, and billing. Within six months, the hospital saw dramatic reductions in administrative overhead, faster patient throughput, and a measurable return on investment, all without replacing existing HIS infrastructure.
                     </p>
                     <div className="grid grid-cols-3 gap-4">
                       {[
@@ -60,7 +60,7 @@ export default function UseCasesPage() {
                       <path d="M9.352 4C4.456 7.456 1 13.12 1 19.36c0 5.088 3.072 8.064 6.624 8.064 3.36 0 5.856-2.688 5.856-5.856 0-3.168-2.208-5.472-5.088-5.472-.576 0-1.344.096-1.536.192.48-3.264 3.552-7.104 6.624-9.024L9.352 4zm16.512 0c-4.8 3.456-8.256 9.12-8.256 15.36 0 5.088 3.072 8.064 6.624 8.064 3.264 0 5.856-2.688 5.856-5.856 0-3.168-2.304-5.472-5.184-5.472-.576 0-1.248.096-1.44.192.48-3.264 3.456-7.104 6.528-9.024L25.864 4z" />
                     </svg>
                     <blockquote className="type-body-lg text-white/90 leading-relaxed mb-8">
-                      &ldquo;Zonov didn&apos;t just automate tasks — it fundamentally transformed how our clinical teams work. Our doctors spend more time with patients, our nurses focus on care, and our billing team recovers revenue we used to simply lose. The ROI was clear within the first quarter.&rdquo;
+                      &ldquo;Zonov didn&apos;t just automate tasks. It fundamentally transformed how our clinical teams work. Our doctors spend more time with patients, our nurses focus on care, and our billing team recovers revenue we used to simply lose. The ROI was clear within the first quarter.&rdquo;
                     </blockquote>
                     <div>
                       <p className="type-body font-semibold text-white">Dr. Anita Sharma</p>

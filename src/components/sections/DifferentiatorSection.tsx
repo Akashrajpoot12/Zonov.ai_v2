@@ -25,7 +25,7 @@ const WHY_DIFFERENT: { icon: React.ReactNode; title: string; desc: string }[] = 
   {
     icon: <Bot className="w-5 h-5" strokeWidth={1.5} />,
     title: "AI Employees, Not Just Software",
-    desc: "Traditional HIMS stores information. Zonov.ai agents perform work — automatically, intelligently, continuously.",
+    desc: "Traditional HIMS stores information. Zonov.ai agents perform work, automatically, intelligently, continuously.",
   },
   {
     icon: <Zap className="w-5 h-5" strokeWidth={1.5} />,
@@ -35,7 +35,7 @@ const WHY_DIFFERENT: { icon: React.ReactNode; title: string; desc: string }[] = 
   {
     icon: <IndiaFlag />,
     title: "Built for Indian Healthcare",
-    desc: "Aadhaar integration, multilingual support, ABHA, insurance workflows — designed from day one for India.",
+    desc: "Aadhaar integration, multilingual support, ABHA, insurance workflows, designed from day one for India.",
   },
   {
     icon: <Lock className="w-5 h-5" strokeWidth={1.5} />,

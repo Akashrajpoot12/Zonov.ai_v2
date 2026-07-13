@@ -22,13 +22,12 @@ const NAV_LINKS = [
   },
 ];
 
-/* Shared transparent "capsule" that slides between nav items on route change.
-   All items reuse layoutId="navPill", so framer-motion animates it from the
-   previously-active link to the newly-active one. */
+/* Transparent "capsule" behind the active nav item. Renders instantly on the
+   active link — no shared-layout slide, so it never appears to fly in across
+   the bar when switching pages. */
 function NavPill() {
   return (
-    <motion.span
-      layoutId="navPill"
+    <span
       aria-hidden
       className="absolute inset-0 rounded-full"
       style={{
@@ -36,7 +35,6 @@ function NavPill() {
         background: "rgba(27, 79, 216, 0.1)",
         border: "1px solid rgba(27, 79, 216, 0.22)",
       }}
-      transition={{ type: "spring", stiffness: 380, damping: 32 }}
     />
   );
 }

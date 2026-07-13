@@ -17,23 +17,23 @@ const STATS = [
 type Msg = { role: "in" | "out"; text: string };
 const CONVERSATIONS: Msg[][] = [
   [
-    { role: "in", text: "I haven't been feeling well — I've lost some weight." },
+    { role: "in", text: "I haven't been feeling well. I've lost some weight." },
     { role: "out", text: "Six months ago you were 68 kg. What's your weight today?" },
     { role: "in", text: "Around 61 kg now." },
   ],
   [
     { role: "in", text: "I keep forgetting if I took my BP tablet." },
     { role: "out", text: "Your last dose was logged this morning at 8:15. You're on track." },
-    { role: "in", text: "Oh, good — thank you." },
+    { role: "in", text: "Oh, good, thank you." },
   ],
   [
     { role: "in", text: "I'm here for my cardiology appointment." },
-    { role: "out", text: "Found your record, Mr. Sharma. Dr. Rao, OPD-3 — you're checked in." },
+    { role: "out", text: "Found your record, Mr. Sharma. Dr. Rao, OPD-3, you're checked in." },
     { role: "in", text: "That was quick!" },
   ],
   [
     { role: "in", text: "My fever is still there after three days." },
-    { role: "out", text: "That's beyond the expected window — flagging this for Dr. Mehta now." },
+    { role: "out", text: "That's beyond the expected window, flagging this for Dr. Mehta now." },
     { role: "in", text: "Thank you." },
   ],
 ];
@@ -77,13 +77,13 @@ export default function SimulationCascade() {
             </FadeIn>
             <FadeIn delay={0.05}>
               <h2 className="type-h1 text-[var(--text)] mb-5 [text-wrap:balance]">
-                Tested across thousands of cases —{" "}
+                Tested across thousands of cases,{" "}
                 <span className="italic gradient-text">before any real patient.</span>
               </h2>
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="type-body-lg text-[var(--text-muted)] max-w-md mb-8">
-                Every agent is stress-tested against a vast library of clinical scenarios — edge cases, exceptions, and rare events — until it clears our accuracy and safety bar. Your patients meet an agent that has already seen it all.
+                Every agent is stress-tested against a vast library of clinical scenarios (edge cases, exceptions, and rare events) until it clears our accuracy and safety bar. Your patients meet an agent that has already seen it all.
               </p>
             </FadeIn>
             <FadeIn delay={0.15}>

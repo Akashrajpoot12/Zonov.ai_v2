@@ -9,10 +9,10 @@ import FadeIn from "@/components/ui/FadeIn";
 const AGENTS = [
   { slug: "patient-registration", num: "01", name: "Registration Agent", short: "Registration", icon: IdCard, area: "Front desk & OPD", tagline: "Zero-friction intake, from first contact to first care.", outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
   { slug: "doctor-prescription", num: "02", name: "Doctor Prescription Agent", short: "Prescription", icon: Stethoscope, area: "Clinical documentation", tagline: "Every conversation captured. Every doctor's time given back.", outcome: "~2 hrs back / doctor", color: "#00B4AE" },
-  { slug: "investigation", num: "03", name: "Investigation Agent", short: "Investigation", icon: Microscope, area: "Diagnostics & labs", tagline: "From order to insight — at the speed of care.", outcome: "Up to 40% faster results", color: "#7C3AED" },
+  { slug: "investigation", num: "03", name: "Investigation Agent", short: "Investigation", icon: Microscope, area: "Diagnostics & labs", tagline: "From order to insight, at the speed of care.", outcome: "Up to 40% faster results", color: "#7C3AED" },
   { slug: "pharmacy", num: "04", name: "Pharmacy Agent", short: "Pharmacy", icon: Pill, area: "Pharmacy & inventory", tagline: "Near-expiry alerts. Zero wastage.", outcome: "Near-zero wastage", color: "#059669" },
   { slug: "ipd", num: "05", name: "IPD Agent", short: "IPD", icon: BedDouble, area: "In-patient care", tagline: "Nursing handovers. Quality, never lost between shifts.", outcome: "Complete handovers", color: "#D97706" },
-  { slug: "ot", num: "06", name: "OT Agent", short: "OT", icon: Syringe, area: "Operation theatres", tagline: "Scheduling, monitoring, and emergencies — under control.", outcome: "Up to 30% fewer delays", color: "#0D1F3C" },
+  { slug: "ot", num: "06", name: "OT Agent", short: "OT", icon: Syringe, area: "Operation theatres", tagline: "Scheduling, monitoring, and emergencies. Under control.", outcome: "Up to 30% fewer delays", color: "#0D1F3C" },
   { slug: "claim", num: "07", name: "Claim Agent", short: "Claims", icon: ReceiptText, area: "Insurance & claims", tagline: "Fewer rejections. More of the revenue you earned.", outcome: "Up to 20% fewer rejections", color: "#7C3AED" },
   { slug: "finance", num: "08", name: "Finance Agent", short: "Finance", icon: Wallet, area: "Hospital finance", tagline: "Stop the leak. See every rupee.", outcome: "Up to 20% leakage recovered", color: "#1B4FD8" },
 ];

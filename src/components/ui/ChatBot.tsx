@@ -94,7 +94,7 @@ type Message = {
 
 const INITIAL_MESSAGE: Message = {
   role: "assistant",
-  content: "Hi! I'm the Zonov.ai assistant. I can help you learn about our 8 AI agents, implementation, pricing, or anything else — what would you like to know?",
+  content: "Hi! I'm the Zonov.ai assistant. I can help you learn about our 8 AI agents, implementation, pricing, or anything else. What would you like to know?",
 };
 
 const QUICK_REPLIES = [

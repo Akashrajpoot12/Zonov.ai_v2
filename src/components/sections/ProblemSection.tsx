@@ -31,7 +31,7 @@ export default function ProblemSection() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="type-body-lg text-[var(--text-muted)] max-w-xl mb-16">
-            Doctors and nurses spend a large portion of their time on paperwork instead of patient care. Zonov.ai fixes this — permanently.
+            Doctors and nurses spend a large portion of their time on paperwork instead of patient care. Zonov.ai fixes this. Permanently.
           </p>
         </FadeIn>
 
@@ -60,7 +60,7 @@ export default function ProblemSection() {
             <div className="flex-shrink-0 text-[var(--primary)]"><MessageSquare className="w-9 h-9" strokeWidth={1.5} /></div>
             <div>
               <p className="text-[18px] text-[var(--text)] leading-relaxed italic mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
-                &ldquo;Most AI isn&rsquo;t built to meet healthcare&rsquo;s standards. Most HIMS only stores data. Zonov.ai actually works — like a digital workforce.&rdquo;
+                &ldquo;Most AI isn&rsquo;t built to meet healthcare&rsquo;s standards. Most HIMS only stores data. Zonov.ai actually works, like a digital workforce.&rdquo;
               </p>
               <p className="type-mono text-[var(--primary)]">Zonov.ai Mission Statement</p>
             </div>

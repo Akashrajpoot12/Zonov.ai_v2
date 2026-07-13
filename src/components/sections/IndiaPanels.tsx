@@ -19,12 +19,12 @@ function IndiaFlag({ className }: { className?: string }) {
 type PanelIcon = React.ComponentType<{ className?: string; strokeWidth?: number }>;
 
 const PANELS: { num: string; icon: PanelIcon; title: string; desc: string; color: string }[] = [
-  { num: "01", icon: Link2, title: "ABHA & ABDM Ready", desc: "Connects natively to India's Ayushman Bharat Digital Mission — ABHA IDs and the national digital health stack.", color: "#1B4FD8" },
-  { num: "02", icon: IdCard, title: "Aadhaar-Based Verification", desc: "Instant, reliable patient identity at registration — no duplicate records, no manual re-entry.", color: "#00B4AE" },
+  { num: "01", icon: Link2, title: "ABHA & ABDM Ready", desc: "Connects natively to India's Ayushman Bharat Digital Mission: ABHA IDs and the national digital health stack.", color: "#1B4FD8" },
+  { num: "02", icon: IdCard, title: "Aadhaar-Based Verification", desc: "Instant, reliable patient identity at registration: no duplicate records, no manual re-entry.", color: "#00B4AE" },
   { num: "03", icon: Speech, title: "Speaks Your Patients' Language", desc: "Engages patients across India's major regional languages, so care is never lost in translation.", color: "#7C3AED" },
   { num: "04", icon: Receipt, title: "Insurance & TPA Workflows", desc: "Built for cashless claims, Ayushman Bharat, and the TPA portals Indian hospitals handle every day.", color: "#059669" },
-  { num: "05", icon: Building2, title: "Made for India's Scale", desc: "Designed for high-volume OPDs and multi-specialty hospitals — hundreds of patients a day, handled calmly.", color: "#D97706" },
-  { num: "06", icon: IndiaFlag, title: "India-First, Not Adapted", desc: "Engineered from day one for Indian healthcare — not a Western product retrofitted for India.", color: "#1B4FD8" },
+  { num: "05", icon: Building2, title: "Made for India's Scale", desc: "Designed for high-volume OPDs and multi-specialty hospitals: hundreds of patients a day, handled calmly.", color: "#D97706" },
+  { num: "06", icon: IndiaFlag, title: "India-First, Not Adapted", desc: "Engineered from day one for Indian healthcare, not a Western product retrofitted for India.", color: "#1B4FD8" },
 ];
 
 export default function IndiaPanels() {
@@ -103,7 +103,7 @@ export default function IndiaPanels() {
 
         <FadeIn delay={0.15}>
           <p className="mt-8 type-body text-[var(--text-dim)]">
-            Built on India&rsquo;s digital health rails —{" "}
+            Built on India&rsquo;s digital health rails:{" "}
             <Link href="/platform" className="font-medium text-[var(--primary)] underline underline-offset-2">
               see how the platform connects
             </Link>

@@ -27,11 +27,11 @@ const caseStudies: CaseStudy[] = [
     location: "Jaipur, Rajasthan",
     beds: "200 Beds",
     type: "Multispeciality Hospital",
-    tagline: "From administrative bottlenecks to a streamlined operation — in under 8 weeks.",
+    tagline: "From administrative bottlenecks to a streamlined operation, in under 8 weeks.",
     challenges: [
       "Patient registration took 25 minutes on average, causing long OPD queues and patient dissatisfaction",
       "Manual billing processes with no real-time visibility led to significant procedure-level revenue leakage",
-      "Low follow-up compliance — less than 40% of discharged patients returned for follow-up consultations",
+      "Low follow-up compliance: less than 40% of discharged patients returned for follow-up consultations",
       "Staff spent disproportionate time on data entry, leaving little bandwidth for patient-facing work",
       "No centralised reporting made it difficult to identify operational inefficiencies",
     ],
@@ -57,7 +57,7 @@ const caseStudies: CaseStudy[] = [
     location: "Delhi, NCR",
     beds: "350 Beds",
     type: "Cardiac Care Hospital",
-    tagline: "Giving clinicians their time back — without changing how they work.",
+    tagline: "Giving clinicians their time back, without changing how they work.",
     challenges: [
       "Cardiologists were spending 35–40% of their shift on documentation rather than patient care",
       "Discharge summaries took hours to compile, delaying bed turnover and increasing patient wait times",
@@ -88,7 +88,7 @@ const caseStudies: CaseStudy[] = [
     tagline: "A single AI layer that unified operations across all departments.",
     challenges: [
       "At 500 beds, manual reporting across departments created data silos with no unified view for leadership",
-      "Revenue leakage was systemic — unbilled procedures and delayed charge captures cost crores annually",
+      "Revenue leakage was systemic: unbilled procedures and delayed charge captures cost crores annually",
       "Reporting cycles took 3–4 days, making it impossible to respond to operational issues in real time",
       "Manual data aggregation for board-level dashboards required a full analyst team each quarter",
       "Department heads had no live visibility into bed occupancy, OT utilisation, or billing status",
