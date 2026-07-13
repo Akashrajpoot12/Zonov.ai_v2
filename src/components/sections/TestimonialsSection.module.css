@@ -1,7 +1,8 @@
 .section {
   position: relative;
   overflow: hidden;
-  background: linear-gradient(160deg, #0D1F3C 0%, #122050 55%, #0A1830 100%);
+  /* Match the Differentiator section — solid dark-navy (no purple gradient) */
+  background: var(--dark-navy);
   padding: clamp(5rem, 8vw, 9rem) 0;
 }
 
@@ -16,31 +17,27 @@
   position: absolute;
   border-radius: 50%;
   filter: blur(80px);
-  opacity: 0.18;
+  opacity: 0.2;
   pointer-events: none;
+  will-change: transform;
+  animation: aurora 20s ease-in-out infinite;
 }
 
-.blobBlue1  { width: 520px; height: 520px; top: -10%;  left: -8%;  background: #1B4FD8; }
-.blobPurple { width: 400px; height: 400px; bottom: 5%; right: 10%; background: #7C3AED; }
-.blobTeal   { width: 360px; height: 360px; top: 30%;   right: -5%; background: #00B4AE; }
-.blobBlue2  { width: 280px; height: 280px; bottom: 15%;left: 30%;  background: #1B4FD8; }
+/* Desynced durations/delays so the glows drift organically (aurora effect) */
+.blobBlue1  { width: 520px; height: 520px; top: -10%;  left: -8%;  background: #1B4FD8; animation-duration: 19s; animation-delay: 0s;   }
+.blobPurple { width: 400px; height: 400px; bottom: 5%; right: 10%; background: #7C3AED; animation-duration: 23s; animation-delay: -6s;  }
+.blobTeal   { width: 360px; height: 360px; top: 30%;   right: -5%; background: #00B4AE; animation-duration: 21s; animation-delay: -12s; }
+.blobBlue2  { width: 280px; height: 280px; bottom: 15%;left: 30%;  background: #1B4FD8; animation-duration: 17s; animation-delay: -3s;  }
 
-/* ── Floating glass cards (background decorations) ── */
-.glassCard {
-  position: absolute;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(6px);
-  backdrop-filter: blur(6px);
-  pointer-events: none;
+@keyframes aurora {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%      { transform: translate(36px, -28px) scale(1.12); }
+  66%      { transform: translate(-28px, 22px) scale(0.94); }
 }
 
-.gc1 { width: 220px; height: 140px; top: 12%;    left: 4%;   transform: rotate(-8deg);  }
-.gc2 { width: 180px; height: 110px; top: 55%;    left: 1%;   transform: rotate(6deg);   }
-.gc3 { width: 200px; height: 130px; bottom: 8%;  left: 22%;  transform: rotate(-4deg);  }
-.gc4 { width: 240px; height: 150px; top: 8%;     right: 3%;  transform: rotate(7deg);   }
-.gc5 { width: 160px; height: 100px; top: 45%;    right: 1%;  transform: rotate(-10deg); }
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}
 
 /* ── Content ── */
 .inner {
@@ -130,6 +127,7 @@
   line-height: 0.8;
   opacity: 0.7;
   margin-bottom: 16px;
+  -webkit-user-select: none;
   user-select: none;
 }
 

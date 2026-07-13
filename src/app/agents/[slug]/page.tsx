@@ -2,6 +2,7 @@ import Footer from "@/components/layout/Footer";
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import BackButton from "./BackButton";
 import type { Metadata } from "next";
 import { IdCard, Stethoscope, Microscope, Pill, BedDouble, Syringe, ReceiptText, Wallet } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -349,6 +350,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
 
           <div className="container-wide px-edge relative z-10">
             <FadeIn>
+              <BackButton />
               <div className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border" style={{ borderColor: `${color}40`, background: `${color}15` }}>
                 <Icon className="w-5 h-5" strokeWidth={1.5} style={{ color }} />
                 <span className="type-mono text-sm" style={{ color }}>AI Agent</span>
