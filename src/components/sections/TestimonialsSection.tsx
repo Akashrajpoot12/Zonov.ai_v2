@@ -17,7 +17,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "The voice-to-prescription feature alone saves me 2 hours every day. I can finally focus on what I trained for — treating patients.",
+      "The voice-to-prescription feature alone saves me 2 hours every day. I can finally focus on what I trained for: treating patients.",
     name: "Dr. Rajesh Kumar",
     role: "Senior Consultant, Internal Medicine",
     org: "City Care Hospital, Delhi",
@@ -26,7 +26,7 @@ const TESTIMONIALS = [
   },
   {
     quote:
-      "Our billing team recovered significant missed charges in the first month — revenue we never even knew we were losing. The leakage detection is extraordinary.",
+      "Our billing team recovered significant missed charges in the first month, revenue we never even knew we were losing. The leakage detection is extraordinary.",
     name: "Mr. Anil Mehta",
     role: "CFO",
     org: "Sunshine Hospital Group, Mumbai",

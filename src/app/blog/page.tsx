@@ -15,7 +15,7 @@ const posts = [
     slug: "future-of-hospital-operations",
     category: "Industry Trends",
     title: "Future of Hospital Operations",
-    excerpt: "From reactive management to AI-orchestrated facilities — how intelligence embedded in every workflow will define the next decade of hospital operations.",
+    excerpt: "From reactive management to AI-orchestrated facilities: how intelligence embedded in every workflow will define the next decade of hospital operations.",
     read: "8 min",
   },
   {
@@ -36,7 +36,7 @@ const posts = [
     slug: "how-ai-reduces-doctor-burnout",
     category: "Clinical Operations",
     title: "How AI Reduces Doctor Burnout",
-    excerpt: "Documentation burden — not clinical complexity — drives burnout. Voice AI can return four hours per day to physicians while improving note accuracy.",
+    excerpt: "Documentation burden, not clinical complexity, drives burnout. Voice AI can return four hours per day to physicians while improving note accuracy.",
     read: "8 min",
   },
   {
@@ -50,7 +50,7 @@ const posts = [
     slug: "digital-transformation-in-healthcare",
     category: "Industry Trends",
     title: "Digital Transformation in Healthcare",
-    excerpt: "The first wave digitized paper. The current wave transforms data into intelligence. India is positioned unusually well for this phase — here is why.",
+    excerpt: "The first wave digitized paper. The current wave transforms data into intelligence. India is positioned unusually well for this phase. Here is why.",
     read: "9 min",
   },
   {
@@ -71,7 +71,7 @@ const posts = [
     slug: "ai-in-revenue-cycle-management",
     category: "Revenue",
     title: "AI in Revenue Cycle Management",
-    excerpt: "A 4–8 percentage point improvement in net collection rate across the full revenue cycle — from registration validation to denial management.",
+    excerpt: "A 4–8 percentage point improvement in net collection rate across the full revenue cycle: from registration validation to denial management.",
     read: "9 min",
   },
   {
@@ -120,14 +120,14 @@ const posts = [
     slug: "ai-agents-in-healthcare",
     category: "Technology",
     title: "AI Agents in Healthcare",
-    excerpt: "Agents pursue multi-step goals autonomously — not just responding to queries. The architecture behind the next generation of healthcare workflow automation.",
+    excerpt: "Agents pursue multi-step goals autonomously, not just responding to queries. The architecture behind the next generation of healthcare workflow automation.",
     read: "8 min",
   },
   {
     slug: "building-smart-hospitals",
     category: "AI Strategy",
     title: "Building Smart Hospitals",
-    excerpt: "Four sequential phases — data foundation, intelligence deployment, autonomous operations, and adaptive operations — define the smart hospital roadmap.",
+    excerpt: "Four sequential phases, data foundation, intelligence deployment, autonomous operations, and adaptive operations, define the smart hospital roadmap.",
     read: "9 min",
   },
   {
@@ -204,7 +204,7 @@ export default function BlogPage() {
                   <div className="mt-8 flex flex-col sm:flex-row sm:items-center gap-4 justify-between">
                     <div>
                       <p className="type-caption text-white/40">Zonov.ai Team</p>
-                      <p className="type-caption text-white/40">2026 · 7 min read</p>
+                      <p className="type-caption text-white/40">2026</p>
                     </div>
                     <span className="btn btn-glass self-start sm:self-auto">Read Article →</span>
                   </div>
@@ -248,7 +248,7 @@ export default function BlogPage() {
                 const style = categoryStyle[post.category] ?? { bg: "rgba(27,79,216,0.12)", color: "var(--primary)" };
                 return (
                   <FadeInItem key={post.slug}>
-                    <Link href={`/blog/${post.slug}`} className="block card h-full flex flex-col hover:shadow-md transition-shadow">
+                    <Link href={`/blog/${post.slug}`} className="group block card h-full flex flex-col hover:shadow-md transition-shadow">
                       <span
                         className="type-mono text-xs inline-block px-3 py-1 rounded-full self-start"
                         style={{ background: style.bg, color: style.color }}
@@ -269,7 +269,10 @@ export default function BlogPage() {
                       </p>
                       <div className="flex justify-between items-center mt-4 pt-4 border-t border-[var(--border)]">
                         <p className="type-caption text-[var(--text-muted)]">Zonov.ai Team · 2026</p>
-                        <p className="type-caption text-[var(--text-muted)]">{post.read} read</p>
+                        <span className="type-caption font-semibold text-[var(--primary)] inline-flex items-center gap-1">
+                          Read More
+                          <span className="transition-transform group-hover:translate-x-1">→</span>
+                        </span>
                       </div>
                     </Link>
                   </FadeInItem>

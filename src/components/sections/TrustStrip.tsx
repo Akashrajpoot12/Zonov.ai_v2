@@ -19,7 +19,7 @@ const ITEMS: Item[] = [
   },
   {
     label: "Works with Your Existing HIS",
-    sub: "No rip-and-replace — integrates on top",
+    sub: "No rip-and-replace, integrates on top",
     icon: (
       <path d="M4 4h7v7H4V4Zm9 0h7v7h-7V4ZM4 13h7v7H4v-7Zm9 3.5a3.5 3.5 0 1 0 7 0 3.5 3.5 0 0 0-7 0Z" />
     ),

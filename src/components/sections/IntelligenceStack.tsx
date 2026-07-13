@@ -7,9 +7,9 @@ import s from "./IntelligenceStack.module.css";
 /* Bottom → top: raw data at the base, decisions at the peak. */
 const LAYERS = [
   { label: "Raw Hospital Data", desc: "Records, orders, notes and signals from every system you already run." },
-  { label: "Extracted Clinical Events", desc: "Structured events pulled from the noise — what actually happened, and when." },
+  { label: "Extracted Clinical Events", desc: "Structured events pulled from the noise: what actually happened, and when." },
   { label: "Operational Insights", desc: "Patterns, risks and opportunities surfaced across the whole hospital." },
-  { label: "Agent Decisions", desc: "The actions your agents take — the work that moves the hospital forward." },
+  { label: "Agent Decisions", desc: "The actions your agents take, the work that moves the hospital forward." },
 ];
 
 export default function IntelligenceStack() {
@@ -43,7 +43,7 @@ export default function IntelligenceStack() {
             </FadeIn>
             <FadeIn delay={0.1}>
               <p className="type-body-lg text-white/60 max-w-md mb-8">
-                Traditional systems stop at the bottom layer — they hold your data. Zonov.ai turns that raw data into clinical signals, operational insights, and finally the decisions your agents act on.
+                Traditional systems stop at the bottom layer. They hold your data. Zonov.ai turns that raw data into clinical signals, operational insights, and finally the decisions your agents act on.
               </p>
             </FadeIn>
             <FadeIn delay={0.15}>

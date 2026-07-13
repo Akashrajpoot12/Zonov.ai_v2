@@ -6,11 +6,11 @@ import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
   title: "Integrations — Zonov.ai",
-  description: "Zonov.ai integrates with every major Hospital Information System in India — Practo, eHospital, Meddbase, HIS Pro, and more. No rip-and-replace.",
+  description: "Zonov.ai integrates with every major Hospital Information System in India: Practo, eHospital, Meddbase, HIS Pro, and more. No rip-and-replace.",
 };
 
 const HIS_SYSTEMS = [
-  { name: "Practo", category: "HIS / EMR", status: "Live", desc: "Full bidirectional sync — patient records, prescriptions, and billing data." },
+  { name: "Practo", category: "HIS / EMR", status: "Live", desc: "Full bidirectional sync: patient records, prescriptions, and billing data." },
   { name: "eHospital", category: "HIS / EMR", status: "Live", desc: "Deep integration with appointment scheduling, IPD management, and discharge workflows." },
   { name: "Meddbase", category: "HIS / EMR", status: "Live", desc: "Real-time data flow for clinical documentation and revenue cycle management." },
   { name: "HIS Pro", category: "HIS / EMR", status: "Live", desc: "Connects with OPD, IPD, OT, pharmacy, and lab modules." },
@@ -28,7 +28,7 @@ const DIAGNOSTIC_LABS = [
 ];
 
 const INSURANCE = [
-  { name: "ABDM / ABHA", category: "Government", status: "Live", desc: "Full ABDM Health ID integration — auto-fetch patient records and consent management." },
+  { name: "ABDM / ABHA", category: "Government", status: "Live", desc: "Full ABDM Health ID integration: auto-fetch patient records and consent management." },
   { name: "Ayushman Bharat", category: "Government", status: "Live", desc: "PM-JAY claim submission, eligibility verification, and pre-auth workflow." },
   { name: "Star Health", category: "Insurance", status: "Live", desc: "Cashless claim pre-auth and TPA communication automation." },
   { name: "Niva Bupa", category: "Insurance", status: "Live", desc: "Pre-authorisation, claim scrubbing, and denial management." },

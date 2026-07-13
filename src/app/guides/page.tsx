@@ -63,7 +63,7 @@ const guides = [
     color: "#06C270",
     title: "Revenue leakage: identifying and recovering missed billing",
     description:
-      "How Indian hospitals lose 15–25% of billed revenue to unbilled procedures, claim rejections, and late submissions — and how AI catches it in real time.",
+      "How Indian hospitals lose 15–25% of billed revenue to unbilled procedures, claim rejections, and late submissions, and how AI catches it in real time.",
     time: "7 min read",
   },
   {

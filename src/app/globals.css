@@ -77,7 +77,9 @@
   --font-display: var(--font-nunito), system-ui, sans-serif;
   --font-body:    var(--font-nunito), system-ui, sans-serif;
   --font-google-sans: var(--font-nunito), system-ui, sans-serif;
-  --font-mono:    'Courier New', monospace;
+  /* Unified to Nunito Sans — whole site uses one font family. The .type-mono
+     class keeps its uppercase + letter-spacing styling, just not a mono face. */
+  --font-mono:    var(--font-nunito), system-ui, sans-serif;
 
   --radius-btn: var(--radius-sm);
 }

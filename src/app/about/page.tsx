@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 const values = [
   { num: "01", title: "Patient First", desc: "Every decision we make starts and ends with what is best for the patient.", color: "#1B4FD8" },
   { num: "02", title: "Clinical Accuracy", desc: "We hold our AI to the same standard as the clinicians it supports.", color: "#00B4AE" },
-  { num: "03", title: "Radical Transparency", desc: "Our models explain their reasoning — no black boxes in healthcare.", color: "#7C3AED" },
+  { num: "03", title: "Radical Transparency", desc: "Our models explain their reasoning: no black boxes in healthcare.", color: "#7C3AED" },
   { num: "04", title: "Relentless Simplicity", desc: "If a doctor needs a manual, we have not done our job.", color: "#059669" },
-  { num: "05", title: "Build for Scale", desc: "We design for every hospital, clinic, lab, and healthcare network — not just flagship deployments.", color: "#D97706" },
+  { num: "05", title: "Build for Scale", desc: "We design for every hospital, clinic, lab, and healthcare network, not just flagship deployments.", color: "#D97706" },
 ];
 
 const standards = [
@@ -34,7 +34,7 @@ const commitments = [
 const faqs = [
   {
     q: "Are you replacing doctors?",
-    a: "No. Zonov.ai augments healthcare professionals. Our AI agents handle administrative, documentation, and workflow tasks so that clinicians can spend their time on diagnosis, treatment, and patient relationships — the work only they can do.",
+    a: "No. Zonov.ai augments healthcare professionals. Our AI agents handle administrative, documentation, and workflow tasks so that clinicians can spend their time on diagnosis, treatment, and patient relationships, the work only they can do.",
   },
   {
     q: "Is patient data secure?",
@@ -46,7 +46,7 @@ const faqs = [
   },
   {
     q: "How long does implementation take?",
-    a: "Typically 1–2 weeks depending on facility size, the number of workflows being deployed, and the complexity of existing system integrations — with no disruption to your current operations.",
+    a: "Typically 1–2 weeks depending on facility size, the number of workflows being deployed, and the complexity of existing system integrations, with no disruption to your current operations.",
   },
   {
     q: "What is the ROI?",
@@ -67,7 +67,7 @@ export default function AboutPage() {
                 The AI Workforce for Healthcare.
               </h1>
               <p className="type-body-lg text-white/70 mt-6 max-w-xl">
-                Zonov.ai builds specialized AI agents that eliminate healthcare inefficiency — handling administrative, documentation, and workflow tasks so that clinicians and staff can focus on what matters most.
+                Zonov.ai builds specialized AI agents that eliminate healthcare inefficiency, handling administrative, documentation, and workflow tasks so that clinicians and staff can focus on what matters most.
               </p>
             </FadeIn>
           </div>
@@ -96,7 +96,7 @@ export default function AboutPage() {
                     <CountUp value={4} suffix="h" />
                   </span>
                   <p className="type-body text-[var(--text-muted)] mt-3 max-w-[220px]">
-                    every single day — lost to paperwork, not patients.
+                    every single day, lost to paperwork, not patients.
                   </p>
                 </div>
               </FadeIn>
@@ -115,11 +115,11 @@ export default function AboutPage() {
                     className="text-[clamp(21px,2.5vw,32px)] leading-snug text-[var(--text)] relative [text-wrap:balance]"
                     style={{ fontFamily: "var(--font-playfair)" }}
                   >
-                    Our founder watched his closest friend — a cardiologist — lose{" "}
+                    Our founder watched his closest friend, a cardiologist, lose{" "}
                     <span className="gradient-text">four hours every day</span> to documentation. Not saving lives. Typing notes.
                   </p>
                   <p className="type-body-lg text-[var(--text-muted)] mt-6 max-w-xl">
-                    That was the moment Zonov.ai began — to give that time back, to every clinician, in every hospital.
+                    That was the moment Zonov.ai began: to give that time back, to every clinician, in every hospital.
                   </p>
                 </div>
               </FadeIn>
@@ -201,7 +201,7 @@ export default function AboutPage() {
               <p className="type-mono text-[var(--primary)] mb-2">TRUST &amp; COMPLIANCE</p>
               <h2 className="type-h2 text-[var(--text)] mb-3">Built for the trust healthcare demands.</h2>
               <p className="type-body-lg text-[var(--text-muted)] max-w-xl mb-10">
-                Patient data is sacred. Zonov.ai is engineered to meet the security and compliance standards hospitals, regulators, and patients expect — from day one.
+                Patient data is sacred. Zonov.ai is engineered to meet the security and compliance standards hospitals, regulators, and patients expect, from day one.
               </p>
             </FadeIn>
 

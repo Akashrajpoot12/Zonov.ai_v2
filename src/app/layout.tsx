@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://zonov.ai"),
   openGraph: {
     title: "Zonov.ai — AI Operating System for Healthcare",
-    description: "Deploy AI agents across every hospital workflow — registration, documentation, diagnostics, billing, and operations.",
+    description: "Deploy AI agents across every hospital workflow: registration, documentation, diagnostics, billing, and operations.",
     url: "https://zonov.ai",
     siteName: "Zonov.ai",
     type: "website",

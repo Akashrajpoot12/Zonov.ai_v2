@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import Footer from "@/components/layout/Footer";
 import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import { ChevronDown } from "lucide-react";
+import { getJobs } from "@/lib/jobs";
+
+// Jobs come from a Google Sheet (see src/lib/jobs.ts). Refresh hourly.
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: "Careers — Zonov.ai",
@@ -12,7 +17,7 @@ export const metadata: Metadata = {
 const perks = [
   {
     title: "Remote-first",
-    desc: "Work from anywhere in India. We don't believe location determines contribution — outcomes do.",
+    desc: "Work from anywhere in India. We don't believe location determines contribution. Outcomes do.",
     icon: (
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
         <circle cx="12" cy="12" r="10" />
@@ -43,16 +48,10 @@ const perks = [
   },
 ];
 
-const jobs = [
-  { title: "Senior Full-Stack Engineer", department: "Engineering", location: "Remote India", type: "Full-time" },
-  { title: "AI/ML Engineer — Clinical NLP", department: "AI Research", location: "Bangalore", type: "Full-time" },
-  { title: "Product Manager — Patient Workflows", department: "Product", location: "Remote India", type: "Full-time" },
-  { title: "Clinical Consultant", department: "Healthcare", location: "Delhi / Mumbai", type: "Full-time" },
-  { title: "Enterprise Sales Executive", department: "Sales", location: "Mumbai", type: "Full-time" },
-  { title: "UX Designer — Healthcare", department: "Design", location: "Remote India", type: "Full-time" },
-];
+export default async function CareersPage() {
+  const jobs = await getJobs();
+  const count = jobs.length;
 
-export default function CareersPage() {
   return (
     <div className="flex flex-col min-h-screen">
       <main className="flex-grow">
@@ -69,7 +68,7 @@ export default function CareersPage() {
               <p className="type-body-lg text-white/60 max-w-xl mx-auto mt-6">
                 We&apos;re building the AI layer that runs India&apos;s hospitals. Small team, large surface area, and problems nobody has solved before.
               </p>
-              <p className="type-caption text-white/20 mt-10 flex items-center justify-center gap-1.5">6 open positions below <ChevronDown className="w-4 h-4" strokeWidth={2} /></p>
+              <p className="type-caption text-white/20 mt-10 flex items-center justify-center gap-1.5">{count} open position{count === 1 ? "" : "s"} below <ChevronDown className="w-4 h-4" strokeWidth={2} /></p>
             </FadeIn>
           </div>
         </section>
@@ -101,14 +100,19 @@ export default function CareersPage() {
             </FadeIn>
             <FadeInStagger className="mt-10">
               {jobs.map((job) => (
-                <FadeInItem key={job.title}>
-                  <div className="py-6 flex items-center justify-between gap-4 border-b border-[var(--border)]">
-                    <div>
+                <FadeInItem key={job.slug}>
+                  <div className="py-6 flex items-center gap-4 border-b border-[var(--border)]">
+                    <div className="flex-1 min-w-0">
                       <h3 className="type-h4 text-[var(--text)]">{job.title}</h3>
-                      <p className="type-caption text-[var(--text-muted)] mt-1">{job.department} · {job.location}</p>
+                      <p className="type-caption text-[var(--text-muted)] mt-1">
+                        {job.department}{job.department && job.location ? " · " : ""}{job.location}
+                      </p>
+                      {job.description && (
+                        <p className="type-body text-[var(--text-muted)] mt-2 max-w-2xl">{job.description}</p>
+                      )}
                     </div>
-                    <p className="type-mono text-[var(--text-muted)] hidden md:block">{job.type}</p>
-                    <a href="mailto:careers@zonov.ai" className="btn btn-ghost shrink-0">Apply Now →</a>
+                    <p className="type-mono text-[var(--text-muted)] hidden md:block w-32 text-center shrink-0">{job.type}</p>
+                    <Link href={`/careers/apply?role=${encodeURIComponent(job.title)}`} className="btn btn-ghost shrink-0">Apply Now →</Link>
                   </div>
                 </FadeInItem>
               ))}
@@ -123,7 +127,7 @@ export default function CareersPage() {
                   <h3 className="type-h4">Don&apos;t see your role?</h3>
                   <p className="type-body text-[var(--text-muted)] mt-1">We hire for exceptional people ahead of headcount.</p>
                 </div>
-                <a href="mailto:careers@zonov.ai" className="btn btn-primary shrink-0">Send Your Resume →</a>
+                <Link href="/careers/apply?role=General%20Application" className="btn btn-primary shrink-0">Send Your Resume →</Link>
               </div>
             </FadeIn>
           </div>

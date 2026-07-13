@@ -8,7 +8,7 @@ const STAKEHOLDERS: { icon: LucideIcon; title: string; color: string; values: st
     title: "For Patients",
     color: "var(--primary)",
     values: [
-      "Faster registration — seconds not minutes",
+      "Faster registration in seconds, not minutes",
       "Shorter waiting times",
       "Better follow-ups & reminders",
       "Improved care experience overall",
@@ -67,7 +67,7 @@ export default function ValueSection() {
         </FadeIn>
         <FadeIn delay={0.1}>
           <p className="type-body-lg text-[var(--text-muted)] max-w-xl mb-14">
-            When AI handles the administration, every stakeholder wins — patients get faster care, doctors get back their time, hospitals get better margins.
+            When AI handles the administration, every stakeholder wins: patients get faster care, doctors get back their time, hospitals get better margins.
           </p>
         </FadeIn>
 
@@ -114,13 +114,13 @@ export default function ValueSection() {
             <div className="p-8 rounded-[24px] bg-[var(--primary-subtle)] border border-[var(--primary)]/20">
               <p className="type-mono text-[var(--primary)] mb-3">Our Mission</p>
               <p className="text-[18px] text-[var(--text)] leading-relaxed italic mb-0" style={{ fontFamily: "var(--font-playfair)" }}>
-                &ldquo;To eliminate healthcare inefficiency through AI-powered autonomous agents — giving every healthcare professional an AI workforce so they can spend more time caring for patients.&rdquo;
+                &ldquo;To eliminate healthcare inefficiency through AI-powered autonomous agents, giving every healthcare professional an AI workforce so they can spend more time caring for patients.&rdquo;
               </p>
             </div>
             <div className="p-8 rounded-[24px] bg-[var(--dark-navy)] text-white">
               <p className="type-mono text-white/40 mb-3">Our Vision</p>
               <p className="text-[18px] text-white leading-relaxed italic mb-0" style={{ fontFamily: "var(--font-playfair)" }}>
-                &ldquo;To build the world&rsquo;s AI Operating System for Healthcare — powering every hospital, clinic, laboratory, and healthcare network with intelligent AI agents.&rdquo;
+                &ldquo;To build the world&rsquo;s AI Operating System for Healthcare, powering every hospital, clinic, laboratory, and healthcare network with intelligent AI agents.&rdquo;
               </p>
             </div>
           </div>

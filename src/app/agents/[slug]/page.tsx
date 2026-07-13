@@ -29,13 +29,13 @@ const AGENTS: Record<string, AgentData> = {
     name: "Registration Agent",
     tagline: "Zero-friction intake, from first contact to first care.",
     description:
-      "Turn patient onboarding into a calm, guided experience — so your front desk spends its time on people, not paperwork.",
+      "Turn patient onboarding into a calm, guided experience, so your front desk spends its time on people, not paperwork.",
     color: "#1B4FD8",
     icon: IdCard,
     features: [
       {
         title: "Effortless Intake",
-        desc: "Patients are guided through registration conversationally, capturing the right details the first time — without long forms or queues.",
+        desc: "Patients are guided through registration conversationally, capturing the right details the first time, without long forms or queues.",
       },
       {
         title: "Accurate, Verified Records",
@@ -48,7 +48,7 @@ const AGENTS: Record<string, AgentData> = {
     ],
     metrics: [
       { num: "Up to 60%", label: "Faster OPD registration" },
-      { num: "Minutes", label: "Intake time — not the usual wait" },
+      { num: "Minutes", label: "Intake time, not the usual wait" },
       { num: "Same-day", label: "Verification, every time" },
     ],
     useCases: [
@@ -62,13 +62,13 @@ const AGENTS: Record<string, AgentData> = {
     name: "Doctor Prescription Agent",
     tagline: "Every conversation captured. Every doctor's time given back.",
     description:
-      "An AI clinical companion that turns the consultation into structured notes and a ready-to-review prescription — so doctors spend their time healing, not typing.",
+      "An AI clinical companion that turns the consultation into structured notes and a ready-to-review prescription, so doctors spend their time healing, not typing.",
     color: "#00B4AE",
     icon: Stethoscope,
     features: [
       {
         title: "Ambient Documentation",
-        desc: "The encounter becomes a structured clinical note in the background — ready for the physician to review and approve, not write from scratch.",
+        desc: "The encounter becomes a structured clinical note in the background, ready for the physician to review and approve, not write from scratch.",
       },
       {
         title: "Assisted Prescriptions",
@@ -93,9 +93,9 @@ const AGENTS: Record<string, AgentData> = {
 
   investigation: {
     name: "Investigation Agent",
-    tagline: "From order to insight — at the speed of care.",
+    tagline: "From order to insight, at the speed of care.",
     description:
-      "Keep the diagnostics loop moving — orders, tracking, and results flow to the right person at the right moment, with nothing lost in between.",
+      "Keep the diagnostics loop moving: orders, tracking, and results flow to the right person at the right moment, with nothing lost in between.",
     color: "#7C3AED",
     icon: Microscope,
     features: [
@@ -128,13 +128,13 @@ const AGENTS: Record<string, AgentData> = {
     name: "Pharmacy Agent",
     tagline: "Near-expiry alerts. Zero wastage.",
     description:
-      "Keep the pharmacy running lean — stock stays visible, expiries are caught early, and shortages are headed off before they happen.",
+      "Keep the pharmacy running lean: stock stays visible, expiries are caught early, and shortages are headed off before they happen.",
     color: "#059669",
     icon: Pill,
     features: [
       {
         title: "Stay Ahead of Expiry",
-        desc: "Medicines approaching expiry are surfaced with enough lead time to act — protecting both safety and margin.",
+        desc: "Medicines approaching expiry are surfaced with enough lead time to act, protecting both safety and margin.",
       },
       {
         title: "Always-Visible Stock",
@@ -161,13 +161,13 @@ const AGENTS: Record<string, AgentData> = {
     name: "IPD Agent",
     tagline: "Nursing handovers. Quality, never lost between shifts.",
     description:
-      "Make in-patient care visible and consistent — so critical information carries cleanly across every shift and no patient goes unnoticed.",
+      "Make in-patient care visible and consistent, so critical information carries cleanly across every shift and no patient goes unnoticed.",
     color: "#D97706",
     icon: BedDouble,
     features: [
       {
         title: "Structured Handovers",
-        desc: "Shift changes follow a clear, complete protocol — so the next team always knows exactly where each patient stands.",
+        desc: "Shift changes follow a clear, complete protocol, so the next team always knows exactly where each patient stands.",
       },
       {
         title: "Early Warnings",
@@ -192,9 +192,9 @@ const AGENTS: Record<string, AgentData> = {
 
   ot: {
     name: "OT Agent",
-    tagline: "Scheduling, monitoring, and emergencies — under control.",
+    tagline: "Scheduling, monitoring, and emergencies. Under control.",
     description:
-      "Keep operation theatres running at their best — fewer delays, clearer coordination, and emergencies handled without throwing the day off course.",
+      "Keep operation theatres running at their best: fewer delays, clearer coordination, and emergencies handled without throwing the day off course.",
     color: "#0D1F3C",
     icon: Syringe,
     features: [
@@ -227,7 +227,7 @@ const AGENTS: Record<string, AgentData> = {
     name: "Claim Agent",
     tagline: "Fewer rejections. More of the revenue you earned.",
     description:
-      "Get claims right the first time and recover what slips through — so your team chases fewer denials and collects more of what's owed.",
+      "Get claims right the first time and recover what slips through, so your team chases fewer denials and collects more of what's owed.",
     color: "#7C3AED",
     icon: ReceiptText,
     features: [
@@ -260,17 +260,17 @@ const AGENTS: Record<string, AgentData> = {
     name: "Finance Agent",
     tagline: "Stop the leak. See every rupee.",
     description:
-      "Bring hospital finances into real time — catch revenue leakage as it happens and understand profitability at a level that week-old spreadsheets never could.",
+      "Bring hospital finances into real time: catch revenue leakage as it happens and understand profitability at a level that week-old spreadsheets never could.",
     color: "#1B4FD8",
     icon: Wallet,
     features: [
       {
         title: "Catch Leakage Early",
-        desc: "Missed charges and billing gaps are surfaced while they can still be recovered — not discovered months later.",
+        desc: "Missed charges and billing gaps are surfaced while they can still be recovered, not discovered months later.",
       },
       {
         title: "Real Profitability",
-        desc: "See revenue and cost with the clarity to understand what's actually driving — or draining — your margins.",
+        desc: "See revenue and cost with the clarity to understand what's actually driving, or draining, your margins.",
       },
       {
         title: "Live Financial View",
@@ -434,7 +434,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
             {/* Tease the rest behind a demo */}
             <FadeIn delay={0.1}>
               <p className="mt-10 type-body text-[var(--text-dim)] max-w-xl">
-                See exactly how {name} works inside your hospital —{" "}
+                See exactly how {name} works inside your hospital:{" "}
                 <Link href="/book-demo" className="font-medium underline underline-offset-2" style={{ color }}>
                   book a private demo
                 </Link>
@@ -454,7 +454,7 @@ export default async function AgentPage({ params }: { params: Promise<{ slug: st
                   Designed for organizations where precision matters.
                 </h2>
                 <p className="type-body-lg text-[var(--text-muted)]">
-                  {name} is deployed across hospitals of every size — wherever clinical teams need to move faster without sacrificing accuracy.
+                  {name} is deployed across hospitals of every size, wherever clinical teams need to move faster without sacrificing accuracy.
                 </p>
               </FadeIn>
 

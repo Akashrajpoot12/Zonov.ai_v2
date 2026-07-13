@@ -6,7 +6,7 @@ import AgentTree from "@/components/sections/AgentTree";
 
 export const metadata: Metadata = {
   title: "AI Agents — Zonov.ai | One Operating System, Eight Agents",
-  description: "One AI operating system, eight specialized agents — covering every hospital workflow from registration to finance.",
+  description: "One AI operating system, eight specialized agents, covering every hospital workflow from registration to finance.",
 };
 
 export default function AgentsPage() {
@@ -27,7 +27,7 @@ export default function AgentsPage() {
                 <span className="italic gradient-text-light">Eight agents.</span>
               </h1>
               <p className="type-subtitle text-white/55 max-w-xl">
-                Every agent plugs into the same Zonov.ai brain — so your hospital runs as one connected system, not eight disconnected tools.
+                Every agent plugs into the same Zonov.ai brain, so your hospital runs as one connected system, not eight disconnected tools.
               </p>
             </FadeIn>
           </div>
