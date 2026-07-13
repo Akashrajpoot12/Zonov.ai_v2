@@ -4,8 +4,10 @@ import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { IdCard, Stethoscope, Microscope, Pill, BedDouble, Syringe, ReceiptText, Wallet } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
+import AgentPreview from "./AgentPreview";
 
-/* Teaser data only — coverage + outcome, no mechanics. */
+/* Teaser data only — coverage + outcome, no mechanics.
+   The right-hand live panel is a per-agent product mockup (see AgentPreview). */
 const AGENTS = [
   { slug: "patient-registration", num: "01", name: "Registration Agent", short: "Registration", icon: IdCard, area: "Front desk & OPD", tagline: "Zero-friction intake, from first contact to first care.", outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
   { slug: "doctor-prescription", num: "02", name: "Doctor Prescription Agent", short: "Prescription", icon: Stethoscope, area: "Clinical documentation", tagline: "Every conversation captured. Every doctor's time given back.", outcome: "~2 hrs back / doctor", color: "#00B4AE" },
@@ -48,34 +50,6 @@ export default function AgentsOverview() {
 
   return (
     <section className="section-py bg-[var(--bg)]">
-      <style>{`
-        @keyframes shimmer-sweep {
-          0% { transform: translateX(-150%) skewX(-15deg); }
-          50%, 100% { transform: translateX(200%) skewX(-15deg); }
-        }
-        .animate-shimmer {
-          animation: shimmer-sweep 4s ease-in-out infinite;
-        }
-        @keyframes type-log {
-          0%, 20% { max-width: 0; opacity: 0; }
-          40%, 100% { max-width: 100%; opacity: 1; }
-        }
-        .animate-type-log {
-          display: inline-block;
-          overflow: hidden;
-          white-space: nowrap;
-          animation: type-log 3s steps(30, end) infinite alternate;
-        }
-        .holographic-grid {
-          background-image: 
-            linear-gradient(to right, rgba(255,255,255,0.03) 1px, transparent 1px),
-            linear-gradient(to bottom, rgba(255,255,255,0.03) 1px, transparent 1px);
-          background-size: 30px 30px;
-          mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
-          transform: perspective(500px) rotateX(60deg) translateY(-50px) translateZ(-200px);
-          transform-origin: top center;
-        }
-      `}</style>
       <div className="container-wide">
         <FadeIn>
           <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
@@ -97,28 +71,49 @@ export default function AgentsOverview() {
           </FadeIn>
         </div>
 
-        {/* ── Agent selector tabs ── */}
+        {/* ── Patient-journey pipeline selector ── */}
         <FadeIn delay={0.05}>
-          <div className="flex flex-wrap gap-2 mb-8">
-            {AGENTS.map((ag, i) => {
-              const on = i === active;
-              return (
-                <button
-                  key={ag.slug}
-                  type="button"
-                  onClick={() => setActive(i)}
-                  className="flex items-center gap-2 px-4 py-2.5 rounded-full text-[13px] font-medium transition-all border"
-                  style={
-                    on
-                      ? { background: ag.color, color: "#fff", borderColor: ag.color }
-                      : { background: "#fff", color: "var(--text-muted)", borderColor: "var(--border)" }
-                  }
-                >
-                  <ag.icon className="w-4 h-4" strokeWidth={2} />
-                  {ag.short}
-                </button>
-              );
-            })}
+          <p className="type-mono text-[var(--text-dim)] mb-4 text-[10px]">The patient journey — one platform, every stage</p>
+          <div className="overflow-x-auto pb-3 mb-10 -mx-[var(--space-edge)] px-[var(--space-edge)]">
+            <div className="relative flex min-w-[720px] lg:min-w-0">
+              {/* connecting line (track + colored progress up to active step) */}
+              <div className="absolute top-[23px] h-[2px] bg-[var(--border)]" style={{ left: "6.25%", right: "6.25%" }} />
+              <div
+                className="absolute top-[23px] h-[2px] transition-all duration-500"
+                style={{ left: "6.25%", width: `${(active / (AGENTS.length - 1)) * 87.5}%`, background: a.color, opacity: 0.55 }}
+              />
+              {AGENTS.map((ag, i) => {
+                const on = i === active;
+                const done = i < active;
+                return (
+                  <button
+                    key={ag.slug}
+                    type="button"
+                    onClick={() => setActive(i)}
+                    className="relative z-10 flex-1 flex flex-col items-center gap-2 px-1 group"
+                    aria-label={ag.name}
+                  >
+                    <span
+                      className="w-12 h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 group-hover:scale-105"
+                      style={
+                        on
+                          ? { background: ag.color, borderColor: ag.color, color: "#fff", boxShadow: `0 6px 18px -4px ${ag.color}` }
+                          : { background: "var(--surface)", borderColor: done ? `${ag.color}80` : "var(--border-strong)", color: done ? ag.color : "var(--text-dim)" }
+                      }
+                    >
+                      <ag.icon className="w-5 h-5" strokeWidth={2} />
+                    </span>
+                    <span className="type-mono text-[9px]" style={{ color: on ? ag.color : "var(--text-dim)" }}>{ag.num}</span>
+                    <span
+                      className="text-[11px] font-medium text-center leading-tight max-w-[88px]"
+                      style={{ color: on ? "var(--text)" : "var(--text-muted)" }}
+                    >
+                      {ag.short}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </FadeIn>
 
@@ -159,23 +154,28 @@ export default function AgentsOverview() {
             </AnimatePresence>
           </div>
 
-          {/* RIGHT — animated visual panel */}
+          {/* RIGHT — per-agent live product mockup (light) */}
           <div
-            className="noise relative rounded-[24px] overflow-hidden min-h-[420px] flex items-center justify-center"
-            style={{ background: "linear-gradient(160deg,#0D1F3C 0%,#122050 60%,#0A1830 100%)", perspective: "1000px" }}
+            className="relative rounded-[24px] overflow-hidden min-h-[420px] flex items-center justify-center border shadow-sm"
+            style={{
+              perspective: "1000px",
+              background: "rgba(255,255,255,0.6)",
+              backdropFilter: "blur(12px)",
+              WebkitBackdropFilter: "blur(12px)",
+              borderColor: `${a.color}2A`,
+            }}
             onMouseMove={handleMouseMove}
             onMouseLeave={handleMouseLeave}
           >
-            {/* Holographic Grid Background */}
-            <div className="absolute inset-0 holographic-grid pointer-events-none" />
-
-            {/* ambient glow (per agent) */}
-            <div className="ambient-glow" style={{ width: "60%", height: "60%", top: "10%", left: "20%", background: a.color, opacity: 0.22 }} />
+            {/* per-agent color wash + glows */}
+            <div className="absolute inset-0 pointer-events-none" style={{ background: a.color, opacity: 0.04 }} />
+            <div className="ambient-glow" style={{ width: "60%", height: "60%", top: "-6%", right: "-8%", background: a.color, opacity: 0.14 }} />
+            <div className="ambient-glow" style={{ width: "45%", height: "45%", bottom: "-8%", left: "-4%", background: a.color, opacity: 0.10, animationDelay: "3s" }} />
 
             {/* live header */}
             <div className="absolute top-5 left-5 flex items-center gap-2 z-10">
               <span className="w-2 h-2 rounded-full animate-pulse" style={{ background: a.color }} />
-              <span className="type-mono text-[10px] text-white/60">{a.short} · live</span>
+              <span className="type-mono text-[10px] text-[var(--text-muted)]">{a.short} · live</span>
             </div>
 
             <AnimatePresence mode="wait">
@@ -185,79 +185,16 @@ export default function AgentsOverview() {
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -15 }}
                 transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="relative z-10 w-full h-full flex flex-col items-center justify-center p-6 sm:p-8"
+                className="relative z-10 w-full h-full flex flex-col items-center justify-center px-6 sm:px-8 pt-14 pb-6"
               >
-                {/* 3D Hover Wrapper (separated to prevent transform conflicts) */}
+                {/* 3D Hover Wrapper */}
                 <motion.div
                   style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
                   className="w-full flex justify-center"
                 >
-                  {/* Premium Bento Grid Container */}
-                  <div className="grid grid-cols-2 gap-3 sm:gap-4 w-full max-w-[340px]" style={{ transform: "translateZ(30px)" }}>
-                  
-                  {/* Card 1: Main Identity (Full width) */}
-                  <div 
-                    className="col-span-2 glass-card-dark rounded-[16px] sm:rounded-[20px] p-4 flex items-center gap-4 border-l-4 shadow-xl hover:bg-white/[0.04] transition-colors relative overflow-hidden" 
-                    style={{ borderLeftColor: a.color }}
-                  >
-                    <div className="absolute top-0 left-0 w-full h-full bg-white/20 animate-shimmer pointer-events-none" />
-                    <div 
-                      className="w-12 h-12 rounded-[12px] flex items-center justify-center text-2xl shadow-inner relative overflow-hidden" 
-                      style={{ background: `${a.color}22`, border: `1px solid ${a.color}55` }}
-                    >
-                      <span className="absolute inset-0 opacity-50 bg-gradient-to-tr from-transparent to-white/20" />
-                      <a.icon className="relative z-10 w-6 h-6" strokeWidth={1.5} style={{ color: a.color }} />
-                    </div>
-                    <div>
-                      <h4 className="text-white text-[14px] sm:text-[15px] font-semibold tracking-tight">{a.short} AI</h4>
-                      <div className="flex items-center gap-1.5 mt-1">
-                        <span className="w-1.5 h-1.5 rounded-full animate-pulse" style={{ background: a.color }} />
-                        <span className="text-white/50 text-[10px] sm:text-[11px] font-mono tracking-wide uppercase">System Online</span>
-                      </div>
-                    </div>
+                  <div className="w-full max-w-[360px]" style={{ transform: "translateZ(30px)" }}>
+                    <AgentPreview a={a} />
                   </div>
-
-                  {/* Card 2: Metric/Outcome */}
-                  <div className="col-span-1 glass-card-dark rounded-[16px] sm:rounded-[20px] p-4 flex flex-col justify-between relative overflow-hidden shadow-lg group">
-                    <div className="absolute -right-6 -top-6 w-20 h-20 rounded-full blur-2xl opacity-30 transition-opacity group-hover:opacity-50" style={{ background: a.color }} />
-                    <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest font-mono mb-3">Target Outcome</span>
-                    <span className="text-white text-[12px] sm:text-[13px] font-medium leading-snug">{a.outcome}</span>
-                  </div>
-
-                  {/* Card 3: Activity Chart / Progress */}
-                  <div className="col-span-1 glass-card-dark rounded-[16px] sm:rounded-[20px] p-4 flex flex-col justify-between shadow-lg">
-                    <span className="text-white/40 text-[9px] sm:text-[10px] uppercase tracking-widest font-mono mb-2">Efficiency</span>
-                    <div className="w-full flex items-end gap-1.5 h-10 mt-2">
-                      {[30, 50, 40, 70, 55, 100].map((h, idx) => (
-                        <div 
-                          key={idx} 
-                          className="w-full rounded-t-[2px] transition-all duration-700 delay-100" 
-                          style={{ 
-                            height: `${h}%`, 
-                            background: idx === 5 ? a.color : 'rgba(255,255,255,0.08)' 
-                          }} 
-                        />
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Card 4: Action Log (Full width) */}
-                  <div className="col-span-2 glass-card-dark rounded-[14px] p-3 sm:p-4 flex items-center justify-between shadow-xl relative overflow-hidden">
-                    <div className="absolute top-0 left-0 w-full h-full bg-white/20 animate-shimmer pointer-events-none" style={{ animationDelay: '1.5s' }} />
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-5 h-5 rounded-full flex items-center justify-center relative" style={{ background: `${a.color}22` }}>
-                        <span className="absolute inset-0 rounded-full animate-ping opacity-50" style={{ background: a.color }} />
-                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke={a.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                          <polyline points="20 6 9 17 4 12"></polyline>
-                        </svg>
-                      </div>
-                      <span className="text-white/70 text-[10px] sm:text-[11px] font-mono tracking-tight animate-type-log max-w-[180px] sm:max-w-[220px]">
-                        Executing {a.area} tasks...
-                      </span>
-                    </div>
-                    <span className="text-[9px] sm:text-[10px] text-[var(--secondary)] animate-pulse whitespace-nowrap">Live</span>
-                  </div>
-                </div>
                 </motion.div>
               </motion.div>
             </AnimatePresence>
