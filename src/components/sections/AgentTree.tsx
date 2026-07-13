@@ -100,7 +100,16 @@ export default function AgentTree() {
 
           {/* Wires from each agent into the core + traveling pulse */}
           {POS.map((p, i) => {
-            const d = `M ${p.x} ${p.y} Q ${(p.x + CX) / 2} ${(p.y + CY) / 2 + (p.y < CY ? -30 : 30)} ${CX} ${CY}`;
+            // Bow each wire perpendicular to its direction so EVERY connector —
+            // including the vertical top/bottom ones (Registration, Finance) —
+            // reads as a visible curve into the core, like the diagonal agents.
+            const dx = p.x - CX;
+            const dy = p.y - CY;
+            const len = Math.hypot(dx, dy) || 1;
+            const bow = 55;
+            const cx2 = ((p.x + CX) / 2 + (-dy / len) * bow).toFixed(1);
+            const cy2 = ((p.y + CY) / 2 + (dx / len) * bow).toFixed(1);
+            const d = `M ${p.x} ${p.y} Q ${cx2} ${cy2} ${CX} ${CY}`;
             return (
               <g key={i}>
                 <path d={d} fill="none" stroke="var(--border-strong)" strokeWidth="1.5" opacity="0.45" />
@@ -127,20 +136,25 @@ export default function AgentTree() {
         <div className="absolute -translate-x-1/2 -translate-y-1/2 z-20" style={{ left: pct(CX, VW), top: pct(CY, VH) }}>
           <div className="relative flex items-center justify-center">
             {/* pulse rings */}
-            <span className="absolute w-[150px] h-[150px] rounded-full border border-[var(--primary)]/40 animate-pulse-ring" />
-            <span className="absolute w-[150px] h-[150px] rounded-full border border-[var(--secondary)]/40 animate-pulse-ring" style={{ animationDelay: "1s" }} />
+            <span className="absolute w-[160px] h-[160px] rounded-full border border-[var(--primary)]/40 animate-pulse-ring" />
+            <span className="absolute w-[160px] h-[160px] rounded-full border border-[var(--secondary)]/40 animate-pulse-ring" style={{ animationDelay: "1s" }} />
             <motion.div
               initial={{ scale: 0.8, opacity: 0 }}
               whileInView={{ scale: 1, opacity: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="gradient-primary relative w-[150px] h-[150px] rounded-full flex flex-col items-center justify-center text-center shadow-2xl shadow-[#1B4FD8]/40"
+              className="gradient-primary relative w-[160px] h-[160px] rounded-full flex flex-col items-center justify-center text-center px-5 shadow-2xl shadow-[#1B4FD8]/40"
             >
               <Brain className="w-7 h-7 text-white mb-1" strokeWidth={1.5} />
               <span className="text-white text-[15px] font-semibold tracking-tight leading-none" style={{ fontFamily: "var(--font-playfair)" }}>
                 Zonov.ai
               </span>
-              <span className="type-mono text-[8px] text-white/70 mt-1">AI OPERATING SYSTEM</span>
+              <span
+                className="text-white/70 mt-1.5 uppercase text-center"
+                style={{ fontFamily: "var(--font-mono)", fontSize: "7.5px", letterSpacing: "0.06em", lineHeight: 1.35, maxWidth: "104px" }}
+              >
+                AI Operating System
+              </span>
             </motion.div>
           </div>
         </div>

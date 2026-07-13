@@ -68,13 +68,6 @@ export default function TestimonialsSection() {
         <div className={`${s.blob} ${s.blobBlue2}`} />
       </motion.div>
 
-      {/* ── Floating glass card decorations ── */}
-      <div className={`${s.glassCard} ${s.gc1}`} />
-      <div className={`${s.glassCard} ${s.gc2}`} />
-      <div className={`${s.glassCard} ${s.gc3}`} />
-      <div className={`${s.glassCard} ${s.gc4}`} />
-      <div className={`${s.glassCard} ${s.gc5}`} />
-
       <div className={`container-wide ${s.inner}`}>
 
         {/* Label */}
