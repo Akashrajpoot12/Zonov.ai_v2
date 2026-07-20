@@ -102,12 +102,9 @@ export default function GuidesFilter({ guides }: { guides: Guide[] }) {
                       </p>
                     </div>
                     <div
-                      className="flex items-center justify-between px-6 pb-6 pt-4"
+                      className="flex items-center justify-end px-6 pb-6 pt-4"
                       style={{ borderTop: "1px solid var(--border)" }}
                     >
-                      <span className="type-caption" style={{ color: "var(--text-muted)" }}>
-                        {guide.time}
-                      </span>
                       <a href="mailto:guides@zonov.ai?subject=Guide%20request" className="type-caption font-medium" style={{ color: "var(--primary)" }}>
                         Read Guide →
                       </a>

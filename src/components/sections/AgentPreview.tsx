@@ -33,10 +33,10 @@ function Chip({ label, c, tone = "brand" }: { label: string; c: string; tone?: "
   return <span className="text-[8px] font-mono px-2 py-0.5 rounded-full whitespace-nowrap" style={styles}>{label}</span>;
 }
 
-/* 01 — Registration: patient header + intake form + queue footer */
+/* 01, Registration: patient header + intake form + queue footer */
 function Registration({ c }: { c: string }) {
   const rows: [string, string, boolean][] = [
-    ["ABHA ID", "14-2938-8821", true],
+    ["Health ID", "14-2938-8821", true],
     ["Insurance", "Star Health", true],
     ["Department", "General OPD", false],
   ];
@@ -69,10 +69,10 @@ function Registration({ c }: { c: string }) {
   );
 }
 
-/* 02 — Prescription: recording bar + waveform + transcribed Rx list */
+/* 02, Prescription: recording bar + waveform + transcribed Rx list */
 function Prescription({ c }: { c: string }) {
   const bars = [40, 70, 30, 90, 55, 75, 35, 80, 50, 65, 45, 85, 30, 60, 40, 72];
-  const rx = ["Tab Paracetamol 500mg — 1-0-1", "Cap Amoxicillin 500mg — 1-1-1", "Syrup Ambroxol — 2 tsp SOS"];
+  const rx = ["Tab Paracetamol 500mg, 1-0-1", "Cap Amoxicillin 500mg, 1-1-1", "Syrup Ambroxol, 2 tsp SOS"];
   return (
     <div className="w-full flex flex-col gap-3">
       <div className={`${PANEL} p-3`}>
@@ -99,7 +99,7 @@ function Prescription({ c }: { c: string }) {
   );
 }
 
-/* 03 — Investigation: test-status chips + report table + critical banner */
+/* 03, Investigation: test-status chips + report table + critical banner */
 function Investigation({ c }: { c: string }) {
   const rows: [string, string, string, boolean][] = [
     ["Hemoglobin", "9.2", "g/dL", true],
@@ -115,7 +115,7 @@ function Investigation({ c }: { c: string }) {
       </div>
       <div className={`${PANEL} p-3`}>
         <div className="flex items-center justify-between mb-2">
-          <span className={LABEL}>CBC Panel — Report</span>
+          <span className={LABEL}>CBC Panel, Report</span>
           <Chip label="READY" c={c} />
         </div>
         <div className="space-y-1.5">
@@ -138,7 +138,7 @@ function Investigation({ c }: { c: string }) {
   );
 }
 
-/* 04 — Pharmacy: summary stat tiles + stock list with bars */
+/* 04, Pharmacy: summary stat tiles + stock list with bars */
 function Pharmacy({ c }: { c: string }) {
   const stats: [string, string, string][] = [["In Stock", "248", "#fff"], ["Near Expiry", "12", "#FBBF24"], ["Reorder", "3", "#F87171"]];
   const meds: [string, number, string, string][] = [
@@ -176,7 +176,7 @@ function Pharmacy({ c }: { c: string }) {
   );
 }
 
-/* 05 — IPD: patient header + vitals tiles + handover checklist */
+/* 05, IPD: patient header + vitals tiles + handover checklist */
 function IPD({ c }: { c: string }) {
   const vitals: [string, string][] = [["BP", "120/80"], ["HR", "78"], ["SpO₂", "98%"]];
   const handover = ["Meds administered", "Vitals charted", "Pending: 2 PM review"];
@@ -211,7 +211,7 @@ function IPD({ c }: { c: string }) {
   );
 }
 
-/* 06 — OT: status row + schedule timeline */
+/* 06, OT: status row + schedule timeline */
 function OT({ c }: { c: string }) {
   const suites: [string, number, number, string, boolean][] = [
     ["OT-1", 10, 45, "Cardiac", false],
@@ -225,7 +225,7 @@ function OT({ c }: { c: string }) {
         <Chip label="NEXT CASE · 15 MIN" c={c} tone="muted" />
       </div>
       <div className={`${PANEL} p-3`}>
-        <span className={LABEL}>OT Schedule — Today</span>
+        <span className={LABEL}>OT Schedule, Today</span>
         <div className="space-y-2.5 mt-3">
           {suites.map(([name, left, width, label, emg]) => (
             <div key={name} className="flex items-center gap-2">
@@ -244,7 +244,7 @@ function OT({ c }: { c: string }) {
   );
 }
 
-/* 07 — Claim: approval gauge + scrubbing checklist + amount */
+/* 07, Claim: approval gauge + scrubbing checklist + amount */
 function Claim({ c }: { c: string }) {
   const checks: [string, boolean][] = [
     ["Codes valid", true],
@@ -266,7 +266,7 @@ function Claim({ c }: { c: string }) {
         <div>
           <span className={LABEL}>Approval Likelihood</span>
           <p className="text-white text-[12px] font-medium mt-1">Claim #CLM-4471</p>
-          <p className="text-white/50 text-[10px] font-mono mt-0.5">₹ 84,200 · Star Health</p>
+          <p className="text-white/50 text-[10px] font-mono mt-0.5">Pre-authorized · Star Health</p>
         </div>
       </div>
       <div className={`${PANEL} p-3 space-y-1.5`}>
@@ -281,7 +281,7 @@ function Claim({ c }: { c: string }) {
   );
 }
 
-/* 08 — Finance: revenue KPI + sparkline + leakage breakdown */
+/* 08, Finance: revenue KPI + sparkline + leakage breakdown */
 function Finance({ c }: { c: string }) {
   const leaks: [string, number][] = [["Charge capture", 70], ["Coding gaps", 45], ["Denials", 30]];
   return (
@@ -290,7 +290,7 @@ function Finance({ c }: { c: string }) {
         <div className="flex items-start justify-between">
           <div>
             <span className={LABEL}>Revenue Recovered · MTD</span>
-            <p className="text-white text-[24px] font-semibold leading-none mt-1">₹1.2<span className="text-[14px] text-white/60"> Cr</span></p>
+            <p className="text-white text-[24px] font-semibold leading-none mt-1">20%<span className="text-[14px] text-white/60"> recovered</span></p>
             <p className="text-[10px] font-mono mt-1" style={{ color: c }}>▲ 18% vs last month</p>
           </div>
           <svg width="72" height="40" viewBox="0 0 72 40" fill="none" className="mt-1">

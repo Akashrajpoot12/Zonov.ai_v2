@@ -27,21 +27,21 @@ const ZONOV_CARDS = [
     label: 'REGISTRATION',
     icon: Mic,
     title: 'Voice Registration',
-    desc: 'Patient registered in under 90 seconds — just speak, no typing, no forms.',
+    desc: 'Patient registered in under 90 seconds, just speak, no typing, no forms.',
   },
   {
     id: 2,
     label: 'REGISTRATION',
     icon: IdCard,
-    title: 'ABHA Auto-Fetch',
-    desc: 'Scans health ID and pulls complete patient history instantly from ABDM.',
+    title: 'Health ID Auto-Fetch',
+    desc: 'Scans the national health ID and pulls complete patient history instantly.',
   },
   {
     id: 3,
     label: 'PRESCRIPTION',
     icon: Stethoscope,
     title: 'Voice Prescription',
-    desc: 'Doctors dictate — AI writes, codes, and saves the prescription error-free.',
+    desc: 'Doctors dictate, AI writes, codes, and saves the prescription error-free.',
   },
   {
     id: 4,
@@ -62,21 +62,21 @@ const ZONOV_CARDS = [
     label: 'DIAGNOSTICS',
     icon: Bone,
     title: 'Report Generation',
-    desc: 'AI-assisted radiology and pathology report drafting — 40% faster turnaround.',
+    desc: 'AI-assisted radiology and pathology report drafting, 40% faster turnaround.',
   },
   {
     id: 7,
     label: 'PHARMACY',
     icon: Pill,
     title: 'Expiry Alerts',
-    desc: 'Near-expiry and low-stock alerts in real time — zero wastage, zero stockouts.',
+    desc: 'Near-expiry and low-stock alerts in real time, zero wastage, zero stockouts.',
   },
   {
     id: 8,
     label: 'IPD',
     icon: BedDouble,
     title: 'Nursing Handovers',
-    desc: 'Structured, voice-captured shift handovers — nothing missed, ever.',
+    desc: 'Structured, voice-captured shift handovers, nothing missed, ever.',
   },
   {
     id: 9,
@@ -90,14 +90,14 @@ const ZONOV_CARDS = [
     label: 'CLAIMS',
     icon: ReceiptText,
     title: 'Claim Scrubbing',
-    desc: 'Every claim validated before submission — 20% fewer rejections guaranteed.',
+    desc: 'Every claim validated before submission, 20% fewer rejections guaranteed.',
   },
   {
     id: 11,
     label: 'FINANCE',
     icon: TrendingUp,
     title: 'Revenue Recovery',
-    desc: 'Unbilled procedures caught automatically — 20% revenue leakage recovered.',
+    desc: 'Unbilled procedures caught automatically, 20% revenue leakage recovered.',
   },
   {
     id: 12,
@@ -111,7 +111,7 @@ const ZONOV_CARDS = [
     label: 'DISCHARGE',
     icon: CheckCircle2,
     title: 'Discharge Planning',
-    desc: 'AI coordinates discharge checklists across departments — cuts time by 60%.',
+    desc: 'AI coordinates discharge checklists across departments, cuts time by 60%.',
   },
   {
     id: 14,
@@ -124,8 +124,8 @@ const ZONOV_CARDS = [
     id: 15,
     label: 'COMPLIANCE',
     icon: Lock,
-    title: 'ABDM Compliant',
-    desc: 'Fully ABDM/ABHA compliant by design — audit trails on every interaction.',
+    title: 'Standards Compliant',
+    desc: 'Built to national digital health standards by design, with audit trails on every interaction.',
   },
   {
     id: 16,
@@ -192,7 +192,7 @@ export default function CardBook({
       lastTsRef.current = ts;
       let r = rotationRef.current;
       if (draggingRef.current) {
-        // pointer-driven — no auto movement
+        // pointer-driven, no auto movement
       } else if (targetRef.current != null) {
         const diff = targetRef.current - r;
         if (Math.abs(diff) < 0.1) { r = targetRef.current; targetRef.current = null; }

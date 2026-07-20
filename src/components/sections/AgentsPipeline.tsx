@@ -7,7 +7,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import AgentPreview from "./AgentPreview";
 
 /* Patient-journey pipeline selector + per-agent live preview.
-   Self-contained (no section chrome) — the page provides the heading. */
+   Self-contained (no section chrome), the page provides the heading. */
 const AGENTS = [
   { slug: "patient-registration", num: "01", name: "Registration Agent", short: "Registration", icon: IdCard, area: "Front desk & OPD", tagline: "Zero-friction intake, from first contact to first care.", outcome: "Up to 60% faster OPD", color: "#1B4FD8" },
   { slug: "doctor-prescription", num: "02", name: "Doctor Prescription Agent", short: "Prescription", icon: Stethoscope, area: "Clinical documentation", tagline: "Every conversation captured. Every doctor's time given back.", outcome: "~2 hrs back / doctor", color: "#00B4AE" },
@@ -73,7 +73,7 @@ export default function AgentsPipeline() {
     <div onMouseEnter={() => setPaused(true)} onMouseLeave={() => setPaused(false)}>
       {/* ── Patient-journey pipeline selector ── */}
       <FadeIn delay={0.05}>
-        <p className="type-mono text-[var(--text-dim)] mb-4 text-[10px]">The patient journey — one platform, every stage</p>
+        <p className="type-mono text-[var(--text-dim)] mb-4 text-[10px]">The patient journey, one platform, every stage</p>
         <div className="overflow-x-auto pt-4 pb-3 mb-8 -mx-[var(--space-edge)] px-[var(--space-edge)]">
           <div className="relative flex min-w-[720px] lg:min-w-0">
             <div className="absolute top-[23px] h-[2px] bg-[var(--border)]" style={{ left: "6.25%", right: "6.25%" }} />
@@ -115,7 +115,7 @@ export default function AgentsPipeline() {
 
       {/* ── Showcase: text + live preview ── */}
       <div className="grid lg:grid-cols-2 gap-8 items-stretch">
-        {/* LEFT — text */}
+        {/* LEFT, text */}
         <div className="flex flex-col justify-center min-h-[300px]">
           <AnimatePresence mode="wait">
             <motion.div
@@ -125,7 +125,7 @@ export default function AgentsPipeline() {
               exit={{ opacity: 0, y: -12 }}
               transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
             >
-              <p className="type-mono mb-3" style={{ color: a.color }}>{a.num} — {a.area}</p>
+              <p className="type-mono mb-3" style={{ color: a.color }}>{a.num}, {a.area}</p>
               <h3 className="type-h2 text-[var(--text)] mb-4 [text-wrap:balance]">{a.name}</h3>
               <p className="type-body-lg text-[var(--text-muted)] max-w-md mb-6">{a.tagline}</p>
               <div className="flex flex-wrap items-center gap-3">
@@ -144,7 +144,7 @@ export default function AgentsPipeline() {
           </AnimatePresence>
         </div>
 
-        {/* RIGHT — per-agent live product mockup (dark screen) */}
+        {/* RIGHT, per-agent live product mockup (dark screen) */}
         <div
           className="noise relative rounded-[24px] overflow-hidden min-h-[420px] flex items-center justify-center"
           style={{ perspective: "1000px", background: "linear-gradient(160deg,#0D1F3C 0%,#122050 60%,#0A1830 100%)" }}

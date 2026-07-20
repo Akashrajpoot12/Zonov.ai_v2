@@ -8,7 +8,6 @@ export default function PlatformHero() {
       <div className="container-wide">
         <FadeIn>
           <p className="type-mono text-white/40 mb-5 flex items-center gap-3">
-            <span className="w-6 h-px bg-white/20" />
             The Platform
           </p>
         </FadeIn>
@@ -39,7 +38,7 @@ export default function PlatformHero() {
           <div className="mt-14 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
               { n: "1–2 wks", l: "Time to deploy" },
-              { n: "7", l: "Specialized AI agents" },
+              { n: "8", l: "Specialized AI agents" },
               { n: "100%", l: "HIPAA compliant" },
               { n: "24/7", l: "Autonomous operation" },
             ].map((s) => (

@@ -11,7 +11,7 @@
 //
 // If the env var is unset or the fetch fails, we fall back to the list below,
 // so the page always renders. The careers page revalidates hourly, so adding a
-// row in the Sheet shows up on the site within the hour — no code change, no deploy.
+// row in the Sheet shows up on the site within the hour, no code change, no deploy.
 
 export type Job = {
   slug: string;
@@ -20,15 +20,18 @@ export type Job = {
   location: string;
   type: string;
   description: string;
+  workMode?: string; // "On Site" | "Remote" | "Hybrid"
+  salary?: string; // e.g. "$130K - $200K" or "₹20-35 LPA"
+  equity?: string; // e.g. "Offers Equity"
 };
 
 const FALLBACK_JOBS: Job[] = [
-  { slug: "senior-full-stack-engineer", title: "Senior Full-Stack Engineer", department: "Engineering", location: "Remote India", type: "Full-time", description: "" },
-  { slug: "ai-ml-engineer-clinical-nlp", title: "AI/ML Engineer — Clinical NLP", department: "AI Research", location: "Bangalore", type: "Full-time", description: "" },
-  { slug: "product-manager-patient-workflows", title: "Product Manager — Patient Workflows", department: "Product", location: "Remote India", type: "Full-time", description: "" },
+  { slug: "senior-full-stack-engineer", title: "Senior Full-Stack Engineer", department: "Engineering", location: "Remote", type: "Full-time", description: "" },
+  { slug: "ai-ml-engineer-clinical-nlp", title: "AI/ML Engineer, Clinical NLP", department: "AI Research", location: "Remote", type: "Full-time", description: "" },
+  { slug: "product-manager-patient-workflows", title: "Product Manager, Patient Workflows", department: "Product", location: "Remote", type: "Full-time", description: "" },
   { slug: "clinical-consultant", title: "Clinical Consultant", department: "Healthcare", location: "Delhi / Mumbai", type: "Full-time", description: "" },
   { slug: "enterprise-sales-executive", title: "Enterprise Sales Executive", department: "Sales", location: "Mumbai", type: "Full-time", description: "" },
-  { slug: "ux-designer-healthcare", title: "UX Designer — Healthcare", department: "Design", location: "Remote India", type: "Full-time", description: "" },
+  { slug: "ux-designer-healthcare", title: "UX Designer, Healthcare", department: "Design", location: "Remote", type: "Full-time", description: "" },
 ];
 
 function slugify(s: string): string {
@@ -82,7 +85,7 @@ export async function getJobs(): Promise<Job[]> {
   if (!url) return FALLBACK_JOBS;
 
   try {
-    // Revalidate hourly — Sheet edits appear within the hour without a rebuild.
+    // Revalidate hourly, Sheet edits appear within the hour without a rebuild.
     const res = await fetch(url, { next: { revalidate: 3600 } });
     if (!res.ok) return FALLBACK_JOBS;
 
@@ -97,6 +100,9 @@ export async function getJobs(): Promise<Job[]> {
     const iType = col("type");
     const iDesc = col("description");
     const iActive = col("active");
+    const iWorkMode = col("workmode");
+    const iSalary = col("salary");
+    const iEquity = col("equity");
     if (iTitle === -1) return FALLBACK_JOBS;
 
     const at = (r: string[], i: number) => (i === -1 ? "" : (r[i] || "").trim());
@@ -114,6 +120,9 @@ export async function getJobs(): Promise<Job[]> {
         location: at(r, iLoc),
         type: at(r, iType) || "Full-time",
         description: at(r, iDesc),
+        workMode: at(r, iWorkMode) || undefined,
+        salary: at(r, iSalary) || undefined,
+        equity: at(r, iEquity) || undefined,
       });
     }
     return jobs.length ? jobs : FALLBACK_JOBS;

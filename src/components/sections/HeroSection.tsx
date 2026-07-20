@@ -40,7 +40,6 @@ export default function HeroSection() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
         >
-          <span className="w-8 h-px bg-[var(--primary)]" />
           AI Operating System for Healthcare
         </motion.p>
 
@@ -77,7 +76,7 @@ export default function HeroSection() {
             </motion.div>
           </div>
 
-          {/* Right — Product screenshot */}
+          {/* Right, Product screenshot */}
           <motion.div
             className="w-full relative"
             initial={{ opacity: 0, y: 24, scale: 0.97 }}
@@ -122,7 +121,7 @@ export default function HeroSection() {
               <span className="w-8 h-8 rounded-full bg-[var(--success)]/15 flex items-center justify-center text-[var(--success)]"><Check className="w-4 h-4" strokeWidth={2.5} /></span>
               <div>
                 <p className="text-[12px] font-semibold text-[var(--text)]">20% Revenue Recovered</p>
-                <p className="text-[10px] text-[var(--text-muted)]">Sunrise Hospital, Jaipur</p>
+                <p className="text-[10px] text-[var(--text-muted)]">Sunrise Hospital</p>
               </div>
             </motion.div>
             </div>
@@ -190,13 +189,24 @@ export default function HeroSection() {
           transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.5 }}
         >
           {STATS.map((s) => (
-            <div key={s.label}>
-              <p className="text-[clamp(28px,3vw,40px)] leading-none tracking-tight text-[var(--text)]" style={{ fontFamily: "var(--font-playfair)" }}>
+            <div key={s.label} className="flex flex-col">
+              <p
+                className="text-[clamp(30px,3.2vw,44px)] leading-none tracking-tight"
+                style={{
+                  fontFamily: "var(--font-playfair)",
+                  fontWeight: 800,
+                  background: "linear-gradient(120deg, #1B4FD8 0%, #00B4AE 100%)",
+                  WebkitBackgroundClip: "text",
+                  backgroundClip: "text",
+                  WebkitTextFillColor: "transparent",
+                  color: "transparent",
+                }}
+              >
                 {s.animate && s.value !== null
                   ? <CountUp value={s.value} suffix={s.suffix} />
-                  : <>{s.display}<span className="text-[var(--primary)]">{s.suffix}</span></>}
+                  : <>{s.display}{s.suffix}</>}
               </p>
-              <p className="type-mono text-[var(--text-dim)] mt-2">{s.label}</p>
+              <p className="type-mono text-[var(--text-muted)] mt-3">{s.label}</p>
             </div>
           ))}
         </motion.div>

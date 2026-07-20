@@ -2,29 +2,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import FadeIn from "@/components/ui/FadeIn";
-import { Link2, IdCard, Speech, Receipt, Building2 } from "lucide-react";
+import { Link2, IdCard, Speech, Receipt, Building2, Globe } from "lucide-react";
 import s from "./IndiaPanels.module.css";
-
-function IndiaFlag({ className }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 36 24" width="18" height="12" className={`inline-block rounded-[1px] align-middle ${className ?? ""}`} aria-hidden="true">
-      <rect width="36" height="8" y="0" fill="#FF9933" />
-      <rect width="36" height="8" y="8" fill="#fff" />
-      <rect width="36" height="8" y="16" fill="#138808" />
-      <circle cx="18" cy="12" r="3" fill="none" stroke="#000080" strokeWidth="0.6" />
-    </svg>
-  );
-}
 
 type PanelIcon = React.ComponentType<{ className?: string; strokeWidth?: number }>;
 
 const PANELS: { num: string; icon: PanelIcon; title: string; desc: string; color: string }[] = [
-  { num: "01", icon: Link2, title: "ABHA & ABDM Ready", desc: "Connects natively to India's Ayushman Bharat Digital Mission: ABHA IDs and the national digital health stack.", color: "#1B4FD8" },
-  { num: "02", icon: IdCard, title: "Aadhaar-Based Verification", desc: "Instant, reliable patient identity at registration: no duplicate records, no manual re-entry.", color: "#00B4AE" },
-  { num: "03", icon: Speech, title: "Speaks Your Patients' Language", desc: "Engages patients across India's major regional languages, so care is never lost in translation.", color: "#7C3AED" },
-  { num: "04", icon: Receipt, title: "Insurance & TPA Workflows", desc: "Built for cashless claims, Ayushman Bharat, and the TPA portals Indian hospitals handle every day.", color: "#059669" },
-  { num: "05", icon: Building2, title: "Made for India's Scale", desc: "Designed for high-volume OPDs and multi-specialty hospitals: hundreds of patients a day, handled calmly.", color: "#D97706" },
-  { num: "06", icon: IndiaFlag, title: "India-First, Not Adapted", desc: "Engineered from day one for Indian healthcare, not a Western product retrofitted for India.", color: "#1B4FD8" },
+  { num: "01", icon: Link2, title: "National Health ID Ready", desc: "Connects natively to national digital health ID systems and the wider health-data stack.", color: "#1B4FD8" },
+  { num: "02", icon: IdCard, title: "Instant Identity Verification", desc: "Instant, reliable patient identity at registration: no duplicate records, no manual re-entry.", color: "#00B4AE" },
+  { num: "03", icon: Speech, title: "Speaks Your Patients' Language", desc: "Engages patients across dozens of languages, so care is never lost in translation.", color: "#7C3AED" },
+  { num: "04", icon: Receipt, title: "Insurance & TPA Workflows", desc: "Built for cashless claims and the insurance and TPA portals hospitals handle every day.", color: "#059669" },
+  { num: "05", icon: Building2, title: "Built for High-Volume Care", desc: "Designed for high-volume OPDs and multi-specialty hospitals: hundreds of patients a day, handled calmly.", color: "#D97706" },
+  { num: "06", icon: Globe, title: "Built for Modern Healthcare", desc: "Engineered from day one for real hospital workflows, not generic software retrofitted for healthcare.", color: "#1B4FD8" },
 ];
 
 export default function IndiaPanels() {
@@ -39,16 +28,16 @@ export default function IndiaPanels() {
     <section className="bg-[var(--surface)] section-py">
       <div className="container-wide px-edge">
         <FadeIn>
-          <p className="type-mono text-[var(--primary)] mb-2">BUILT FOR INDIA</p>
+          <p className="type-mono text-[var(--primary)] mb-2">BUILT FOR MODERN HEALTHCARE</p>
           <h2 className="type-h2 text-[var(--text)] mb-3 [text-wrap:balance]">
-            Designed for Indian healthcare, from the ground up.
+            Designed for real healthcare, from the ground up.
           </h2>
           <p className="type-body-lg text-[var(--text-muted)] max-w-xl mb-12">
-            Indian hospitals don&rsquo;t run like hospitals anywhere else. Zonov.ai is built for the systems, languages, and scale your hospital actually works with.
+            Hospitals don&rsquo;t run like ordinary businesses. Zonov.ai is built for the systems, languages, and scale your hospital actually works with.
           </p>
         </FadeIn>
 
-        {/* Desktop — expanding panels */}
+        {/* Desktop, expanding panels */}
         <FadeIn delay={0.1}>
           <div className={`${s.row} hidden md:flex`}>
             {PANELS.map((p, i) => {
@@ -80,7 +69,7 @@ export default function IndiaPanels() {
           </div>
         </FadeIn>
 
-        {/* Mobile — simple stacked cards */}
+        {/* Mobile, simple stacked cards */}
         <div className="md:hidden flex flex-col gap-3">
           {PANELS.map((p) => {
             const Icon = p.icon;
@@ -103,7 +92,7 @@ export default function IndiaPanels() {
 
         <FadeIn delay={0.15}>
           <p className="mt-8 type-body text-[var(--text-dim)]">
-            Built on India&rsquo;s digital health rails:{" "}
+            Built on open digital health standards:{" "}
             <Link href="/platform" className="font-medium text-[var(--primary)] underline underline-offset-2">
               see how the platform connects
             </Link>

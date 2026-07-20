@@ -5,8 +5,8 @@ import FadeIn from "@/components/ui/FadeIn";
 import ApplyForm from "./ApplyForm";
 
 export const metadata: Metadata = {
-  title: "Apply — Careers",
-  description: "Apply to join the team building the AI layer that runs India's hospitals.",
+  title: "Apply, Careers",
+  description: "Apply to join the team building the AI layer that runs hospitals worldwide.",
 };
 
 export default async function ApplyPage({
@@ -23,12 +23,14 @@ export default async function ApplyPage({
         <section className="bg-[var(--dark-navy)] noise relative pt-40 pb-24 text-center">
           <div className="relative z-10 container-wide px-edge">
             <FadeIn>
-              <Link
-                href="/careers"
-                className="type-mono text-white/40 hover:text-white/70 transition-colors inline-flex items-center gap-1.5 mb-6"
-              >
-                ← Back to all roles
-              </Link>
+              <div className="text-left mb-8">
+                <Link
+                  href="/careers"
+                  className="type-mono text-white/40 hover:text-white/70 transition-colors inline-flex items-center gap-1.5"
+                >
+                  ← Back to all roles
+                </Link>
+              </div>
               <p className="type-mono text-white/40 mb-4">APPLY NOW</p>
               <h1 className="type-h1 text-white max-w-3xl mx-auto">
                 {position === "General Application" ? (

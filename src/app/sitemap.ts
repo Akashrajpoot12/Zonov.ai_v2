@@ -1,4 +1,5 @@
 import { MetadataRoute } from "next";
+import { EVENTS } from "@/lib/events";
 
 const BASE_URL = "https://zonov.ai";
 
@@ -13,28 +14,7 @@ const AGENT_SLUGS = [
   "finance",
 ];
 
-const BLOG_SLUGS = [
-  "why-hospitals-need-ai-workforce",
-  "future-of-hospital-operations",
-  "revenue-leakage-in-healthcare",
-  "ai-vs-traditional-hims",
-  "how-ai-reduces-doctor-burnout",
-  "ai-powered-patient-follow-up",
-  "digital-transformation-in-healthcare",
-  "hospital-efficiency-metrics",
-  "voice-ai-for-doctors",
-  "ai-in-revenue-cycle-management",
-  "reducing-waiting-time-through-automation",
-  "intelligent-hospital-operations",
-  "ai-for-multi-hospital-chains",
-  "hospital-analytics-explained",
-  "predictive-healthcare-operations",
-  "future-of-clinical-documentation",
-  "ai-agents-in-healthcare",
-  "building-smart-hospitals",
-  "healthcare-automation-trends",
-  "autonomous-hospitals-the-next-decade",
-];
+const BLOG_SLUGS = EVENTS.map((e) => e.slug);
 
 const CUSTOMER_SLUGS = [
   "sunrise-multispeciality",

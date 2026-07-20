@@ -57,7 +57,7 @@ const POS = AGENTS.map((_, i) => posOf(i));
 export default function AgentTree() {
   return (
     <>
-      {/* ════════ DESKTOP — REACTOR CORE (lg+) ════════ */}
+      {/* ════════ DESKTOP, REACTOR CORE (lg+) ════════ */}
       <div
         className="hidden lg:block relative w-full max-w-[1080px] mx-auto"
         style={{ aspectRatio: `${VW} / ${VH}` }}
@@ -100,8 +100,8 @@ export default function AgentTree() {
 
           {/* Wires from each agent into the core + traveling pulse */}
           {POS.map((p, i) => {
-            // Bow each wire perpendicular to its direction so EVERY connector —
-            // including the vertical top/bottom ones (Registration, Finance) —
+            // Bow each wire perpendicular to its direction so EVERY connector -
+            // including the vertical top/bottom ones (Registration, Finance) -
             // reads as a visible curve into the core, like the diagonal agents.
             const dx = p.x - CX;
             const dy = p.y - CY;

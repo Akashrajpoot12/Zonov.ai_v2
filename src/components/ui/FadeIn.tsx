@@ -43,7 +43,7 @@ export default function FadeIn({
   );
 }
 
-/* Stagger container — wraps multiple FadeIn children */
+/* Stagger container, wraps multiple FadeIn children */
 export function FadeInStagger({
   children,
   stagger = 0.1,

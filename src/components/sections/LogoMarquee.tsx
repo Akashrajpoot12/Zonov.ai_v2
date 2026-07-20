@@ -1,12 +1,16 @@
 "use client";
 
-import { ShieldCheck, LayoutGrid, Activity, Lock, Clock } from "lucide-react";
+import { ShieldCheck, LayoutGrid, Activity, Lock, Clock, BadgeCheck, Award, Globe } from "lucide-react";
 
 const COMPLIANCES = [
-  { text: "ABDM & ABHA Compliant", Icon: ShieldCheck },
-  { text: "Works with Your Existing HIS", Icon: LayoutGrid },
+  { text: "SOC 2 Type II", Icon: BadgeCheck },
+  { text: "HIPAA Compliant", Icon: ShieldCheck },
+  { text: "ISO 27001 Certified", Icon: Award },
+  { text: "GDPR Ready", Icon: Globe },
   { text: "HL7 / FHIR Integration", Icon: Activity },
   { text: "End-to-End Encryption", Icon: Lock },
+  { text: "National Health ID Ready", Icon: ShieldCheck },
+  { text: "Works with Your Existing HIS", Icon: LayoutGrid },
   { text: "Live in 2-8 Weeks", Icon: Clock }
 ];
 
@@ -19,12 +23,6 @@ export default function LogoMarquee() {
 
   return (
     <div className="py-8 border-t border-white/5 bg-[var(--dark-navy)]">
-      <div className="container-wide mb-6">
-        <p className="type-mono text-[var(--secondary)] text-[11px] tracking-widest flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-[var(--secondary)] animate-pulse" />
-          ENTERPRISE-GRADE, BUILT FOR INDIAN HEALTHCARE
-        </p>
-      </div>
       <div
         className="overflow-hidden"
         style={{
@@ -56,7 +54,7 @@ export default function LogoMarquee() {
                   </span>
                 </div>
 
-                {/* AI Sparkle Separator — on EVERY item so both copies are
+                {/* AI Sparkle Separator, on EVERY item so both copies are
                     identical and the loop seam is invisible */}
                 <span className="text-white/20 text-[10px] ml-2" aria-hidden="true">✦</span>
               </div>

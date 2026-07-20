@@ -4,7 +4,7 @@ import Image from "next/image";
 type FooterLink = { label: string; href: string; external?: boolean; icon?: "mail" | "linkedin" };
 type FooterGroup = { title: string; links: FooterLink[] };
 
-// Three columns, each stacking two groups — amigo-style.
+// Three columns, each stacking two groups, amigo-style.
 const FOOTER_COLUMNS: FooterGroup[][] = [
   [
     {
@@ -46,7 +46,7 @@ const FOOTER_COLUMNS: FooterGroup[][] = [
       title: "Connect",
       links: [
         { label: "Contact Us", href: "mailto:hello@zonov.ai", icon: "mail", external: true },
-        { label: "LinkedIn", href: "https://linkedin.com/company/zonovai", icon: "linkedin", external: true },
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/zonov-ai/posts/?feedView=all", icon: "linkedin", external: true },
       ],
     },
     {
@@ -103,9 +103,9 @@ export default function Footer() {
     <footer className="relative overflow-hidden bg-[var(--dark-navy)] text-white">
       {/* Top CTA band */}
       <div className="border-b border-white/10 relative overflow-hidden z-10 py-8 md:py-10">
-        {/* Floating 3D panels — decorative background */}
+        {/* Floating 3D panels, decorative background */}
         <div className="absolute inset-0 pointer-events-none select-none" aria-hidden="true">
-          {/* Panel 1 — large, far right */}
+          {/* Panel 1, large, far right */}
           <div style={{
             position: "absolute",
             right: "-40px",
@@ -119,7 +119,7 @@ export default function Footer() {
             WebkitBackdropFilter: "blur(2px)",
             backdropFilter: "blur(2px)",
           }} />
-          {/* Panel 2 — medium, overlapping */}
+          {/* Panel 2, medium, overlapping */}
           <div style={{
             position: "absolute",
             right: "160px",
@@ -131,7 +131,7 @@ export default function Footer() {
             border: "1px solid rgba(255,255,255,0.07)",
             transform: "perspective(800px) rotateY(-14deg) rotateX(6deg)",
           }} />
-          {/* Panel 3 — small accent, bottom right */}
+          {/* Panel 3, small accent, bottom right */}
           <div style={{
             position: "absolute",
             right: "60px",
@@ -173,10 +173,10 @@ export default function Footer() {
         </div>
       </div>
 
-{/* Spacer — gap after the CTA band line */}
+{/* Spacer, gap after the CTA band line */}
       <div className="h-10 md:h-14 relative z-10" aria-hidden="true" />
 
-      {/* Links grid + brand column — amigo style */}
+      {/* Links grid + brand column, amigo style */}
       <div className="container-wide pb-20 relative z-10">
         <div className="grid grid-cols-2 lg:grid-cols-[1.6fr_1fr_1fr_1fr] gap-10 lg:gap-0">
 
@@ -184,7 +184,7 @@ export default function Footer() {
           <div className="col-span-2 lg:col-span-1 lg:pr-12">
             <Image
               src="/logo-footer.png"
-              alt="Zonov.ai — The Future of Healthcare, Now!"
+              alt="Zonov.ai, The Future of Healthcare, Now!"
               width={110}
               height={32}
               style={{ height: "85px", width: "auto" }}
@@ -193,26 +193,22 @@ export default function Footer() {
               className="mt-6 text-white/80 max-w-[300px] leading-snug"
               style={{ fontFamily: "var(--font-playfair)", fontSize: "22px" }}
             >
-              The AI Operating System for India&rsquo;s hospitals.
+              The AI Operating System for hospitals worldwide.
             </p>
 
             {/* Social icons */}
             <div className="mt-7 flex items-center gap-3">
-              <a href="https://linkedin.com/company/zonovai" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/55 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all">
+              <a href="https://www.linkedin.com/company/zonov-ai/posts/?feedView=all" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/55 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
                   <rect x="2" y="9" width="4" height="12"/>
                   <circle cx="4" cy="4" r="2"/>
                 </svg>
               </a>
-              <a href="https://x.com/zonovai" target="_blank" rel="noopener noreferrer" aria-label="Twitter / X" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/55 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all">
-                <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-4.714-6.231-5.401 6.231H2.744l7.737-8.835L1.254 2.25H8.08l4.259 5.63 5.905-5.63zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-                </svg>
-              </a>
-              <a href="https://github.com/zonovai" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/55 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0 1 12 6.844a9.59 9.59 0 0 1 2.504.337c1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.02 10.02 0 0 0 22 12.017C22 6.484 17.522 2 12 2z"/>
+              <a href="mailto:arvind@zonov.ai" aria-label="Email" className="w-9 h-9 rounded-full border border-white/15 flex items-center justify-center text-white/55 hover:text-white hover:border-white/40 hover:bg-white/5 transition-all">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <rect width="20" height="16" x="2" y="4" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
               </a>
             </div>

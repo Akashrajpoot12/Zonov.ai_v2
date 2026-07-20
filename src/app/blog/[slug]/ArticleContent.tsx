@@ -118,7 +118,7 @@ export default function ArticleContent({ content }: { content: string }) {
       continue;
     }
 
-    // Paragraph — the first one reads as a larger lead-in.
+    // Paragraph, the first one reads as a larger lead-in.
     blocks.push(
       <p
         key={key++}

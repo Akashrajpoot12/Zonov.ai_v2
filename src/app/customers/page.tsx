@@ -5,8 +5,8 @@ import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Customer Stories — Zonov.ai",
-  description: "How Indian hospitals recover revenue and deliver better care with Zonov.ai.",
+  title: "Customer Stories, Zonov.ai",
+  description: "How hospitals worldwide recover revenue and deliver better care with Zonov.ai.",
 };
 
 const stats = [
@@ -20,8 +20,7 @@ const customers = [
   {
     initials: "SM",
     name: "Sunrise Multispeciality Hospital",
-    city: "Jaipur",
-    beds: "200 beds",
+    city: "London",
     type: "Multispeciality",
     slug: "sunrise-multispeciality",
     quote: "Zonov.ai transformed our operational efficiency without increasing manpower.",
@@ -33,8 +32,7 @@ const customers = [
   {
     initials: "MH",
     name: "Metro Heart Institute",
-    city: "Delhi",
-    beds: "350 beds",
+    city: "Dubai",
     type: "Cardiac Care",
     slug: "metro-heart-institute",
     quote: "Our clinicians now spend more time with patients instead of screens.",
@@ -46,8 +44,7 @@ const customers = [
   {
     initials: "CF",
     name: "CareFirst Medical Center",
-    city: "Bangalore",
-    beds: "500 beds",
+    city: "Singapore",
     type: "Multispeciality",
     slug: "carefirst-medical",
     quote: "Zonov.ai became our operational command center.",
@@ -72,7 +69,7 @@ export default function CustomersPage() {
                 with Zonov.ai
               </h1>
               <p className="type-body-lg mt-5 max-w-2xl" style={{ color: "rgba(255,255,255,0.6)" }}>
-                Real results from Indian hospitals recovering revenue, reducing admin burden, and delivering better patient experiences.
+                Real results from hospitals recovering revenue, reducing admin burden, and delivering better patient experiences.
               </p>
             </FadeIn>
 
@@ -113,7 +110,7 @@ export default function CustomersPage() {
                           <div>
                             <h3 className="type-h4 leading-tight" style={{ color: "var(--text)" }}>{customer.name}</h3>
                             <p className="type-caption mt-0.5" style={{ color: "var(--text-muted)" }}>
-                              {customer.city} · {customer.beds} · {customer.type}
+                              {customer.city} · {customer.type}
                             </p>
                           </div>
                         </div>
@@ -133,7 +130,7 @@ export default function CustomersPage() {
                           </span>
                           {customer.quote}
                         </blockquote>
-                        <p className="type-caption mt-3" style={{ color: "var(--text-muted)" }}>— {customer.author}</p>
+                        <p className="type-caption mt-3" style={{ color: "var(--text-muted)" }}>- {customer.author}</p>
 
                         <div
                           className="mt-6 pt-5 flex items-center justify-between"
@@ -157,6 +154,11 @@ export default function CustomersPage() {
                 ))}
               </div>
             </FadeInStagger>
+            <FadeIn delay={0.2}>
+              <p className="type-caption text-center mt-10" style={{ color: "var(--text-dim)" }}>
+                Representative examples shown. Full customer stories coming soon.
+              </p>
+            </FadeIn>
           </div>
         </section>
 

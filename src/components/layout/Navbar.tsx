@@ -23,7 +23,7 @@ const NAV_LINKS = [
 ];
 
 /* Transparent "capsule" behind the active nav item. Renders instantly on the
-   active link — no shared-layout slide, so it never appears to fly in across
+   active link, no shared-layout slide, so it never appears to fly in across
    the bar when switching pages. */
 function NavPill() {
   return (
@@ -31,7 +31,7 @@ function NavPill() {
       aria-hidden
       className="absolute inset-0 rounded-full"
       style={{
-        // rgba (not color-mix) for full browser support — brand primary #1B4FD8
+        // rgba (not color-mix) for full browser support, brand primary #1B4FD8
         background: "rgba(27, 79, 216, 0.1)",
         border: "1px solid rgba(27, 79, 216, 0.22)",
       }}
@@ -68,8 +68,9 @@ export default function Navbar() {
         {/* Logo */}
         <Link href="/" className="flex items-center flex-shrink-0" aria-label="Zonov.ai home">
           <Image
+            id="site-logo"
             src="/logo-nav.png"
-            alt="Zonov.ai — The Future of Healthcare"
+            alt="Zonov.ai, The Future of Healthcare"
             width={1377}
             height={406}
             priority
@@ -77,7 +78,7 @@ export default function Navbar() {
           />
         </Link>
 
-        {/* Desktop Nav — absolutely centered */}
+        {/* Desktop Nav, absolutely centered */}
         <div className="hidden lg:flex items-center gap-1 absolute left-1/2 -translate-x-1/2 google-sans-500">
           {NAV_LINKS.map((link) => {
             const active = link.dropdown

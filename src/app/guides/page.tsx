@@ -5,7 +5,7 @@ import NewsletterForm from "@/components/ui/NewsletterForm";
 import GuidesFilter from "./GuidesFilter";
 
 export const metadata: Metadata = {
-  title: "Guides & Resources — Zonov.ai",
+  title: "Guides & Resources, Zonov.ai",
   description: "Practical implementation guides for hospital teams navigating AI adoption.",
 };
 
@@ -45,9 +45,9 @@ const guides = [
   {
     category: "Implementation",
     color: "var(--primary)",
-    title: "AI in Indian healthcare: ABDM, ABHA, and what it means for you",
+    title: "National health IDs and AI: what it means for your hospital",
     description:
-      "A clear explanation of the Ayushman Bharat Digital Mission and how AI systems must align with ABHA ID, PHR, and HIP requirements. Relevant for every Indian hospital.",
+      "A clear explanation of national digital health ID systems and how AI must align with health-ID, PHR, and provider requirements. Relevant for every modern hospital.",
     time: "9 min read",
   },
   {
@@ -63,7 +63,7 @@ const guides = [
     color: "#06C270",
     title: "Revenue leakage: identifying and recovering missed billing",
     description:
-      "How Indian hospitals lose 15–25% of billed revenue to unbilled procedures, claim rejections, and late submissions, and how AI catches it in real time.",
+      "How hospitals lose 15–25% of billed revenue to unbilled procedures, claim rejections, and late submissions, and how AI catches it in real time.",
     time: "7 min read",
   },
   {
@@ -121,7 +121,7 @@ export default function GuidesPage() {
                 className="type-body mt-3 max-w-lg"
                 style={{ color: "var(--text-muted)" }}
               >
-                One digest per month. Implementation tips, regulatory updates, and case studies from Indian hospitals.
+                One digest per month. Implementation tips, regulatory updates, and case studies from hospitals worldwide.
               </p>
               <NewsletterForm />
               <p

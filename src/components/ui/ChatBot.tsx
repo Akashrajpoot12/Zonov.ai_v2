@@ -74,7 +74,7 @@ function inlineMd(text: string): string {
     .replace(/>/g, "&gt;")
     .replace(/"/g, "&quot;");
   return esc
-    // Markdown links [label](url) — allow internal paths, http(s), and mailto only
+    // Markdown links [label](url), allow internal paths, http(s), and mailto only
     .replace(
       /\[([^\]]+)\]\((https?:\/\/[^\s)]+|\/[^\s)]*|mailto:[^\s)]+)\)/g,
       (_m, label, url) => {
@@ -202,7 +202,7 @@ export default function ChatBot() {
                   </div>
                 </div>
               ))}
-              {/* Quick-reply suggestions — shown only on the opening message */}
+              {/* Quick-reply suggestions, shown only on the opening message */}
               {messages.length === 1 && !loading && (
                 <div className="flex flex-wrap gap-2 pt-0.5">
                   {QUICK_REPLIES.map((q) => (

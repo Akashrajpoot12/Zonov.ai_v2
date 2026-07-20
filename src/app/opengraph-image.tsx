@@ -1,12 +1,12 @@
 import { ImageResponse } from "next/og";
 
 // Image metadata
-export const alt = "Zonov.ai — AI Operating System for Healthcare";
+export const alt = "Zonov.ai, AI Operating System for Healthcare";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 // Dynamically generated Open Graph image (also used for Twitter).
-// Brand: Sapphire Health — navy gradient, white headline, accent highlight.
+// Brand: Sapphire Health, navy gradient, white headline, accent highlight.
 export default function Image() {
   return new ImageResponse(
     (
@@ -23,7 +23,7 @@ export default function Image() {
           fontFamily: "sans-serif",
         }}
       >
-        {/* Top — wordmark + eyebrow */}
+        {/* Top, wordmark + eyebrow */}
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div
             style={{
@@ -50,7 +50,7 @@ export default function Image() {
           </div>
         </div>
 
-        {/* Middle — headline */}
+        {/* Middle, headline */}
         <div style={{ display: "flex", flexDirection: "column", gap: 24 }}>
           <div
             style={{
@@ -75,12 +75,12 @@ export default function Image() {
               maxWidth: 880,
             }}
           >
-            Automate every hospital workflow — from patient registration to final
-            billing — with specialized AI agents.
+            Automate every hospital workflow, from patient registration to final
+            billing, with specialized AI agents.
           </div>
         </div>
 
-        {/* Bottom — trust row */}
+        {/* Bottom, trust row */}
         <div
           style={{
             display: "flex",
@@ -90,7 +90,7 @@ export default function Image() {
             color: "rgba(255,255,255,0.6)",
           }}
         >
-          <span style={{ display: "flex" }}>ABDM &amp; ABHA Compliant</span>
+          <span style={{ display: "flex" }}>National Health ID Ready</span>
           <span style={{ display: "flex", color: "rgba(255,255,255,0.3)" }}>•</span>
           <span style={{ display: "flex" }}>Works with your existing HIS</span>
           <span style={{ display: "flex", color: "rgba(255,255,255,0.3)" }}>•</span>

@@ -162,7 +162,7 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <p className="type-caption text-[var(--text-muted)]">Location</p>
-                      <p className="type-body font-medium text-[var(--text)]">Bangalore, India</p>
+                      <p className="type-body font-medium text-[var(--text)]">Jaipur, India · US office</p>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">

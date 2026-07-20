@@ -2,7 +2,7 @@ import Link from "next/link";
 import FadeIn from "@/components/ui/FadeIn";
 import AgentsPipeline from "./AgentsPipeline";
 
-/* Home "What We Provide" section — interactive patient-journey pipeline with
+/* Home "What We Provide" section, interactive patient-journey pipeline with
    per-agent live previews (auto-play tour). */
 export default function AgentsOverview() {
   return (
@@ -10,7 +10,6 @@ export default function AgentsOverview() {
       <div className="container-wide">
         <FadeIn>
           <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-            <span className="w-6 h-px bg-[var(--primary)]" />
             What We Provide
           </p>
         </FadeIn>

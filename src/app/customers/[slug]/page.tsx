@@ -9,7 +9,6 @@ interface CaseStudy {
   slug: string;
   name: string;
   location: string;
-  beds: string;
   type: string;
   tagline: string;
   challenges: string[];
@@ -24,8 +23,7 @@ const caseStudies: CaseStudy[] = [
   {
     slug: "sunrise-multispeciality",
     name: "Sunrise Multispeciality Hospital",
-    location: "Jaipur, Rajasthan",
-    beds: "200 Beds",
+    location: "London, UK",
     type: "Multispeciality Hospital",
     tagline: "From administrative bottlenecks to a streamlined operation, in under 8 weeks.",
     challenges: [
@@ -54,8 +52,7 @@ const caseStudies: CaseStudy[] = [
   {
     slug: "metro-heart-institute",
     name: "Metro Heart Institute",
-    location: "Delhi, NCR",
-    beds: "350 Beds",
+    location: "Dubai, UAE",
     type: "Cardiac Care Hospital",
     tagline: "Giving clinicians their time back, without changing how they work.",
     challenges: [
@@ -82,13 +79,12 @@ const caseStudies: CaseStudy[] = [
   {
     slug: "carefirst-medical",
     name: "CareFirst Medical Center",
-    location: "Bangalore, Karnataka",
-    beds: "500 Beds",
+    location: "Singapore",
     type: "Multispeciality Hospital",
     tagline: "A single AI layer that unified operations across all departments.",
     challenges: [
-      "At 500 beds, manual reporting across departments created data silos with no unified view for leadership",
-      "Revenue leakage was systemic: unbilled procedures and delayed charge captures cost crores annually",
+      "At scale, manual reporting across departments created data silos with no unified view for leadership",
+      "Revenue leakage was systemic: unbilled procedures and delayed charge captures cost significant revenue annually",
       "Reporting cycles took 3–4 days, making it impossible to respond to operational issues in real time",
       "Manual data aggregation for board-level dashboards required a full analyst team each quarter",
       "Department heads had no live visibility into bed occupancy, OT utilisation, or billing status",
@@ -117,9 +113,9 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params;
   const cs = caseStudies.find((c) => c.slug === slug);
-  if (!cs) return { title: "Case Study — Zonov.ai" };
+  if (!cs) return { title: "Case Study, Zonov.ai" };
   return {
-    title: `${cs.name} — Zonov.ai Customer Story`,
+    title: `${cs.name}, Zonov.ai Customer Story`,
     description: cs.tagline,
   };
 }
@@ -159,12 +155,6 @@ export default async function CaseStudyPage({ params }: { params: Promise<{ slug
                   style={{ backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}
                 >
                   {cs.type}
-                </span>
-                <span
-                  className="type-mono text-xs px-3 py-1 rounded-full"
-                  style={{ backgroundColor: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.5)" }}
-                >
-                  {cs.beds}
                 </span>
                 <span
                   className="type-mono text-xs px-3 py-1 rounded-full"

@@ -1,6 +1,5 @@
 import Link from "next/link";
 import FadeIn from "@/components/ui/FadeIn";
-import CursorSpotlight from "@/components/ui/CursorSpotlight";
 
 export default function CTASection() {
   return (
@@ -8,10 +7,6 @@ export default function CTASection() {
       <div className="container-wide">
         <FadeIn>
           <div className="noise relative rounded-[32px] bg-[var(--dark-navy)] overflow-hidden px-8 md:px-16 py-16 md:py-20 text-center">
-            <CursorSpotlight color="rgba(124,58,237,0.22)" size={520} />
-            <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full opacity-20 blur-3xl pointer-events-none bg-[var(--secondary)]" />
-            <div className="absolute -bottom-20 -right-20 w-72 h-72 rounded-full opacity-20 blur-3xl pointer-events-none bg-[var(--purple)]" />
-
             <div className="relative z-10">
               <p className="type-mono text-white/40 mb-5">Get Started Today</p>
               <h2

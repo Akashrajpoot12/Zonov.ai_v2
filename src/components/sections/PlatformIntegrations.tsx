@@ -9,11 +9,11 @@ const SYSTEMS: { name: string; examples: string; icon: LucideIcon }[] = [
   { name: "Billing & Insurance", examples: "Kareo, NexGen, custom TPA portals", icon: CreditCard },
   { name: "Pharmacy", examples: "Rx30, QS/1, Medispan", icon: Pill },
   { name: "Patient Apps", examples: "WhatsApp, iOS, Android, web", icon: Smartphone },
-  { name: "Government / NHA", examples: "ABHA, Ayushman Bharat, NDHM", icon: Landmark },
+  { name: "National Health Systems", examples: "National health IDs, public schemes", icon: Landmark },
   { name: "Custom Systems", examples: "Any REST API or HL7 FHIR endpoint", icon: Link2 },
 ];
 
-const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "ABDM", "OAuth 2.0", "SNOMED CT", "ICD-10"];
+const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "OpenEHR", "OAuth 2.0", "SNOMED CT", "ICD-10"];
 
 type System = (typeof SYSTEMS)[number];
 
@@ -38,7 +38,6 @@ export default function PlatformIntegrations() {
       <div className="container-wide">
         <FadeIn>
           <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-            <span className="w-6 h-px bg-[var(--primary)]" />
             Integrations
           </p>
           <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4 google-sans-700">

@@ -1,6 +1,6 @@
 import FadeIn, { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 import type { LucideIcon } from "lucide-react";
-import { UserRound, Stethoscope, Building2, Landmark } from "lucide-react";
+import { UserRound, Stethoscope, Building2 } from "lucide-react";
 
 const STAKEHOLDERS: { icon: LucideIcon; title: string; color: string; values: string[] }[] = [
   {
@@ -36,17 +36,6 @@ const STAKEHOLDERS: { icon: LucideIcon; title: string; color: string; values: st
       "Better compliance & audit trails",
     ],
   },
-  {
-    icon: Landmark,
-    title: "For Governments",
-    color: "#F59E0B",
-    values: [
-      "Better healthcare delivery at scale",
-      "Improved public health monitoring",
-      "Digital healthcare transformation",
-      "Data-driven policy decisions",
-    ],
-  },
 ];
 
 export default function ValueSection() {
@@ -55,7 +44,6 @@ export default function ValueSection() {
       <div className="container-wide">
         <FadeIn>
           <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-            <span className="w-6 h-px bg-[var(--primary)]" />
             The Value We Create
           </p>
         </FadeIn>
@@ -71,7 +59,7 @@ export default function ValueSection() {
           </p>
         </FadeIn>
 
-        <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5" stagger={0.08}>
+        <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5" stagger={0.08}>
           {STAKEHOLDERS.map((s) => {
             const Icon = s.icon;
             return (

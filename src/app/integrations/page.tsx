@@ -5,8 +5,8 @@ import FadeIn from "@/components/ui/FadeIn";
 import { FadeInStagger, FadeInItem } from "@/components/ui/FadeIn";
 
 export const metadata: Metadata = {
-  title: "Integrations — Zonov.ai",
-  description: "Zonov.ai integrates with every major Hospital Information System in India: Practo, eHospital, Meddbase, HIS Pro, and more. No rip-and-replace.",
+  title: "Integrations, Zonov.ai",
+  description: "Zonov.ai integrates with every major Hospital Information System: Practo, eHospital, Meddbase, HIS Pro, and more. No rip-and-replace.",
 };
 
 const HIS_SYSTEMS = [
@@ -28,17 +28,17 @@ const DIAGNOSTIC_LABS = [
 ];
 
 const INSURANCE = [
-  { name: "ABDM / ABHA", category: "Government", status: "Live", desc: "Full ABDM Health ID integration: auto-fetch patient records and consent management." },
-  { name: "Ayushman Bharat", category: "Government", status: "Live", desc: "PM-JAY claim submission, eligibility verification, and pre-auth workflow." },
+  { name: "National Health ID", category: "Government", status: "Live", desc: "Full national health-ID integration: auto-fetch patient records and consent management." },
+  { name: "Public Health Schemes", category: "Government", status: "Live", desc: "Public scheme claim submission, eligibility verification, and pre-auth workflow." },
   { name: "Star Health", category: "Insurance", status: "Live", desc: "Cashless claim pre-auth and TPA communication automation." },
   { name: "Niva Bupa", category: "Insurance", status: "Live", desc: "Pre-authorisation, claim scrubbing, and denial management." },
   { name: "ICICI Lombard", category: "Insurance", status: "Beta", desc: "Claim submission and status tracking integration." },
-  { name: "New India Assurance", category: "Government", status: "Live", desc: "Government insurance scheme claim processing and reconciliation." },
+  { name: "Public Insurance Schemes", category: "Government", status: "Live", desc: "Government insurance scheme claim processing and reconciliation." },
 ];
 
 const INFRA = [
-  { name: "AWS India (ap-south-1)", category: "Cloud", status: "Primary", desc: "All patient data hosted in India region. HIPAA-eligible services." },
-  { name: "Azure India Central", category: "Cloud", status: "Available", desc: "Alternative cloud hosting option for enterprise deployments." },
+  { name: "AWS (multi-region)", category: "Cloud", status: "Primary", desc: "Patient data hosted in your chosen region. HIPAA-eligible services." },
+  { name: "Azure (multi-region)", category: "Cloud", status: "Available", desc: "Alternative cloud hosting option for enterprise deployments." },
   { name: "HL7 FHIR R4", category: "Standard", status: "Supported", desc: "Industry-standard healthcare data exchange format supported natively." },
   { name: "DICOM", category: "Standard", status: "Supported", desc: "Radiology image integration with PACS systems." },
 ];
@@ -110,7 +110,7 @@ export default function IntegrationsPage() {
                 <span className="gradient-text-light italic">your hospital already uses.</span>
               </h1>
               <p className="type-body-lg text-white/60 mt-5 max-w-2xl">
-                Zonov.ai integrates with India&apos;s leading HIS platforms, diagnostic labs, insurance networks, and government health schemes. No rip-and-replace. Live in 1–2 weeks.
+                Zonov.ai integrates with leading HIS platforms, diagnostic labs, insurance networks, and public health schemes. No rip-and-replace. Live in 1–2 weeks.
               </p>
               <div className="flex gap-3 mt-8 flex-wrap">
                 <Link href="/book-demo" className="btn btn-primary-lg">Book a Demo</Link>
@@ -124,7 +124,7 @@ export default function IntegrationsPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-14">
               {[
                 { n: "20+", l: "HIS Systems" },
-                { n: "100%", l: "ABDM Compliant" },
+                { n: "100%", l: "Standards Compliant" },
                 { n: "HL7 FHIR", l: "Native Support" },
                 { n: "1–2 wks", l: "Go Live Time" },
               ].map((s) => (
@@ -142,7 +142,7 @@ export default function IntegrationsPage() {
           <div className="container-wide px-edge">
             <IntegrationGroup
               title="Hospital Information Systems"
-              subtitle="Bidirectional integration with India's leading HIS and EMR platforms."
+              subtitle="Bidirectional integration with leading HIS and EMR platforms."
               items={HIS_SYSTEMS}
             />
             <IntegrationGroup
@@ -152,12 +152,12 @@ export default function IntegrationsPage() {
             />
             <IntegrationGroup
               title="Insurance & Government Schemes"
-              subtitle="Cashless claim automation, pre-auth workflows, and Ayushman Bharat integration."
+              subtitle="Cashless claim automation, pre-auth workflows, and public scheme integration."
               items={INSURANCE}
             />
             <IntegrationGroup
               title="Infrastructure & Standards"
-              subtitle="Built on open standards with India-region cloud hosting."
+              subtitle="Built on open standards with flexible-region cloud hosting."
               items={INFRA}
             />
           </div>

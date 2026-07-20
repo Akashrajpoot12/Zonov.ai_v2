@@ -51,7 +51,7 @@ export default function SimulationCascade() {
       const t = setTimeout(() => setStep((s) => s + 1), 1000);
       return () => clearTimeout(t);
     }
-    // whole conversation shown — pause, then start the next one fresh
+    // whole conversation shown, pause, then start the next one fresh
     const t = setTimeout(() => {
       setIdx((i) => (i + 1) % CONVERSATIONS.length);
       setStep(0);
@@ -67,11 +67,10 @@ export default function SimulationCascade() {
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT — narrative + stats */}
+          {/* LEFT, narrative + stats */}
           <div>
             <FadeIn>
               <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-                <span className="w-6 h-px bg-[var(--primary)]" />
                 Proven Before Deployment
               </p>
             </FadeIn>
@@ -100,7 +99,7 @@ export default function SimulationCascade() {
             </FadeIn>
           </div>
 
-          {/* RIGHT — cascade deck */}
+          {/* RIGHT, cascade deck */}
           <FadeIn delay={0.1}>
             <div className={s.scene}>
               <div className={s.deck}>
@@ -122,7 +121,7 @@ export default function SimulationCascade() {
                   );
                 })}
 
-                {/* front card — live chat, messages appear one by one */}
+                {/* front card, live chat, messages appear one by one */}
                 <div className={`${s.card} ${s.cardFront}`} style={{ ["--p" as string]: 0 }}>
                   <div className={s.convo}>
                     <AnimatePresence mode="popLayout">

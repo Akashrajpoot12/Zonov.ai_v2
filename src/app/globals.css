@@ -393,6 +393,27 @@ body {
   50%       { transform: translateY(-8px); }
 }
 
+/* Traveling-wave bob. Only the two extremes are keyframed (top at 0/100%,
+   bottom at 50%) so ease-in-out eases exactly where velocity should be zero —
+   at the peaks — and glides through the centre at full speed. Keyframing the
+   midpoint too (the old 0/25/50/75/100 version) made it decelerate to a stop
+   at the centre every half-cycle, which read as a jittery "break". Staggered
+   negative delays make the wave appear to travel across the row. */
+@keyframes icon-wave {
+  0%, 100% { transform: translateY(calc(var(--wave-amp, 20px) * -1)); }
+  50%      { transform: translateY(var(--wave-amp, 20px)); }
+}
+
+/* Typewriter caret — blinks while text is typing */
+@keyframes tw-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+.tw-caret {
+  display: inline-block;
+  margin-left: 1px;
+  color: var(--primary);
+  font-weight: 400;
+  animation: tw-blink 1s step-end infinite;
+}
+
 @keyframes pulse-ring {
   0%   { transform: scale(1); opacity: 0.8; }
   100% { transform: scale(1.6); opacity: 0; }
@@ -456,6 +477,17 @@ body {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+
+  /* Exception: the integration wave is a gentle, brand-critical decoration
+     the site intentionally keeps playing even when reduced-motion is on.
+     Scoped to these chips only — the rest of the site still honors the pref. */
+  .wave-chip {
+    animation-duration: var(--wave-dur, 2.6s) !important;
+  }
+  /* Typewriter caret keeps blinking (gentle, brand-intentional). */
+  .tw-caret {
+    animation-duration: 1s !important;
   }
 }
 
@@ -663,7 +695,10 @@ body {
 .marquee-mask:hover .marquee-track { animation-play-state: paused; }
 
 @media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
+  /* Every marquee stops under reduced-motion EXCEPT the integration marquee,
+     which the site intentionally keeps scrolling (gentle, brand-critical). */
+  .marquee-track:not(.wave-marquee) { animation: none; }
+  .wave-marquee { animation-duration: 50s !important; }
 }
 
 /* ── 6. Flowing wires (agent tree diagram) ── */
