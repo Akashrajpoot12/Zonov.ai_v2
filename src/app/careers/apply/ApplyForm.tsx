@@ -6,13 +6,30 @@ import Link from "next/link";
 const inputClass =
   "w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors";
 
+const labelClass = "type-caption text-[var(--text-muted)] block mb-1.5";
+
+const sectionLabel =
+  "type-mono text-[var(--text-dim)] text-[11px] mb-4 pb-2 border-b border-[var(--border)]";
+
 export default function ApplyForm({ position }: { position: string }) {
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
+    gender: "",
+    address: "",
+    collegeName: "",
+    education: "",
+    gradYear: "",
+    cgpa: "",
+    tenth: "",
+    twelfth: "",
+    experienceLevel: "",
+    experience: "",
+    skills: "",
     resumeLink: "",
     linkedin: "",
+    github: "",
     message: "",
   });
   const [submitted, setSubmitted] = useState(false);
@@ -20,7 +37,7 @@ export default function ApplyForm({ position }: { position: string }) {
   const [loading, setLoading] = useState(false);
 
   function handleChange(
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
@@ -76,41 +93,142 @@ export default function ApplyForm({ position }: { position: string }) {
   }
 
   return (
-    <div className="bg-white rounded-[var(--radius-lg)] p-8 shadow-sm">
-      <div className="mb-6">
+    <div className="bg-white rounded-[var(--radius-lg)] p-6 md:p-8 shadow-sm">
+      <div className="mb-8">
         <p className="type-caption text-[var(--text-muted)]">Applying for</p>
         <p className="type-h4 text-[var(--text)]">{position}</p>
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-          <div>
-            <label className="type-caption text-[var(--text-muted)] block mb-1.5">Full name *</label>
-            <input name="name" value={form.name} onChange={handleChange} placeholder="Your full name" className={inputClass} />
+
+      <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        {/* Personal details */}
+        <div>
+          <p className={sectionLabel}>PERSONAL DETAILS</p>
+          <div className="flex flex-col gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>Full name *</label>
+                <input name="name" value={form.name} onChange={handleChange} placeholder="Your full name" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Email *</label>
+                <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@email.com" className={inputClass} />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>Phone</label>
+                <input name="phone" value={form.phone} onChange={handleChange} placeholder="+91 ..." className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Gender</label>
+                <select name="gender" value={form.gender} onChange={handleChange} className={`${inputClass} cursor-pointer`}>
+                  <option value="">Select...</option>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                  <option value="Prefer not to say">Prefer not to say</option>
+                </select>
+              </div>
+            </div>
+            <div>
+              <label className={labelClass}>Address / City</label>
+              <input name="address" value={form.address} onChange={handleChange} placeholder="City, State" className={inputClass} />
+            </div>
           </div>
-          <div>
-            <label className="type-caption text-[var(--text-muted)] block mb-1.5">Email *</label>
-            <input name="email" type="email" value={form.email} onChange={handleChange} placeholder="you@email.com" className={inputClass} />
+        </div>
+
+        {/* Education */}
+        <div>
+          <p className={sectionLabel}>EDUCATION</p>
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className={labelClass}>College / University name</label>
+              <input name="collegeName" value={form.collegeName} onChange={handleChange} placeholder="e.g. IIT Delhi" className={inputClass} />
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>Highest qualification</label>
+                <input name="education" value={form.education} onChange={handleChange} placeholder="e.g. B.Tech, Computer Science" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>Passing / graduation year</label>
+                <input name="gradYear" value={form.gradYear} onChange={handleChange} placeholder="e.g. 2024" className={inputClass} />
+              </div>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+              <div>
+                <label className={labelClass}>Degree CGPA / %</label>
+                <input name="cgpa" value={form.cgpa} onChange={handleChange} placeholder="e.g. 8.5 / 85%" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>10th %</label>
+                <input name="tenth" value={form.tenth} onChange={handleChange} placeholder="e.g. 90%" className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>12th %</label>
+                <input name="twelfth" value={form.twelfth} onChange={handleChange} placeholder="e.g. 88%" className={inputClass} />
+              </div>
+            </div>
           </div>
         </div>
+
+        {/* Experience */}
         <div>
-          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Phone</label>
-          <input name="phone" value={form.phone} onChange={handleChange} placeholder="+91 ..." className={inputClass} />
+          <p className={sectionLabel}>EXPERIENCE</p>
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className={labelClass}>Experience level</label>
+              <select name="experienceLevel" value={form.experienceLevel} onChange={handleChange} className={`${inputClass} cursor-pointer`}>
+                <option value="">Select...</option>
+                <option value="Fresher">Fresher</option>
+                <option value="Internship">Internship</option>
+                <option value="Less than 1 year">Less than 1 year</option>
+                <option value="1 to 3 years">1 to 3 years</option>
+                <option value="3 to 5 years">3 to 5 years</option>
+                <option value="5+ years">5+ years</option>
+              </select>
+            </div>
+            <div>
+              <label className={labelClass}>Previous experience</label>
+              <textarea name="experience" value={form.experience} onChange={handleChange} rows={3} placeholder="Company, role, and duration. Mention if it was an internship or full-time." className={`${inputClass} resize-none`} />
+            </div>
+          </div>
         </div>
+
+        {/* Skills & links */}
         <div>
-          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Resume link *</label>
-          <input name="resumeLink" value={form.resumeLink} onChange={handleChange} placeholder="Google Drive / Dropbox link to your resume (PDF)" className={inputClass} />
-          <p className="type-caption text-[var(--text-dim)] mt-1.5">
-            Upload your resume to Google Drive or Dropbox and paste a shareable link (set access to &ldquo;anyone with the link&rdquo;).
-          </p>
+          <p className={sectionLabel}>SKILLS & LINKS</p>
+          <div className="flex flex-col gap-5">
+            <div>
+              <label className={labelClass}>Key skills</label>
+              <textarea name="skills" value={form.skills} onChange={handleChange} rows={2} placeholder="e.g. React, Python, SQL, communication, sales..." className={`${inputClass} resize-none`} />
+            </div>
+            <div>
+              <label className={labelClass}>Resume link *</label>
+              <input name="resumeLink" value={form.resumeLink} onChange={handleChange} placeholder="Google Drive / Dropbox link to your resume (PDF)" className={inputClass} />
+              <p className="type-caption text-[var(--text-dim)] mt-1.5">
+                Upload your resume to Google Drive or Dropbox and paste a shareable link (set access to &ldquo;anyone with the link&rdquo;).
+              </p>
+            </div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label className={labelClass}>LinkedIn</label>
+                <input name="linkedin" value={form.linkedin} onChange={handleChange} placeholder="https://linkedin.com/in/..." className={inputClass} />
+              </div>
+              <div>
+                <label className={labelClass}>GitHub / Portfolio</label>
+                <input name="github" value={form.github} onChange={handleChange} placeholder="https://github.com/..." className={inputClass} />
+              </div>
+            </div>
+          </div>
         </div>
+
+        {/* Message */}
         <div>
-          <label className="type-caption text-[var(--text-muted)] block mb-1.5">LinkedIn / Portfolio</label>
-          <input name="linkedin" value={form.linkedin} onChange={handleChange} placeholder="https://linkedin.com/in/... (optional)" className={inputClass} />
-        </div>
-        <div>
-          <label className="type-caption text-[var(--text-muted)] block mb-1.5">Why do you want to join? (optional)</label>
+          <label className={labelClass}>Why do you want to join? (optional)</label>
           <textarea name="message" value={form.message} onChange={handleChange} rows={4} placeholder="A few lines about you and why this role..." className={`${inputClass} resize-none`} />
         </div>
+
         {error && <p className="type-caption text-[var(--error)]">{error}</p>}
         <div>
           <button type="submit" disabled={loading} className="btn btn-primary-lg btn-mobile-full">

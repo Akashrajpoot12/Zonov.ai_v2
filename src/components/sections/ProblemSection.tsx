@@ -3,12 +3,12 @@ import type { LucideIcon } from "lucide-react";
 import { ClipboardList, Hourglass, Flame, TrendingDown, Link2, UserRound, MessageSquare } from "lucide-react";
 
 const PROBLEMS: { icon: LucideIcon; title: string; desc: string }[] = [
-  { icon: ClipboardList, title: "Drowning in Paperwork", desc: "Doctors spend 40–60% of their time on documentation instead of patient care." },
-  { icon: Hourglass, title: "Long Waiting Times", desc: "Manual registration and processes create 45+ minute patient wait times." },
-  { icon: Flame, title: "Clinician Burnout", desc: "Administrative burden is the #1 reason healthcare staff quit their jobs." },
+  { icon: ClipboardList, title: "Drowning in Paperwork", desc: "Care staff lose hours every day to documentation and data entry, instead of time with patients." },
+  { icon: Hourglass, title: "Long Waiting Times", desc: "Manual registration and slow processes leave patients waiting far longer than they should." },
+  { icon: Flame, title: "Clinician Burnout", desc: "Too much paperwork leaves doctors and nurses exhausted, and many end up quitting." },
   { icon: TrendingDown, title: "Revenue Leakage", desc: "Hospitals lose 15–20% revenue due to billing errors and missed charges." },
   { icon: Link2, title: "Disconnected Systems", desc: "Lab, OPD, pharmacy, and billing don't talk to each other in real time." },
-  { icon: UserRound, title: "Staff Shortage", desc: "India needs 2.4 million more healthcare workers. AI can fill the gap." },
+  { icon: UserRound, title: "Staff Shortage", desc: "The world faces a shortage of millions of healthcare workers. AI helps close the gap." },
 ];
 
 export default function ProblemSection() {
@@ -16,23 +16,12 @@ export default function ProblemSection() {
     <section className="section-py bg-[var(--surface)]">
       <div className="container-wide">
         <FadeIn>
-          <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-            <span className="w-6 h-px bg-[var(--primary)]" />
-            The Problem
-          </p>
-        </FadeIn>
-        <FadeIn delay={0.05}>
-          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-4 google-sans-700">
+          <h2 className="type-h1 text-[var(--text)] max-w-2xl [text-wrap:balance] mb-16 google-sans-700">
             Healthcare is broken by{" "}
             <span className="italic" style={{ fontFamily: "var(--font-playfair)" }}>
               its own paperwork.
             </span>
           </h2>
-        </FadeIn>
-        <FadeIn delay={0.1}>
-          <p className="type-body-lg text-[var(--text-muted)] max-w-xl mb-16">
-            Doctors and nurses spend a large portion of their time on paperwork instead of patient care. Zonov.ai fixes this. Permanently.
-          </p>
         </FadeIn>
 
         <FadeInStagger className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -62,7 +51,7 @@ export default function ProblemSection() {
               <p className="text-[18px] text-[var(--text)] leading-relaxed italic mb-3" style={{ fontFamily: "var(--font-playfair)" }}>
                 &ldquo;Most AI isn&rsquo;t built to meet healthcare&rsquo;s standards. Most HIMS only stores data. Zonov.ai actually works, like a digital workforce.&rdquo;
               </p>
-              <p className="type-mono text-[var(--primary)]">Zonov.ai Mission Statement</p>
+              <p className="type-mono text-[var(--primary)]">Arvind Chawla, Founder &amp; CEO</p>
             </div>
           </div>
         </FadeIn>

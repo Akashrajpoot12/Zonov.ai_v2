@@ -4,7 +4,7 @@ import FadeIn from "@/components/ui/FadeIn";
 import UseCasesFilter from "./UseCasesFilter";
 
 export const metadata: Metadata = {
-  title: "Use Cases — Zonov.ai | AI Agents for Hospital Workflows",
+  title: "Use Cases, Zonov.ai | AI Agents for Hospital Workflows",
   description:
     "See how Zonov's AI agents transform clinical workflows across OPD, ICU, revenue, discharge, lab, and post-surgery departments.",
 };

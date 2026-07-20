@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Privacy Policy — Zonov.ai",
+  title: "Privacy Policy, Zonov.ai",
   description: "How Zonov.ai collects, uses, and protects data across our AI-powered hospital management platform.",
 };
 
@@ -44,13 +44,13 @@ export default function PrivacyPage() {
                     Zonov.ai collects information necessary to provide our AI-powered hospital management services. We collect three categories of data:
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    <strong>Service data</strong> — Information generated during use of the platform, including patient registration details, appointment records, clinical documentation, billing data, and diagnostic reports. This data is owned by the hospital and processed by Zonov.ai as a data processor under applicable law.
+                    <strong>Service data</strong>, Information generated during use of the platform, including patient registration details, appointment records, clinical documentation, billing data, and diagnostic reports. This data is owned by the hospital and processed by Zonov.ai as a data processor under applicable law.
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    <strong>Account data</strong> — Names, email addresses, role designations, and login credentials for hospital administrators and clinical staff accessing the platform.
+                    <strong>Account data</strong>, Names, email addresses, role designations, and login credentials for hospital administrators and clinical staff accessing the platform.
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    <strong>Usage data</strong> — Anonymised telemetry about how features are used, error logs, and performance metrics. This data does not contain patient-identifiable information and is used solely to improve the platform.
+                    <strong>Usage data</strong>, Anonymised telemetry about how features are used, error logs, and performance metrics. This data does not contain patient-identifiable information and is used solely to improve the platform.
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-2">We do not collect:</p>
                   <ul className="list-disc pl-6 mt-3 space-y-2 type-body text-[var(--text-muted)]">
@@ -69,7 +69,7 @@ export default function PrivacyPage() {
                     <li>Delivering and improving the Zonov.ai platform and its AI agents</li>
                     <li>Generating clinical documentation, billing codes, and operational reports on behalf of the hospital</li>
                     <li>Sending operational notifications, alerts, and scheduled digests to authorised hospital staff</li>
-                    <li>Fulfilling legal obligations under Indian law, including the Digital Personal Data Protection Act 2023 (DPDPA) and applicable healthcare regulations</li>
+                    <li>Fulfilling legal obligations under applicable data protection law, including the EU GDPR, and applicable healthcare regulations</li>
                     <li>Conducting anonymised research to improve AI model accuracy, with hospital consent</li>
                   </ul>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mt-4">
@@ -80,13 +80,13 @@ export default function PrivacyPage() {
                 <section id="security" className="mb-12">
                   <h3 className="type-h3 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Data Security</h3>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    <strong>HIPAA and DPDPA alignment</strong> — Zonov.ai is designed to meet the requirements of both the US Health Insurance Portability and Accountability Act (HIPAA) and India&apos;s Digital Personal Data Protection Act (DPDPA 2023). We implement administrative, technical, and physical safeguards to protect health information.
+                    <strong>HIPAA and GDPR alignment:</strong> Zonov.ai is designed to meet the requirements of both the US Health Insurance Portability and Accountability Act (HIPAA) and the EU General Data Protection Regulation (GDPR). We implement administrative, technical, and physical safeguards to protect health information.
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-2">Key controls:</p>
                   <ul className="list-disc pl-6 mt-3 space-y-2 type-body text-[var(--text-muted)]">
                     <li>AES-256 encryption at rest; TLS 1.3 in transit</li>
                     <li>Role-based access controls with audit trails for all data access</li>
-                    <li>Data residency within India by default (AWS ap-south-1 / Azure India Central)</li>
+                    <li>Flexible data residency in your chosen region (AWS / Azure)</li>
                     <li>Annual third-party penetration testing and SOC 2 Type II audit in progress</li>
                     <li>Incident response SLA: notification within 72 hours of confirmed breach</li>
                   </ul>
@@ -111,16 +111,16 @@ export default function PrivacyPage() {
                 <section id="rights" className="mb-12">
                   <h3 className="type-h3 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Your Rights</h3>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    Under the DPDPA 2023 and other applicable law, individuals whose data is processed through the Zonov.ai platform may have the following rights:
+                    Under applicable data protection law, individuals whose data is processed through the Zonov.ai platform may have the following rights:
                   </p>
                   <ul className="list-disc pl-6 mt-3 space-y-2 type-body text-[var(--text-muted)]">
                     <li>Right to access: request a copy of personal data held about you</li>
                     <li>Right to correction: request correction of inaccurate or incomplete data</li>
                     <li>Right to erasure: request deletion of data, subject to legal retention obligations</li>
-                    <li>Right to grievance redressal: file a complaint with the Data Protection Board of India</li>
+                    <li>Right to grievance redressal: file a complaint with the relevant data protection authority</li>
                   </ul>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mt-4">
-                    Note: Most rights under DPDPA are exercised through the hospital (the data fiduciary), not directly with Zonov.ai (the data processor). Contact your hospital&apos;s data protection officer in the first instance.
+                    Note: Most rights are exercised through the hospital (the data controller), not directly with Zonov.ai (the data processor). Contact your hospital&apos;s data protection officer in the first instance.
                   </p>
                 </section>
 
@@ -133,7 +133,7 @@ export default function PrivacyPage() {
                     Email: <a href="mailto:privacy@zonov.ai" className="text-[var(--primary)] hover:underline">privacy@zonov.ai</a>
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    Address: Zonov.ai Technologies Pvt. Ltd., Bangalore, Karnataka, India
+                    Address: Zonov.ai Technologies Pvt. Ltd., Jaipur, India
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed">
                     We aim to respond to all privacy requests within 30 days.

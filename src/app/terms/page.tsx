@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Footer from "@/components/layout/Footer";
 
 export const metadata: Metadata = {
-  title: "Terms of Service — Zonov.ai",
+  title: "Terms of Service, Zonov.ai",
   description: "Terms governing access to and use of the Zonov.ai AI-powered hospital management platform.",
 };
 
@@ -56,7 +56,7 @@ export default function TermsPage() {
                   </p>
                   <ul className="list-disc pl-6 mt-3 space-y-2 type-body text-[var(--text-muted)]">
                     <li>The Service is provided on a subscription basis under a separately executed Master Service Agreement (MSA) or Order Form</li>
-                    <li>AI Agent outputs — including clinical documentation, billing codes, and diagnostic summaries — are decision-support tools and do not constitute medical advice</li>
+                    <li>AI Agent outputs, including clinical documentation, billing codes, and diagnostic summaries, are decision-support tools and do not constitute medical advice</li>
                     <li>Hospitals remain responsible for clinical decisions and for review of all AI-generated content before use in patient care</li>
                     <li>Zonov.ai will use commercially reasonable efforts to maintain 99.5% uptime, excluding scheduled maintenance windows</li>
                   </ul>
@@ -68,10 +68,10 @@ export default function TermsPage() {
                     By using the Service, you agree to:
                   </p>
                   <ul className="list-disc pl-6 mt-3 space-y-2 type-body text-[var(--text-muted)]">
-                    <li>Use the Service only for lawful purposes in accordance with applicable Indian law and applicable healthcare regulations</li>
+                    <li>Use the Service only for lawful purposes in accordance with applicable law and healthcare regulations</li>
                     <li>Maintain the confidentiality of your login credentials and notify Zonov.ai immediately of any unauthorised access</li>
                     <li>Not reverse-engineer, decompile, or attempt to extract the source code or model weights of any AI component of the Service</li>
-                    <li>Not use the Service to process data of individuals without appropriate consent or legal basis under the DPDPA 2023</li>
+                    <li>Not use the Service to process data of individuals without appropriate consent or legal basis under applicable data protection law</li>
                     <li>Ensure that all hospital staff who access the Service have completed required onboarding and understand that AI outputs require human review</li>
                   </ul>
                 </section>
@@ -108,7 +108,7 @@ export default function TermsPage() {
                 <section id="governing" className="mb-12">
                   <h3 className="type-h3 mb-4" style={{ fontFamily: "var(--font-playfair)" }}>Governing Law</h3>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
-                    These Terms are governed by the laws of India. Any dispute arising from these Terms or the use of the Service shall be subject to the exclusive jurisdiction of the courts in Bangalore, Karnataka, India.
+                    These Terms are governed by the laws of India, where Zonov.ai is incorporated. Any dispute arising from these Terms or the use of the Service shall be subject to the exclusive jurisdiction of the courts in Jaipur, India.
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed mb-4">
                     Disputes shall first be subject to good-faith negotiation for 30 days before either party initiates formal proceedings.
@@ -124,7 +124,7 @@ export default function TermsPage() {
                     Email: <a href="mailto:legal@zonov.ai" className="text-[var(--primary)] hover:underline">legal@zonov.ai</a>
                   </p>
                   <p className="type-body text-[var(--text-muted)] leading-relaxed">
-                    Address: Zonov.ai Technologies Pvt. Ltd., Bangalore, Karnataka, India
+                    Address: Zonov.ai Technologies Pvt. Ltd., Jaipur, India
                   </p>
                 </section>
 

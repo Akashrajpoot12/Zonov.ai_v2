@@ -5,7 +5,7 @@ export const runtime = "nodejs";
 
 export async function POST(req: NextRequest) {
   try {
-    // Per-IP rate limit — this endpoint sends an email per request.
+    // Per-IP rate limit, this endpoint sends an email per request.
     const limit = rateLimit(`contact:${clientIp(req)}`, 5, 60_000);
     if (!limit.ok) {
       return NextResponse.json(
@@ -15,7 +15,7 @@ export async function POST(req: NextRequest) {
     }
 
     const body = await req.json();
-    const { phone, hospital, hospitalName, city, beds, hospitalSize, role, message, useCase, preferredTime, agents, resumeLink, linkedin, type } = body;
+    const { phone, hospital, hospitalName, city, beds, hospitalSize, role, message, useCase, preferredTime, agents, resumeLink, linkedin, type, address, education, gradYear, experienceLevel, experience, skills, gender, collegeName, cgpa, tenth, twelfth, github } = body;
 
     const recipientName = clampStr(body.name, 120);
     const recipientEmail = clampStr(body.email, 254);
@@ -40,28 +40,40 @@ export async function POST(req: NextRequest) {
     }
 
     // Job applications and contact/demo requests carry different fields, so
-    // build a row set tailored to each — keeps the notification email readable.
+    // build a row set tailored to each, keeps the notification email readable.
     const rows: [string, unknown][] = isJobApplication
       ? [
           ["Name", recipientName],
           ["Email", recipientEmail],
-          ["Phone", phone || "—"],
+          ["Phone", phone || "-"],
+          ["Gender", clampStr(gender, 40) || "-"],
+          ["Address / City", clampStr(address, 200) || "-"],
           ["Position", clampStr(role, 160) || "General Application"],
-          ["Resume", clampStr(resumeLink, 500) || "—"],
-          ["LinkedIn / Portfolio", clampStr(linkedin, 500) || "—"],
-          ["Message", clampStr(message, 4000) || "—"],
+          ["College / University", clampStr(collegeName, 200) || "-"],
+          ["Education", clampStr(education, 200) || "-"],
+          ["Passing Year", clampStr(gradYear, 20) || "-"],
+          ["Degree CGPA / %", clampStr(cgpa, 40) || "-"],
+          ["10th %", clampStr(tenth, 40) || "-"],
+          ["12th %", clampStr(twelfth, 40) || "-"],
+          ["Experience Level", clampStr(experienceLevel, 60) || "-"],
+          ["Previous Experience", clampStr(experience, 2000) || "-"],
+          ["Skills", clampStr(skills, 1000) || "-"],
+          ["Resume", clampStr(resumeLink, 500) || "-"],
+          ["LinkedIn", clampStr(linkedin, 500) || "-"],
+          ["GitHub / Portfolio", clampStr(github, 500) || "-"],
+          ["Message", clampStr(message, 4000) || "-"],
         ]
       : [
           ["Name", recipientName],
           ["Email", recipientEmail],
-          ["Phone", phone || "—"],
-          ["Hospital", hospitalDisplay || "—"],
-          ["City", city || "—"],
-          ["Beds", beds || hospitalSize || "—"],
-          ["Role", role || "—"],
-          ["Preferred Time", preferredTime || "—"],
-          ["Agents Interested", agents ? (Array.isArray(agents) ? agents.join(", ") : agents) : "—"],
-          ["Message / Use Case", message || useCase || "—"],
+          ["Phone", phone || "-"],
+          ["Hospital", hospitalDisplay || "-"],
+          ["City", city || "-"],
+          ["Beds", beds || hospitalSize || "-"],
+          ["Role", role || "-"],
+          ["Preferred Time", preferredTime || "-"],
+          ["Agents Interested", agents ? (Array.isArray(agents) ? agents.join(", ") : agents) : "-"],
+          ["Message / Use Case", message || useCase || "-"],
         ];
 
     const htmlBody = `
@@ -92,7 +104,7 @@ export async function POST(req: NextRequest) {
         from: "Zonov.ai Website <noreply@zonov.ai>",
         to: [isJobApplication ? "careers@zonov.ai" : "hello@zonov.ai"],
         reply_to: recipientEmail,
-        subject: `[${formType}] ${recipientName} — ${isJobApplication ? clampStr(role, 160) || "General Application" : hospitalDisplay || recipientEmail}`,
+        subject: `[${formType}] ${recipientName}, ${isJobApplication ? clampStr(role, 160) || "General Application" : hospitalDisplay || recipientEmail}`,
         html: htmlBody,
       }),
     });

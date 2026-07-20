@@ -5,7 +5,7 @@ import CountUp from "@/components/ui/CountUp";
 import IndiaPanels from "@/components/sections/IndiaPanels";
 
 export const metadata: Metadata = {
-  title: "About — Zonov.ai",
+  title: "About, Zonov.ai",
   description: "Zonov.ai is the AI Workforce for Healthcare. Our mission: eliminate healthcare inefficiency through AI-powered autonomous agents.",
 };
 
@@ -19,8 +19,8 @@ const values = [
 
 const standards = [
   { name: "HIPAA", desc: "Aligned with US healthcare data privacy and security rules.", color: "#1B4FD8" },
-  { name: "DPDP Act", desc: "Compliant with India's Digital Personal Data Protection Act.", color: "#00B4AE" },
-  { name: "ABDM / ABHA", desc: "Built for India's Ayushman Bharat Digital Mission ecosystem.", color: "#7C3AED" },
+  { name: "GDPR", desc: "Compliant with global data protection regulations.", color: "#00B4AE" },
+  { name: "Health ID Standards", desc: "Integrates with national digital health ID ecosystems.", color: "#7C3AED" },
   { name: "ISO 27001", desc: "Information security managed to ISO 27001 control standards.", color: "#059669" },
 ];
 
@@ -28,7 +28,7 @@ const commitments = [
   { title: "End-to-end encryption", desc: "Data encrypted in transit and at rest." },
   { title: "Role-based access", desc: "Granular permissions for every user and action." },
   { title: "Full audit trails", desc: "Every agent action logged and reviewable." },
-  { title: "Data residency in India", desc: "Patient data stays on Indian infrastructure." },
+  { title: "Flexible data residency", desc: "Patient data stays in your chosen region." },
 ];
 
 const faqs = [
@@ -80,7 +80,6 @@ export default function AboutPage() {
           <div className="container-wide px-edge relative z-10">
             <FadeIn>
               <p className="type-mono text-[var(--primary)] mb-12 flex items-center gap-3">
-                <span className="w-6 h-px bg-[var(--primary)]" />
                 Our Origin
               </p>
             </FadeIn>

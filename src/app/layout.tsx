@@ -6,8 +6,9 @@ import Navbar from "@/components/layout/Navbar";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import ScrollProgress from "@/components/ui/ScrollProgress";
 import DisableContextMenu from "@/components/ui/DisableContextMenu";
+import IntroOverlay from "@/components/ui/IntroOverlay";
 
-// Self-hosted Nunito Sans (variable font — full weight range + italics).
+// Self-hosted Nunito Sans (variable font, full weight range + italics).
 // Exposed as --font-nunito; globals.css aliases the legacy font variables
 // (--font-playfair / --font-inter / --font-google-sans) onto it, so every
 // existing usage across the site resolves to Nunito Sans with no per-file edits.
@@ -23,7 +24,7 @@ const nunitoSans = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Zonov.ai — AI Operating System for Healthcare",
+    default: "Zonov.ai, AI Operating System for Healthcare",
     template: "%s | Zonov.ai",
   },
   description:
@@ -32,13 +33,13 @@ export const metadata: Metadata = {
     "Healthcare AI", "Hospital AI agents", "Patient registration AI",
     "Doctor AI assistant", "Healthcare automation", "AI operating system",
     "Hospital workflow automation", "Clinical documentation AI",
-    "Healthcare AI India", "Zonov.ai",
+    "Global Healthcare AI", "Zonov.ai",
   ],
   authors: [{ name: "Zonov.ai" }],
   creator: "Zonov.ai",
   metadataBase: new URL("https://zonov.ai"),
   openGraph: {
-    title: "Zonov.ai — AI Operating System for Healthcare",
+    title: "Zonov.ai, AI Operating System for Healthcare",
     description: "Deploy AI agents across every hospital workflow: registration, documentation, diagnostics, billing, and operations.",
     url: "https://zonov.ai",
     siteName: "Zonov.ai",
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Zonov.ai — AI Operating System for Healthcare",
+    title: "Zonov.ai, AI Operating System for Healthcare",
     description: "Deploy AI agents across every hospital workflow.",
     // Twitter image falls back to the generated opengraph-image
   },
@@ -69,6 +70,7 @@ export default function RootLayout({
       className={`${nunitoSans.variable} h-full`}
     >
       <body suppressHydrationWarning className="min-h-full flex flex-col bg-bg text-text antialiased">
+        <IntroOverlay />
         <SmoothScroll />
         <ScrollProgress />
         <DisableContextMenu />

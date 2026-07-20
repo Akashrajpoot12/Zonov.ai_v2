@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 /* ──────────────────────────────────────────────────────────
-   TRUST STRIP — "how we work", not the full product.
+   TRUST STRIP, "how we work", not the full product.
    Answers the healthcare buyer's first questions:
    Is my data safe? Will it fit my hospital? How fast?
    ────────────────────────────────────────────────────────── */
@@ -11,8 +11,8 @@ type Item = { label: string; sub: string; icon: React.ReactNode };
 
 const ITEMS: Item[] = [
   {
-    label: "ABDM & ABHA Compliant",
-    sub: "Built to India's digital health standards",
+    label: "National Health ID Ready",
+    sub: "Built to global digital health standards",
     icon: (
       <path d="M12 2 4 5v6c0 5 3.4 8.5 8 11 4.6-2.5 8-6 8-11V5l-8-3Zm-1 13-3-3 1.4-1.4L11 12.2l4.6-4.6L17 9l-6 6Z" />
     ),
@@ -58,8 +58,7 @@ export default function TrustStrip() {
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
         >
-          <span className="w-8 h-px bg-[var(--primary)]" />
-          Enterprise-Grade, Built for Indian Healthcare
+          Enterprise-Grade, Built for Modern Healthcare
         </motion.p>
 
         <div className="relative flex flex-col lg:flex-row">

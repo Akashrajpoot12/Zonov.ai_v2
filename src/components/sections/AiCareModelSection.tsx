@@ -97,7 +97,7 @@ export default function AiCareModelSection() {
   const [inView, setInView] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
 
-  // Only run the auto-advance loop while the section is actually on screen —
+  // Only run the auto-advance loop while the section is actually on screen -
   // avoids re-rendering the 32-card 3D visual every 4.5s (and the frame hitch
   // that causes) when the user has scrolled elsewhere.
   useEffect(() => {

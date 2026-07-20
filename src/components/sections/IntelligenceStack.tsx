@@ -27,11 +27,10 @@ export default function IntelligenceStack() {
       <div className="container-wide relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
-          {/* LEFT — narrative + interactive layer buttons */}
+          {/* LEFT, narrative + interactive layer buttons */}
           <div>
             <FadeIn>
               <p className="type-mono text-[var(--secondary)] mb-4 flex items-center gap-3">
-                <span className="w-6 h-px bg-[var(--secondary)]" />
                 How Zonov Thinks
               </p>
             </FadeIn>
@@ -77,7 +76,7 @@ export default function IntelligenceStack() {
             </FadeIn>
           </div>
 
-          {/* RIGHT — 3D stack (active layer glows) */}
+          {/* RIGHT, 3D stack (active layer glows) */}
           <FadeIn delay={0.1}>
             <div className={s.scene}>
               <div className={s.stack}>

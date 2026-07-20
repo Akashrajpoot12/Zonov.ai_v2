@@ -4,10 +4,11 @@ import PlatformHero from "@/components/sections/PlatformHero";
 import PlatformSteps from "@/components/sections/PlatformSteps";
 import IntelligenceStack from "@/components/sections/IntelligenceStack";
 import SimulationCascade from "@/components/sections/SimulationCascade";
+import PlatformSecurity from "@/components/sections/PlatformSecurity";
 import PlatformIntegrations from "@/components/sections/PlatformIntegrations";
 
 export const metadata: Metadata = {
-  title: "Platform — Zonov.ai | AI Operating System for Healthcare",
+  title: "Platform, Zonov.ai | AI Operating System for Healthcare",
   description: "The all-in-one platform to deploy, train, and monitor AI agents across every hospital workflow. Define → Train → Deploy → Monitor.",
 };
 
@@ -19,6 +20,7 @@ export default function PlatformPage() {
         <PlatformSteps />
         <IntelligenceStack />
         <SimulationCascade />
+        <PlatformSecurity />
         <PlatformIntegrations />
       </main>
       <Footer />

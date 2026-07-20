@@ -8,7 +8,7 @@ export default function SmoothScroll() {
   const pathname = usePathname();
 
   useEffect(() => {
-    // Respect users who prefer reduced motion — skip smooth scroll entirely.
+    // Respect users who prefer reduced motion, skip smooth scroll entirely.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const lenis = new Lenis({
@@ -16,7 +16,7 @@ export default function SmoothScroll() {
       smoothWheel: true,
       wheelMultiplier: 2.3, // each wheel notch travels more distance = feels fast
       touchMultiplier: 2.5,
-      // syncTouch omitted on purpose — it hijacks native touch/trackpad and adds lag.
+      // syncTouch omitted on purpose, it hijacks native touch/trackpad and adds lag.
     });
     lenisRef.current = lenis;
 
@@ -45,7 +45,7 @@ export default function SmoothScroll() {
   }, []);
 
   // Lenis persists across client-side navigations (it lives in the root layout),
-  // but the page content — and its height — changes underneath it. Reset to the
+  // but the page content, and its height, changes underneath it. Reset to the
   // top and recompute bounds so scrolling doesn't stick at the previous page's
   // stale position/limit.
   useEffect(() => {

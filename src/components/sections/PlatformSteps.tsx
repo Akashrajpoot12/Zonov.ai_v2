@@ -13,7 +13,7 @@ const STEPS = [
       { label: "Agent Persona", content: "Configure the agent's clinical knowledge base, specialty focus, and communication style tailored to your hospital's protocols." },
       { label: "Workflow Rules", content: "Set the rules for how the agent handles edge cases, escalations, and exceptions, so it always behaves predictably." },
       { label: "Integrations", content: "Connect to your existing HIS, EMR, LIS, RIS systems. Zonov.ai agents work alongside your current software, not instead of it." },
-      { label: "Compliance", content: "HIPAA, DPDP, ABHA. Set compliance guardrails from day one. The agent will never process data outside defined boundaries." },
+      { label: "Compliance", content: "HIPAA, GDPR, national health standards. Set compliance guardrails from day one. The agent will never process data outside defined boundaries." },
     ],
     color: "var(--primary)",
   },
@@ -95,7 +95,6 @@ export default function PlatformSteps() {
         <div className="section-py pb-0">
           <FadeIn>
             <p className="type-mono text-[var(--primary)] mb-4 flex items-center gap-3">
-              <span className="w-6 h-px bg-[var(--primary)]" />
               How It Works
             </p>
             <h2 className="type-h1 text-[var(--text)] mb-14 [text-wrap:balance] max-w-xl">
@@ -108,7 +107,7 @@ export default function PlatformSteps() {
         {/* Desktop: sticky sidebar + scrollable steps */}
         <div className="hidden lg:flex gap-10 pb-24">
 
-          {/* LEFT — sticky step navigator */}
+          {/* LEFT, sticky step navigator */}
           <div className="w-64 flex-shrink-0 self-start sticky top-[100px]">
             <div>
               {/* Progress track */}
@@ -159,7 +158,7 @@ export default function PlatformSteps() {
             </div>
           </div>
 
-          {/* RIGHT — scrollable step panels */}
+          {/* RIGHT, scrollable step panels */}
           <div className="flex-1 min-w-0 flex flex-col gap-32" ref={sectionRef}>
             {STEPS.map((s, i) => (
               <div
@@ -173,14 +172,14 @@ export default function PlatformSteps() {
                       className="type-mono px-3 py-1 rounded-full text-white text-[11px]"
                       style={{ background: s.color }}
                     >
-                      {s.num} — {s.name}
+                      {s.num}, {s.name}
                     </span>
                   </div>
                   <h3 className="type-h2 text-[var(--text)] mb-3">{s.tagline}</h3>
                   <p className="type-body-lg text-[var(--text-muted)] max-w-xl">{s.desc}</p>
                 </div>
 
-                {/* Tabs — only shown for active step */}
+                {/* Tabs, only shown for active step */}
                 <div className="border border-[var(--border)] rounded-[20px] overflow-hidden">
                   <div className="flex border-b border-[var(--border)] overflow-x-auto">
                     {s.tabs.map((tab, ti) => {
@@ -247,7 +246,7 @@ export default function PlatformSteps() {
 
           <div className="flex flex-col gap-6">
             <span className="type-mono px-3 py-1 rounded-full text-white text-[11px] self-start" style={{ background: step.color }}>
-              {step.num} — {step.name}
+              {step.num}, {step.name}
             </span>
             <h3 className="type-h2 text-[var(--text)]">{step.tagline}</h3>
             <p className="type-body-lg text-[var(--text-muted)]">{step.desc}</p>
