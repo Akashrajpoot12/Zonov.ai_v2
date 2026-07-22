@@ -1,6 +1,6 @@
 import OpenAI from "openai";
 import { NextRequest, NextResponse } from "next/server";
-import { rateLimit, clientIp, escapeHtml } from "@/lib/security";
+import { rateLimit, clientIp, escapeHtml, readJsonLimited } from "@/lib/security";
 
 const SYSTEM_PROMPT = `You are the Zonov.ai Assistant, the intelligent AI assistant on Zonov.ai's website. If asked your name, say you are the Zonov.ai assistant. Zonov.ai builds specialized AI agents for hospitals and healthcare organizations worldwide.
 
@@ -154,7 +154,7 @@ async function sendLead(lead: Record<string, unknown>): Promise<void> {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Zonov.ai Website <noreply@zonov.ai>",
+        from: "Zonov.ai Website <arvind@zonov.ai>",
         to: ["hello@zonov.ai"],
         subject: `[Chatbot Lead] ${lead.name}, ${lead.hospital || contact}`,
         html,
@@ -178,7 +178,13 @@ export async function POST(req: NextRequest) {
     }
 
     const client = new OpenAI(); // reads OPENAI_API_KEY from env
-    const { messages } = (await req.json()) as { messages?: IncomingMessage[] };
+
+    // Cap the body: up to 50 messages × 4000 chars ≈ 200KB of legit content.
+    const body = await readJsonLimited<{ messages?: IncomingMessage[] }>(req, 300_000);
+    if (!body) {
+      return NextResponse.json({ error: "Invalid or oversized request" }, { status: 413 });
+    }
+    const { messages } = body;
 
     if (!messages || !Array.isArray(messages) || messages.length === 0 || messages.length > 50) {
       return NextResponse.json({ error: "Invalid request" }, { status: 400 });

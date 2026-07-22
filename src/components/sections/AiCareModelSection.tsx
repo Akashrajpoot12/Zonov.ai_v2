@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef } from 'react';
-import { MessageCircle, ArrowRight, MessageSquare, Phone, Globe, Smartphone, Mail, User, Brain, ShieldCheck, Lock, Cloud, Key, ClipboardList, EyeOff } from 'lucide-react';
+import { MessageCircle, ArrowRight, User, ShieldCheck, Lock, Cloud, Key, ClipboardList, EyeOff } from 'lucide-react';
 import FadeIn from "@/components/ui/FadeIn";
 
 // --- DATA ---
@@ -38,17 +38,7 @@ const METRICS_DATA = [
   { name: "Finance Leakage", passes: "-20%", rate: "95%", color: "bg-amber-500" }
 ];
 
-const DEFINE_LABELS: Record<number, string> = {
-  2: "Global Directives",
-  5: "Functional Memory",
-  8: "Dynamic Behaviors",
-  11: "Core Persona",
-  14: "Context Graphs",
-  17: "Actions",
-  20: "Safeguards"
-};
-
-const DEFINE_PAGES_CONTENT: any = {
+const DEFINE_PAGES_CONTENT: Record<number, { title: string; items: string[] }> = {
   0: { title: "Clinical Workflows", items: ["Voice-to-Text Prescriptions", "OPD Intake Automation", "Diagnostics Tracking"] },
   1: { title: "Hospital Operations", items: ["IPD Handovers", "OT Scheduling", "Pharmacy Alerts"] },
   2: { title: "Finance & Claims", items: ["Claim Scrubbing", "Leakage Detection", "Auto-Billing"] },
@@ -209,11 +199,11 @@ function Visualization({ activeStep }: { activeStep: number }) {
   const pages = Array.from({ length: NUM_PAGES });
 
   const getPageStyle = (index: number) => {
-    let hingeAngle = index * (360 / NUM_PAGES); 
-    let radius = 100; 
-    let pageTurn = -85; 
-    let zIndex = index; 
-    let opacity = 1;
+    const hingeAngle = index * (360 / NUM_PAGES);
+    const radius = 100;
+    const pageTurn = -85;
+    const zIndex = index;
+    const opacity = 1;
 
     return {
       transformOrigin: 'left center', 
@@ -226,8 +216,8 @@ function Visualization({ activeStep }: { activeStep: number }) {
 
   const getPivotStyle = () => {
     let rotY = 0;
-    let rotX = -12;
-    if (activeStep === 0) rotY = -35;  
+    const rotX = -12;
+    if (activeStep === 0) rotY = -35;
     if (activeStep === 1) rotY = 15;   
     if (activeStep === 2) rotY = 140;  
     if (activeStep === 3) rotY = 280;  
@@ -241,9 +231,7 @@ function Visualization({ activeStep }: { activeStep: number }) {
 
   const renderCards = (filterFn: (i: number) => boolean) => pages.map((_, i) => {
     if (!filterFn(i)) return null;
-    const chat = CHAT_DATA[i];
-    const isMainCard = i === 0;
-    
+
     return (
       <div
         key={i}
@@ -424,7 +412,7 @@ function Visualization({ activeStep }: { activeStep: number }) {
         className="relative w-0 h-0 transform-style-3d"
         style={getPivotStyle()}
       >
-        {renderCards((i) => true)}
+        {renderCards(() => true)}
       </div>
     </div>
   );

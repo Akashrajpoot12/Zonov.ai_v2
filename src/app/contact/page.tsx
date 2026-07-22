@@ -45,7 +45,7 @@ const helpCards = [
 ];
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: "", email: "", organization: "", message: "" });
+  const [form, setForm] = useState({ name: "", email: "", organization: "", message: "", website: "" });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
 
@@ -109,10 +109,21 @@ export default function ContactPage() {
                         </div>
                         <h3 className="type-h3 text-[var(--text)]">Message sent!</h3>
                         <p className="type-body text-[var(--text-muted)] max-w-sm">Thank you for reaching out. Our team will get back to you within 24 hours.</p>
-                        <button type="button" onClick={() => { setSubmitted(false); setForm({ name: "", email: "", organization: "", message: "" }); }} className="btn btn-ghost mt-2">Send another message</button>
+                        <button type="button" onClick={() => { setSubmitted(false); setForm({ name: "", email: "", organization: "", message: "", website: "" }); }} className="btn btn-ghost mt-2">Send another message</button>
                       </div>
                     ) : (
                       <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                        {/* Honeypot: hidden from real users, catches form-filling bots */}
+                        <input
+                          type="text"
+                          name="website"
+                          value={form.website}
+                          onChange={handleChange}
+                          tabIndex={-1}
+                          autoComplete="off"
+                          aria-hidden="true"
+                          style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                        />
                         <div>
                           <label className="type-caption text-[var(--text-muted)] block mb-1.5">Name</label>
                           <input name="name" value={form.name} onChange={handleChange} placeholder="Your full name" className="w-full px-4 py-3 rounded-lg border border-[var(--border)] bg-white text-[var(--text)] focus:outline-none focus:border-[var(--primary)] transition-colors" />
