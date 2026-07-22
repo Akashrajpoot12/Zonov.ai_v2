@@ -1,7 +1,8 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import FadeIn from "@/components/ui/FadeIn";
 import CursorSpotlight from "@/components/ui/CursorSpotlight";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 import s from "./IntelligenceStack.module.css";
 
 /* Bottom → top: raw data at the base, decisions at the peak. */
@@ -14,15 +15,38 @@ const LAYERS = [
 
 export default function IntelligenceStack() {
   const [active, setActive] = useState(0);
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const motionOk = !usePrefersReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
 
-  /* Auto-cycle through the layers; any click resets the timer */
+  /* Only animate while the section is actually on screen */
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Auto-cycle through the layers; pauses off-screen, on hover, or under reduced motion. Any click resets the timer. */
+  useEffect(() => {
+    if (!motionOk || !inView || paused) return;
     const t = setTimeout(() => setActive((a) => (a + 1) % LAYERS.length), 2400);
     return () => clearTimeout(t);
-  }, [active]);
+  }, [active, inView, paused, motionOk]);
 
   return (
-    <section className="noise relative overflow-hidden section-py section-dark" style={{ background: "linear-gradient(160deg,#0D1F3C 0%,#122050 60%,#0A1830 100%)" }}>
+    <section
+      ref={sectionRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className="noise relative overflow-hidden section-py section-dark"
+      style={{ background: "linear-gradient(160deg,#0D1F3C 0%,#122050 60%,#0A1830 100%)" }}
+    >
       <CursorSpotlight color="rgba(124,58,237,0.18)" size={560} />
       <div className="container-wide relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">

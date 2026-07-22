@@ -17,10 +17,10 @@ const PROTOCOLS = ["HL7 FHIR R4", "REST API", "HL7 v2.x", "DICOM", "OpenEHR", "O
 
 type System = (typeof SYSTEMS)[number];
 
-function IntegrationCard({ sys }: { sys: System }) {
+function IntegrationCard({ sys, dup }: { sys: System; dup?: boolean }) {
   const Icon = sys.icon;
   return (
-    <div className="w-[230px] flex-shrink-0 bg-white rounded-[16px] border border-[var(--border)] p-5 hover:border-[var(--primary)]/40 hover:shadow-md transition-all">
+    <div aria-hidden={dup || undefined} className="w-[230px] flex-shrink-0 bg-white rounded-[16px] border border-[var(--border)] p-5 hover:border-[var(--primary)]/40 hover:shadow-md transition-all">
       <div className="mb-3 text-[var(--primary)]"><Icon className="w-6 h-6" strokeWidth={1.5} /></div>
       <p className="text-[14px] font-semibold text-[var(--text)] mb-1">{sys.name}</p>
       <p className="text-[11px] text-[var(--text-muted)] leading-relaxed">{sys.examples}</p>
@@ -56,7 +56,7 @@ export default function PlatformIntegrations() {
             <div className="marquee-mask overflow-hidden">
               <div className="marquee-track">
                 {[...ROW_A, ...ROW_A, ...ROW_A, ...ROW_A].map((sys, i) => (
-                  <IntegrationCard key={`a-${i}`} sys={sys} />
+                  <IntegrationCard key={`a-${i}`} sys={sys} dup={i >= ROW_A.length} />
                 ))}
               </div>
             </div>
@@ -64,7 +64,7 @@ export default function PlatformIntegrations() {
             <div className="marquee-mask overflow-hidden">
               <div className="marquee-track reverse">
                 {[...ROW_B, ...ROW_B, ...ROW_B, ...ROW_B].map((sys, i) => (
-                  <IntegrationCard key={`b-${i}`} sys={sys} />
+                  <IntegrationCard key={`b-${i}`} sys={sys} dup={i >= ROW_B.length} />
                 ))}
               </div>
             </div>

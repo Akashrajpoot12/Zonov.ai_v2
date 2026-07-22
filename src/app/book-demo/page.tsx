@@ -15,16 +15,18 @@ interface FormData {
   agents: string[];
   preferredTime: string;
   useCase: string;
+  website: string; // honeypot
 }
 
 const AGENTS = [
-  "OPD Assistant",
-  "ICU Scribe",
-  "Discharge Planner",
-  "Revenue Recovery",
-  "Lab Interpreter",
-  "Referral Manager",
-  "Post-surgery Follow-up",
+  "Registration Agent",
+  "Doctor Prescription Agent",
+  "Investigation Agent",
+  "Pharmacy Agent",
+  "IPD Agent",
+  "OT Agent",
+  "Claim Agent",
+  "Finance Agent",
 ];
 
 const inputClass =
@@ -44,6 +46,7 @@ export default function BookDemoPage() {
     agents: [],
     preferredTime: "",
     useCase: "",
+    website: "",
   });
 
   function update(field: keyof FormData, value: string) {
@@ -179,6 +182,17 @@ export default function BookDemoPage() {
 
                   {currentStep === 1 && (
                     <div className="space-y-5">
+                      {/* Honeypot: hidden from real users, catches form-filling bots */}
+                      <input
+                        type="text"
+                        name="website"
+                        value={formData.website}
+                        onChange={(e) => update("website", e.target.value)}
+                        tabIndex={-1}
+                        autoComplete="off"
+                        aria-hidden="true"
+                        style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+                      />
                       <div>
                         <label className={labelClass}>Full Name</label>
                         <input

@@ -10,6 +10,19 @@ import PlatformIntegrations from "@/components/sections/PlatformIntegrations";
 export const metadata: Metadata = {
   title: "Platform, Zonov.ai | AI Operating System for Healthcare",
   description: "The all-in-one platform to deploy, train, and monitor AI agents across every hospital workflow. Define → Train → Deploy → Monitor.",
+  keywords: ["Healthcare AI platform", "Hospital automation", "AI agents", "HIS EMR integration", "Zonov.ai"],
+  alternates: { canonical: "/platform" },
+  openGraph: {
+    title: "Platform | Zonov.ai",
+    description: "One unified AI infrastructure behind every care decision, from patient arrival to final billing. Deploy in 1–2 weeks.",
+    url: "/platform",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Platform | Zonov.ai",
+    description: "One unified AI infrastructure behind every care decision. Define → Train → Deploy → Monitor.",
+  },
 };
 
 export default function PlatformPage() {

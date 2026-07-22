@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { rateLimit, clientIp, escapeHtml, isValidEmail, clampStr } from "@/lib/security";
+import { rateLimit, clientIp, escapeHtml, isValidEmail, clampStr, readJsonLimited } from "@/lib/security";
 
 export const runtime = "nodejs";
 
@@ -14,7 +14,18 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    const body = await req.json();
+    // Cap the body so an oversized payload can't be buffered into memory.
+    const body = await readJsonLimited<Record<string, unknown>>(req, 50_000);
+    if (!body) {
+      return NextResponse.json({ error: "Invalid or oversized request" }, { status: 413 });
+    }
+
+    // Honeypot: a hidden field real users never fill. If a bot populates it,
+    // pretend success but drop the submission silently.
+    if (clampStr(body.website, 1) !== "") {
+      return NextResponse.json({ ok: true });
+    }
+
     const { phone, hospital, hospitalName, city, beds, hospitalSize, role, message, useCase, preferredTime, agents, resumeLink, linkedin, type, address, education, gradYear, experienceLevel, experience, skills, gender, collegeName, cgpa, tenth, twelfth, github } = body;
 
     const recipientName = clampStr(body.name, 120);
@@ -45,7 +56,7 @@ export async function POST(req: NextRequest) {
       ? [
           ["Name", recipientName],
           ["Email", recipientEmail],
-          ["Phone", phone || "-"],
+          ["Phone", clampStr(phone, 40) || "-"],
           ["Gender", clampStr(gender, 40) || "-"],
           ["Address / City", clampStr(address, 200) || "-"],
           ["Position", clampStr(role, 160) || "General Application"],
@@ -66,14 +77,14 @@ export async function POST(req: NextRequest) {
       : [
           ["Name", recipientName],
           ["Email", recipientEmail],
-          ["Phone", phone || "-"],
+          ["Phone", clampStr(phone, 40) || "-"],
           ["Hospital", hospitalDisplay || "-"],
-          ["City", city || "-"],
-          ["Beds", beds || hospitalSize || "-"],
-          ["Role", role || "-"],
-          ["Preferred Time", preferredTime || "-"],
-          ["Agents Interested", agents ? (Array.isArray(agents) ? agents.join(", ") : agents) : "-"],
-          ["Message / Use Case", message || useCase || "-"],
+          ["City", clampStr(city, 120) || "-"],
+          ["Beds", clampStr(beds || hospitalSize, 60) || "-"],
+          ["Role", clampStr(role, 160) || "-"],
+          ["Preferred Time", clampStr(preferredTime, 120) || "-"],
+          ["Agents Interested", clampStr(Array.isArray(agents) ? agents.join(", ") : agents, 500) || "-"],
+          ["Message / Use Case", clampStr(message || useCase, 4000) || "-"],
         ];
 
     const htmlBody = `
@@ -101,7 +112,7 @@ export async function POST(req: NextRequest) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        from: "Zonov.ai Website <noreply@zonov.ai>",
+        from: "Zonov.ai Website <arvind@zonov.ai>",
         to: [isJobApplication ? "careers@zonov.ai" : "hello@zonov.ai"],
         reply_to: recipientEmail,
         subject: `[${formType}] ${recipientName}, ${isJobApplication ? clampStr(role, 160) || "General Application" : hospitalDisplay || recipientEmail}`,

@@ -1,8 +1,9 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "@/components/ui/FadeIn";
 import CountUp from "@/components/ui/CountUp";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 import s from "./SimulationCascade.module.css";
 
 const CARD_COUNT = 11;
@@ -41,11 +42,29 @@ const CONVERSATIONS: Msg[][] = [
 export default function SimulationCascade() {
   const [idx, setIdx] = useState(0);   // which conversation
   const [step, setStep] = useState(0); // how many messages revealed
+  const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
+  const motionOk = !usePrefersReducedMotion();
+  const sectionRef = useRef<HTMLElement>(null);
 
   const convo = CONVERSATIONS[idx];
 
-  /* Drive a live chat: reveal messages one by one, then move to next convo */
+  /* Only run the chat while the section is on screen */
   useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => setInView(entry.isIntersecting),
+      { threshold: 0.3 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  /* Drive a live chat: reveal messages one by one, then move to next convo.
+     Pauses off-screen, on hover, or under reduced motion. */
+  useEffect(() => {
+    if (!motionOk || !inView || paused) return;
     if (step < convo.length) {
       // "typing" for a beat, then drop the next message
       const t = setTimeout(() => setStep((s) => s + 1), 1000);
@@ -57,13 +76,20 @@ export default function SimulationCascade() {
       setStep(0);
     }, 2400);
     return () => clearTimeout(t);
-  }, [step, convo.length]);
+  }, [step, convo.length, motionOk, inView, paused]);
 
-  const typing = step < convo.length;
-  const nextRole = typing ? convo[step].role : null;
+  // Under reduced motion the whole conversation is shown at once (no autoplay).
+  const shown = motionOk ? step : convo.length;
+  const typing = shown < convo.length;
+  const nextRole = typing ? convo[shown].role : null;
 
   return (
-    <section className="section-py bg-[var(--bg)] overflow-hidden">
+    <section
+      ref={sectionRef}
+      onMouseEnter={() => setPaused(true)}
+      onMouseLeave={() => setPaused(false)}
+      className="section-py bg-[var(--bg)] overflow-hidden"
+    >
       <div className="container-wide">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
 
@@ -125,7 +151,7 @@ export default function SimulationCascade() {
                 <div className={`${s.card} ${s.cardFront}`} style={{ ["--p" as string]: 0 }}>
                   <div className={s.convo}>
                     <AnimatePresence mode="popLayout">
-                      {convo.slice(0, step).map((m, mi) =>
+                      {convo.slice(0, shown).map((m, mi) =>
                         m.role === "in" ? (
                           <motion.div
                             key={`${idx}-${mi}`}

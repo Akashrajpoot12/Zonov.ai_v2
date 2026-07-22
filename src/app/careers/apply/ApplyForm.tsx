@@ -31,6 +31,7 @@ export default function ApplyForm({ position }: { position: string }) {
     linkedin: "",
     github: "",
     message: "",
+    website: "", // honeypot
   });
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
@@ -100,6 +101,17 @@ export default function ApplyForm({ position }: { position: string }) {
       </div>
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8">
+        {/* Honeypot: hidden from real users, catches form-filling bots */}
+        <input
+          type="text"
+          name="website"
+          value={form.website}
+          onChange={handleChange}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{ position: "absolute", left: "-9999px", width: 1, height: 1, opacity: 0 }}
+        />
         {/* Personal details */}
         <div>
           <p className={sectionLabel}>PERSONAL DETAILS</p>

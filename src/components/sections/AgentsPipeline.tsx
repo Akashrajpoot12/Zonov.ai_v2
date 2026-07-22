@@ -4,6 +4,7 @@ import Link from "next/link";
 import { motion, AnimatePresence, useMotionValue, useTransform, useSpring } from "framer-motion";
 import { IdCard, Stethoscope, Microscope, Pill, BedDouble, Syringe, ReceiptText, Wallet } from "lucide-react";
 import FadeIn from "@/components/ui/FadeIn";
+import { usePrefersReducedMotion } from "@/lib/useReducedMotion";
 import AgentPreview from "./AgentPreview";
 
 /* Patient-journey pipeline selector + per-agent live preview.
@@ -22,20 +23,19 @@ const AGENTS = [
 export default function AgentsPipeline() {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
-  const [motionOk, setMotionOk] = useState(false);
   const [fillW, setFillW] = useState(0);       // progress-line fill (%)
   const [animate, setAnimate] = useState(false);
+  const motionOk = !usePrefersReducedMotion();
   const a = AGENTS[active];
   const seg = 87.5 / (AGENTS.length - 1);       // line width per step
 
-  useEffect(() => {
-    setMotionOk(!window.matchMedia("(prefers-reduced-motion: reduce)").matches);
-  }, []);
-
   // Auto-advance the journey; the connecting LINE "loads" from the active step
   // to the next over the dwell time (re-arms each step; pauses on interaction).
+  // The synchronous snap-reset below is intentional animation state — it must
+  // run the moment `active`/`paused` changes, before the next frame animates.
   useEffect(() => {
     if (!motionOk || paused) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setAnimate(false);
       setFillW(active * seg); // show completed up to the active step, no loading
       return;

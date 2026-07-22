@@ -57,3 +57,21 @@ export function isValidEmail(email: string): boolean {
 export function clampStr(value: unknown, max: number): string {
   return String(value ?? "").trim().slice(0, max);
 }
+
+// Read and JSON-parse a request body with a hard size cap, so an oversized
+// payload can't be buffered into memory (DoS). Returns null if too large or
+// not valid JSON; callers should respond 400/413.
+export async function readJsonLimited<T = unknown>(
+  req: Request,
+  maxBytes: number
+): Promise<T | null> {
+  const len = Number(req.headers.get("content-length") || 0);
+  if (len > maxBytes) return null;
+  const text = await req.text();
+  if (text.length > maxBytes) return null;
+  try {
+    return JSON.parse(text) as T;
+  } catch {
+    return null;
+  }
+}

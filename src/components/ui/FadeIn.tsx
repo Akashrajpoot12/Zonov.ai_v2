@@ -13,7 +13,7 @@ interface FadeInProps {
 
 const variants: Variants = {
   hidden: (y: number) => ({ opacity: 0, y }),
-  visible: (y: number) => ({
+  visible: () => ({
     opacity: 1,
     y: 0,
     transition: { duration: 0.65, ease: [0.22, 1, 0.36, 1] },
@@ -23,7 +23,6 @@ const variants: Variants = {
 export default function FadeIn({
   children,
   delay = 0,
-  duration = 0.65,
   y = 20,
   className,
   once = true,
