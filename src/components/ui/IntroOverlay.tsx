@@ -1,7 +1,15 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
+
+// useLayoutEffect warns during SSR; fall back to useEffect on the server so we
+// can still hide the overlay before first paint on the client (no flash).
+const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
+
+// Once the intro has played, we don't want to replay it on every client-side
+// navigation or reload within the same tab session.
+const SEEN_KEY = "zonov:intro-seen";
 
 /* ═══════════════════════════════════════════════════════════════
    INTRO OVERLAY, "letters assemble" → dock into the header logo
@@ -108,7 +116,23 @@ export default function IntroOverlay() {
   const [visible, setVisible] = useState(true);
   const [phase, setPhase] = useState<Phase>("assemble");
   const [dock, setDock] = useState<Dock | null>(null);
+  // When we skip the intro (already seen this session), remove it with no fade
+  // so repeat views feel instant instead of flashing a white screen.
+  const [instant, setInstant] = useState(false);
   const wordmarkRef = useRef<HTMLDivElement>(null);
+
+  // Mobile gets a shorter, snappier intro. Timing is picked once so the timers
+  // and the framer transitions below always agree. SSR falls back to desktop
+  // values, which only feed JS timers/transition props (never SSR'd markup),
+  // so there's no hydration mismatch.
+  const [T] = useState(() => {
+    const mobile =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse)").matches;
+    return mobile
+      ? { assemble: 1050, hold: 500, dock: 620, fade: 400 }
+      : { assemble: ASSEMBLE_MS, hold: HOLD_MS, dock: DOCK_MS, fade: FADE_MS };
+  });
 
   // Lock body scroll while the overlay is up.
   useEffect(() => {
@@ -120,31 +144,47 @@ export default function IntroOverlay() {
     };
   }, [visible]);
 
-  // Phase timeline (with a hard-hide safety net).
-  useEffect(() => {
+  // Phase timeline. Runs before first paint (layout effect) so that on a repeat
+  // visit — intro already seen this tab session — the overlay is removed with
+  // no flash instead of replaying the full ~3.8s animation every load.
+  useIsoLayoutEffect(() => {
+    // Tell the page the intro is done, so hero animations that should be seen
+    // (e.g. the stat underlines) start now, not behind the overlay.
+    const markDone = () => {
+      const w = window as unknown as { __zonovIntroDone?: boolean };
+      w.__zonovIntroDone = true;
+      window.dispatchEvent(new Event("zonov:intro-done"));
+    };
+
+    let seen = false;
+    try { seen = sessionStorage.getItem(SEEN_KEY) === "1"; } catch {}
+    if (seen) {
+      setInstant(true);
+      setVisible(false);
+      markDone();
+      return;
+    }
+    try { sessionStorage.setItem(SEEN_KEY, "1"); } catch {}
+
     const timers: ReturnType<typeof setTimeout>[] = [];
-    timers.push(setTimeout(() => setPhase("hold"), ASSEMBLE_MS));
+    timers.push(setTimeout(() => setPhase("hold"), T.assemble));
     timers.push(
       setTimeout(() => {
         setDock(computeDock(wordmarkRef.current));
         setPhase("dock");
-      }, ASSEMBLE_MS + HOLD_MS)
+      }, T.assemble + T.hold)
     );
     timers.push(
-      setTimeout(() => setPhase("reveal"), ASSEMBLE_MS + HOLD_MS + DOCK_MS)
+      setTimeout(() => setPhase("reveal"), T.assemble + T.hold + T.dock)
     );
     timers.push(
       setTimeout(() => {
         setVisible(false);
-        // Tell the page the intro is done, so hero animations that should be
-        // seen (e.g. the stat underlines) start now, not behind the overlay.
-        const w = window as unknown as { __zonovIntroDone?: boolean };
-        w.__zonovIntroDone = true;
-        window.dispatchEvent(new Event("zonov:intro-done"));
-      }, ASSEMBLE_MS + HOLD_MS + DOCK_MS + FADE_MS + 60)
+        markDone();
+      }, T.assemble + T.hold + T.dock + T.fade + 60)
     );
     return () => timers.forEach(clearTimeout);
-  }, []);
+  }, [T]);
 
   const letters = WORD.split("");
   const dotIndex = WORD.indexOf("."); // ".ai" gets the accent color
@@ -161,7 +201,7 @@ export default function IntroOverlay() {
           style={{ background: "#FFFFFF" }}
           initial={{ opacity: 1 }}
           animate={phase === "reveal" ? { opacity: 0 } : { opacity: 1 }}
-          transition={{ duration: FADE_MS / 1000, ease: [0.65, 0, 0.35, 1] }}
+          transition={{ duration: instant ? 0 : T.fade / 1000, ease: [0.65, 0, 0.35, 1] }}
         >
           {/* Whisper-soft brand tints for depth (still reads as white) */}
           <div
@@ -199,7 +239,7 @@ export default function IntroOverlay() {
                   ? { x: dock!.x, y: dock!.y, scale: dock!.scale }
                   : { x: 0, y: 0, scale: 1 }
               }
-              transition={{ duration: DOCK_MS / 1000, ease: [0.16, 1, 0.3, 1] }}
+              transition={{ duration: T.dock / 1000, ease: [0.16, 1, 0.3, 1] }}
               style={{ transformOrigin: "50% 50%" }}
             >
               {/* Letters, fly in from their offsets, then rest */}

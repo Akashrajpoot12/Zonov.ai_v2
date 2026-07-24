@@ -29,6 +29,10 @@ export default function CursorSpotlight({
     const parent = ref.current?.parentElement;
     if (!parent) return;
 
+    // Touch devices have no hovering cursor, so the spotlight never moves —
+    // skip wiring up listeners there rather than carrying idle work on mobile.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const onMove = (e: MouseEvent) => {
       const rect = parent.getBoundingClientRect();
       x.set(e.clientX - rect.left - size / 2);

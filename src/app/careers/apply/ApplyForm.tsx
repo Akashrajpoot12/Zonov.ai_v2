@@ -33,6 +33,7 @@ export default function ApplyForm({ position }: { position: string }) {
     message: "",
     website: "", // honeypot
   });
+  const [resumeFile, setResumeFile] = useState<File | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
@@ -43,28 +44,53 @@ export default function ApplyForm({ position }: { position: string }) {
     setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
+  function handleFile(e: React.ChangeEvent<HTMLInputElement>) {
+    const file = e.target.files?.[0] ?? null;
+    if (file && file.size > 5 * 1024 * 1024) {
+      setError("Resume file is too large. Please keep it under 5MB.");
+      e.target.value = "";
+      setResumeFile(null);
+      return;
+    }
+    setError("");
+    setResumeFile(file);
+  }
+
   async function handleSubmit(e: React.SyntheticEvent<HTMLFormElement>) {
     e.preventDefault();
     if (!form.name.trim() || !form.email.trim()) {
       setError("Please fill in your name and email.");
       return;
     }
-    if (!form.resumeLink.trim() && !form.linkedin.trim()) {
-      setError("Please share a resume link or your LinkedIn/portfolio so we can review your background.");
+    if (!resumeFile && !form.resumeLink.trim() && !form.linkedin.trim()) {
+      setError("Please upload your resume (PDF), or share a resume link / LinkedIn.");
       return;
     }
     setError("");
     setLoading(true);
     try {
-      const res = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...form, role: position, type: "job-application" }),
-      });
+      let res: Response;
+      if (resumeFile) {
+        // With a file we send multipart so the resume can be attached to the
+        // notification email; the browser sets the multipart boundary itself,
+        // so we must NOT set a Content-Type header here.
+        const fd = new FormData();
+        Object.entries(form).forEach(([key, value]) => fd.append(key, value));
+        fd.append("role", position);
+        fd.append("type", "job-application");
+        fd.append("resumeFile", resumeFile);
+        res = await fetch("/api/contact", { method: "POST", body: fd });
+      } else {
+        res = await fetch("/api/contact", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ ...form, role: position, type: "job-application" }),
+        });
+      }
       if (!res.ok) throw new Error("Failed");
       setSubmitted(true);
     } catch {
-      setError("Something went wrong. Please email your resume to careers@zonov.ai");
+      setError("Something went wrong. Please email your resume to lavi@zonov.ai");
     } finally {
       setLoading(false);
     }
@@ -216,11 +242,21 @@ export default function ApplyForm({ position }: { position: string }) {
               <textarea name="skills" value={form.skills} onChange={handleChange} rows={2} placeholder="e.g. React, Python, SQL, communication, sales..." className={`${inputClass} resize-none`} />
             </div>
             <div>
-              <label className={labelClass}>Resume link *</label>
-              <input name="resumeLink" value={form.resumeLink} onChange={handleChange} placeholder="Google Drive / Dropbox link to your resume (PDF)" className={inputClass} />
+              <label className={labelClass}>Resume (PDF or Word) *</label>
+              <input
+                type="file"
+                name="resumeFile"
+                accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+                onChange={handleFile}
+                className="w-full text-sm text-[var(--text-muted)] border border-[var(--border)] rounded-lg py-1.5 px-2 cursor-pointer file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:font-medium file:cursor-pointer file:bg-[var(--primary-subtle)] file:text-[var(--primary)] focus:outline-none focus:border-[var(--primary)] transition-colors"
+              />
               <p className="type-caption text-[var(--text-dim)] mt-1.5">
-                Upload your resume to Google Drive or Dropbox and paste a shareable link (set access to &ldquo;anyone with the link&rdquo;).
+                {resumeFile ? `Selected: ${resumeFile.name}` : "Upload your resume as a PDF or Word doc (max 5MB)."}
               </p>
+            </div>
+            <div>
+              <label className={labelClass}>Resume link (optional)</label>
+              <input name="resumeLink" value={form.resumeLink} onChange={handleChange} placeholder="Or paste a Google Drive / Dropbox link" className={inputClass} />
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
@@ -248,7 +284,7 @@ export default function ApplyForm({ position }: { position: string }) {
           </button>
         </div>
         <p className="type-caption text-[var(--text-dim)]">
-          Prefer email? Send your resume to <a href="mailto:careers@zonov.ai" className="text-[var(--primary)]">careers@zonov.ai</a>.
+          Prefer email? Send your resume to <a href="mailto:lavi@zonov.ai" className="text-[var(--primary)]">lavi@zonov.ai</a>.
         </p>
       </form>
     </div>

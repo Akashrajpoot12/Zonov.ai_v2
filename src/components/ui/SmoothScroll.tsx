@@ -11,6 +11,12 @@ export default function SmoothScroll() {
     // Respect users who prefer reduced motion, skip smooth scroll entirely.
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
+    // Touch devices (phones/tablets) already have buttery native momentum
+    // scrolling. Running Lenis on top of it hijacks the native touch handling
+    // and fights the OS, which is exactly what makes scrolling feel laggy and
+    // "stuck" on mobile. Skip Lenis there and let native scroll do its job.
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
     const lenis = new Lenis({
       lerp: 0.32, // higher = snappier, reaches target faster (less "floaty" lag)
       smoothWheel: true,

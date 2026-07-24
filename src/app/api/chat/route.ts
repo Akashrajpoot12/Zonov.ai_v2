@@ -52,7 +52,7 @@ const SYSTEM_PROMPT = `You are the Zonov.ai Assistant, the intelligent AI assist
 - /guides, Guides and resources
 - /blog, Articles on healthcare AI, automation, and operations
 - /about, Company, mission, vision, leadership team
-- /careers, Open roles (apply via careers@zonov.ai)
+- /careers, Open roles (apply via lavi@zonov.ai)
 - /contact, Contact the team
 - /book-demo, Book a personalized demo (best for pricing/ROI)
 
