@@ -1,4 +1,5 @@
 import OpenAI from "openai";
+import nodemailer from "nodemailer";
 import { NextRequest, NextResponse } from "next/server";
 import { rateLimit, clientIp, escapeHtml, readJsonLimited } from "@/lib/security";
 
@@ -110,12 +111,13 @@ export const runtime = "nodejs";
 
 type IncomingMessage = { role: "user" | "assistant"; content: string };
 
-// Forward a qualified lead to the sales team via Resend (same destination as the contact form).
+// Forward a qualified lead to the sales team via SMTP (same destination as the contact form).
 async function sendLead(lead: Record<string, unknown>): Promise<void> {
   const contact = (lead.email as string) || (lead.phone as string) || "-";
-  const RESEND_API_KEY = process.env.RESEND_API_KEY;
+  const SMTP_USER = process.env.SMTP_USER;
+  const SMTP_PASS = process.env.SMTP_PASS;
 
-  if (!RESEND_API_KEY) {
+  if (!SMTP_USER || !SMTP_PASS) {
     console.log(`[Chatbot Lead] ${lead.name} <${contact}> | Hospital: ${lead.hospital}`);
     return;
   }
@@ -147,20 +149,19 @@ async function sendLead(lead: Record<string, unknown>): Promise<void> {
     </div>`;
 
   try {
-    const res = await fetch("https://api.resend.com/emails", {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${RESEND_API_KEY}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        from: "Zonov.ai Website <arvind@zonov.ai>",
-        to: ["hello@zonov.ai"],
-        subject: `[Chatbot Lead] ${lead.name}, ${lead.hospital || contact}`,
-        html,
-      }),
+    const transporter = nodemailer.createTransport({
+      host: process.env.SMTP_HOST || "smtp.hostinger.com",
+      port: Number(process.env.SMTP_PORT || 465),
+      secure: Number(process.env.SMTP_PORT || 465) === 465,
+      auth: { user: SMTP_USER, pass: SMTP_PASS },
     });
-    if (!res.ok) console.error("Lead email failed:", await res.text());
+    await transporter.sendMail({
+      from: `"Zonov.ai Website" <${SMTP_USER}>`,
+      to: process.env.CONTACT_TO || "hello@zonov.ai",
+      replyTo: (lead.email as string) || undefined,
+      subject: `[Chatbot Lead] ${lead.name}, ${lead.hospital || contact}`,
+      html,
+    });
   } catch (err) {
     console.error("Lead email error:", err);
   }
